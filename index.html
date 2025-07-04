@@ -3,64 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HyLoApp - Bulk Gift Solutions</title>
-    <link rel="stylesheet" href="style.css">
+    <title>HyLoApp - One Stop Solutions for all your Bulk Needs</title>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>    <!-- Header Section -->
+<body>
+    <!-- Header Section -->
     <header class="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo-section">
                     <img src="logo.png" alt="HyLoApp Logo" class="logo">
-                    <span class="brand-name">HyLoApp</span>
-                </div>
-                
-                <div class="tagline">
-                    <h1>One Stop Solutions for all your Bulk Needs</h1>
+                    <div class="logo-text">
+                        <h1>HyLoApp</h1>
+                        <p class="tagline">One Stop Solutions for all your Bulk Needs</p>
+                    </div>
                 </div>
                 
                 <div class="bulk-notice">
-                    <span class="bulk-text">Bulk Orders Only</span>
-                    <span class="no-retail">No Retail</span>
+                    <span class="bulk-badge">
+                        <i class="fas fa-boxes"></i>
+                        Bulk Orders Only / No Retail
+                    </span>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Search & Filter Section -->
-    <section class="search-filter-section">
+    <section class="search-section">
         <div class="container">
-            <div class="search-filter-container">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="searchInput" placeholder="Search products... (e.g., diary, bottle, pen)">
+            <div class="search-wrapper">
+                <div class="search-bar">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="searchInput" placeholder="Search products... (e.g., diary, bottle, pens)" class="search-input">
+                    </div>
                 </div>
                 
-                <div class="filter-controls">
+                <div class="filter-section">
                     <div class="filter-group">
                         <label for="categoryFilter">Category</label>
-                        <select id="categoryFilter">
+                        <select id="categoryFilter" class="filter-select">
                             <option value="">All Categories</option>
-                            <option value="corporate">Corporate</option>
-                            <option value="festival">Festival</option>
+                            <option value="corporate">Corporate Gifts</option>
+                            <option value="festival">Festival Gifts</option>
                             <option value="stationery">Stationery</option>
+                            <option value="promotional">Promotional Items</option>
                             <option value="tech">Tech Accessories</option>
-                            <option value="home">Home & Living</option>
                         </select>
                     </div>
                     
                     <div class="filter-group">
                         <label for="subcategoryFilter">Subcategory</label>
-                        <select id="subcategoryFilter">
+                        <select id="subcategoryFilter" class="filter-select">
                             <option value="">All Subcategories</option>
                         </select>
                     </div>
                     
-                    <button class="filter-btn" id="clearFilters">
-                        <i class="fas fa-times"></i>
-                        Clear Filters
+                    <button class="filter-btn" onclick="applyFilters()">
+                        <i class="fas fa-filter"></i>
+                        Apply Filters
                     </button>
                 </div>
             </div>
@@ -71,107 +75,112 @@
     <main class="main-content">
         <div class="container">
             <div class="content-grid">
-                <!-- Delivery Information Sidebar -->
-                <aside class="delivery-info">
-                    <h2><i class="fas fa-truck"></i> Where We Deliver</h2>
-                    <div class="delivery-timeline">
-                        <div class="delivery-item">
-                            <div class="delivery-icon">
-                                <i class="fas fa-clock"></i>
+                <!-- Left Sidebar - Delivery Information -->
+                <aside class="sidebar left-sidebar">
+                    <div class="delivery-section">
+                        <h3><i class="fas fa-shipping-fast"></i> Where We Deliver</h3>
+                        <div class="delivery-timeline">
+                            <div class="delivery-item">
+                                <div class="delivery-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="delivery-content">
+                                    <h4>Within 24 Hours</h4>
+                                    <p>Across Chennai</p>
+                                </div>
                             </div>
-                            <div class="delivery-content">
-                                <h3>24 Hours</h3>
-                                <p>Across Chennai</p>
+                            
+                            <div class="delivery-item">
+                                <div class="delivery-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="delivery-content">
+                                    <h4>Within 48 Hours</h4>
+                                    <p>Across Tamil Nadu</p>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="delivery-item">
-                            <div class="delivery-icon">
-                                <i class="fas fa-map-marker-alt"></i>
+                            
+                            <div class="delivery-item">
+                                <div class="delivery-icon">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div class="delivery-content">
+                                    <h4>Within 72 Hours</h4>
+                                    <p>Across Southern India</p>
+                                </div>
                             </div>
-                            <div class="delivery-content">
-                                <h3>48 Hours</h3>
-                                <p>Across Tamil Nadu</p>
+                            
+                            <div class="delivery-item">
+                                <div class="delivery-icon">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                                <div class="delivery-content">
+                                    <h4>Within 7 Days</h4>
+                                    <p>Across India</p>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="delivery-item">
-                            <div class="delivery-icon">
-                                <i class="fas fa-map"></i>
-                            </div>
-                            <div class="delivery-content">
-                                <h3>72 Hours</h3>
-                                <p>Across Southern India</p>
-                            </div>
-                        </div>
-                        
-                        <div class="delivery-item">
-                            <div class="delivery-icon">
-                                <i class="fas fa-globe-asia"></i>
-                            </div>
-                            <div class="delivery-content">
-                                <h3>7 Days</h3>
-                                <p>Across India</p>
-                            </div>
-                        </div>
-                        
-                        <div class="delivery-item">
-                            <div class="delivery-icon">
-                                <i class="fas fa-plane"></i>
-                            </div>
-                            <div class="delivery-content">
-                                <h3>Worldwide Export</h3>
-                                <p>Across Countries</p>
+                            
+                            <div class="delivery-item">
+                                <div class="delivery-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div class="delivery-content">
+                                    <h4>Worldwide Export</h4>
+                                    <p>Across Countries</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </aside>
 
                 <!-- Product Display Area -->
-                <section class="product-display">
-                    <div class="product-grid" id="productGrid">
-                        <!-- Products will be dynamically loaded here -->
+                <section class="product-section">
+                    <div class="section-header">
+                        <h2>Our Products</h2>
+                        <div class="results-count">
+                            <span id="resultsCount">Showing all products</span>
+                        </div>
                     </div>
                     
-                    <div class="no-products" id="noProducts" style="display: none;">
-                        <i class="fas fa-search"></i>
-                        <h3>No products found</h3>
-                        <p>Try adjusting your search or filters</p>
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Products will be populated by JavaScript -->
                     </div>
                 </section>
 
-                <!-- MOQ Information Sidebar -->
-                <aside class="moq-info">
-                    <h2><i class="fas fa-boxes"></i> How We Deliver - MOQ</h2>
-                    <div class="moq-tiers">
-                        <div class="moq-tier">
-                            <div class="moq-number">100s</div>
-                            <div class="moq-label">Small Bulk</div>
-                        </div>
-                        
-                        <div class="moq-tier">
-                            <div class="moq-number">500s</div>
-                            <div class="moq-label">Medium Bulk</div>
-                        </div>
-                        
-                        <div class="moq-tier">
-                            <div class="moq-number">1000s</div>
-                            <div class="moq-label">Large Bulk</div>
-                        </div>
-                        
-                        <div class="moq-tier">
-                            <div class="moq-number">5000s</div>
-                            <div class="moq-label">Extra Large</div>
-                        </div>
-                        
-                        <div class="moq-tier">
-                            <div class="moq-number">10,000s</div>
-                            <div class="moq-label">Enterprise</div>
-                        </div>
-                        
-                        <div class="moq-tier special">
-                            <div class="moq-number">Container</div>
-                            <div class="moq-label">Based Orders</div>
+                <!-- Right Sidebar - MOQ Information -->
+                <aside class="sidebar right-sidebar">
+                    <div class="moq-section">
+                        <h3><i class="fas fa-boxes"></i> How We Deliver - MOQ</h3>
+                        <div class="moq-tiers">
+                            <div class="moq-tier">
+                                <div class="moq-number">100s</div>
+                                <div class="moq-label">Small Bulk</div>
+                            </div>
+                            
+                            <div class="moq-tier">
+                                <div class="moq-number">500s</div>
+                                <div class="moq-label">Medium Bulk</div>
+                            </div>
+                            
+                            <div class="moq-tier">
+                                <div class="moq-number">1000s</div>
+                                <div class="moq-label">Large Bulk</div>
+                            </div>
+                            
+                            <div class="moq-tier">
+                                <div class="moq-number">5000s</div>
+                                <div class="moq-label">Extra Large</div>
+                            </div>
+                            
+                            <div class="moq-tier">
+                                <div class="moq-number">10,000s</div>
+                                <div class="moq-label">Enterprise</div>
+                            </div>
+                            
+                            <div class="moq-tier featured">
+                                <div class="moq-number">Container</div>
+                                <div class="moq-label">Based Orders</div>
+                            </div>
                         </div>
                     </div>
                 </aside>
@@ -189,60 +198,60 @@
                         <i class="fas fa-receipt"></i>
                     </div>
                     <h3>GST Invoice</h3>
-                    <p>For Every Order</p>
+                    <p>GST Invoice for Every Order</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-vial"></i>
                     </div>
-                    <h3>Samples Available</h3>
-                    <p>Can Be Provided</p>
+                    <h3>Free Samples</h3>
+                    <p>Samples Can Be Provided</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-print"></i>
                     </div>
-                    <h3>Logo Branding</h3>
-                    <p>Can Be Printed</p>
+                    <h3>Custom Branding</h3>
+                    <p>Logo / Branding Can Be Printed on Products</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Business Terms Section -->
-    <section class="business-terms">
+    <section class="terms-section">
         <div class="container">
             <h2>Our Terms & Business Scope</h2>
             <div class="terms-grid">
-                <div class="term-card">
-                    <div class="term-icon">
+                <div class="terms-card">
+                    <div class="terms-icon">
                         <i class="fas fa-money-bill-wave"></i>
                     </div>
                     <h3>Payment Terms</h3>
                     <p>100% Advance Payment Required</p>
                 </div>
                 
-                <div class="term-card">
-                    <div class="term-icon">
-                        <i class="fas fa-user-tie"></i>
+                <div class="terms-card">
+                    <div class="terms-icon">
+                        <i class="fas fa-user-friends"></i>
                     </div>
                     <h3>Customer Scope</h3>
                     <p>Unloading & On-site Delivery Handling</p>
                 </div>
                 
-                <div class="term-card">
-                    <div class="term-icon">
+                <div class="terms-card">
+                    <div class="terms-icon">
                         <i class="fas fa-truck-loading"></i>
                     </div>
                     <h3>Our Scope</h3>
                     <p>Loading & Professional Packing</p>
                 </div>
                 
-                <div class="term-card">
-                    <div class="term-icon">
-                        <i class="fas fa-shipping-fast"></i>
+                <div class="terms-card">
+                    <div class="terms-icon">
+                        <i class="fas fa-route"></i>
                     </div>
                     <h3>Logistics Support</h3>
                     <p>Guidance on Shipping & Delivery</p>
@@ -257,22 +266,23 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <img src="logo.png" alt="HyLoApp Logo" class="footer-logo">
-                    <p>Your trusted partner for bulk gift solutions across India and worldwide.</p>
+                    <p>Your trusted partner for bulk gift solutions</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Quick Links</h3>
+                    <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#delivery">Delivery Info</a></li>
-                        <li><a href="#moq">MOQ Details</a></li>
-                        <li><a href="#terms">Business Terms</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#delivery">Delivery</a></li>
+                        <li><a href="#moq">MOQ</a></li>
+                        <li><a href="#terms">Terms</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Contact Info</h3>
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> Contact us for bulk orders</p>
                     <p><i class="fas fa-envelope"></i> info@hyloapp.com</p>
-                    <p><i class="fas fa-phone"></i> +91 XXXXX XXXXX</p>
                 </div>
             </div>
             

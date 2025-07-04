@@ -2,285 +2,179 @@
 const products = [
     {
         id: 1,
-        name: "Premium Corporate Diary",
-        price: "₹45",
+        name: "Corporate Notebook Set",
+        price: "₹85",
+        moq: "MOQ: 500",
         category: "corporate",
         subcategory: "stationery",
-        moq: "500",
-        image: "",
-        keywords: ["diary", "notebook", "corporate", "leather", "premium"]
+        keywords: ["notebook", "diary", "corporate", "writing"]
     },
     {
         id: 2,
         name: "Stainless Steel Water Bottle",
-        price: "₹120",
+        price: "₹125",
+        moq: "MOQ: 100",
         category: "corporate",
-        subcategory: "drinkware",
-        moq: "200",
-        image: "",
-        keywords: ["bottle", "water", "steel", "corporate", "gift"]
+        subcategory: "bottles",
+        keywords: ["bottle", "water", "steel", "corporate", "drink"]
     },
     {
         id: 3,
-        name: "Wireless Bluetooth Earbuds",
-        price: "₹350",
-        category: "tech",
-        subcategory: "audio",
-        moq: "100",
-        image: "",
-        keywords: ["earbuds", "bluetooth", "wireless", "tech", "audio"]
+        name: "Premium Pen Set",
+        price: "₹45",
+        moq: "MOQ: 1000",
+        category: "stationery",
+        subcategory: "pens",
+        keywords: ["pen", "writing", "stationery", "office"]
     },
     {
         id: 4,
-        name: "Bamboo Desk Organizer",
-        price: "₹180",
-        category: "corporate",
-        subcategory: "office",
-        moq: "300",
-        image: "",
-        keywords: ["organizer", "desk", "bamboo", "office", "eco"]
+        name: "Festival Gift Hamper",
+        price: "₹250",
+        moq: "MOQ: 200",
+        category: "festival",
+        subcategory: "hampers",
+        keywords: ["festival", "hamper", "gift", "celebration"]
     },
     {
         id: 5,
-        name: "LED Power Bank",
-        price: "₹280",
+        name: "Tech Accessories Kit",
+        price: "₹180",
+        moq: "MOQ: 300",
         category: "tech",
         subcategory: "accessories",
-        moq: "250",
-        image: "",
-        keywords: ["powerbank", "led", "charging", "tech", "portable"]
+        keywords: ["tech", "accessories", "electronic", "gadget"]
     },
     {
         id: 6,
-        name: "Ceramic Coffee Mug Set",
+        name: "Promotional Tote Bag",
         price: "₹95",
-        category: "home",
-        subcategory: "drinkware",
-        moq: "400",
-        image: "",
-        keywords: ["mug", "coffee", "ceramic", "set", "home"]
+        moq: "MOQ: 500",
+        category: "promotional",
+        subcategory: "bags",
+        keywords: ["bag", "tote", "promotional", "carry"]
     },
     {
         id: 7,
-        name: "Diwali Gift Box",
-        price: "₹200",
-        category: "festival",
-        subcategory: "traditional",
-        moq: "100",
-        image: "",
-        keywords: ["diwali", "festival", "gift", "box", "traditional"]
+        name: "Desk Calendar 2025",
+        price: "₹65",
+        moq: "MOQ: 1000",
+        category: "stationery",
+        subcategory: "calendars",
+        keywords: ["calendar", "desk", "2025", "office"]
     },
     {
         id: 8,
-        name: "Premium Pen Set",
+        name: "Corporate Mug Set",
         price: "₹75",
-        category: "stationery",
-        subcategory: "writing",
-        moq: "500",
-        image: "",
-        keywords: ["pen", "writing", "premium", "set", "corporate"]
+        moq: "MOQ: 250",
+        category: "corporate",
+        subcategory: "mugs",
+        keywords: ["mug", "coffee", "corporate", "ceramic"]
     },
     {
         id: 9,
-        name: "USB Flash Drive",
-        price: "₹150",
+        name: "USB Power Bank",
+        price: "₹320",
+        moq: "MOQ: 100",
         category: "tech",
-        subcategory: "storage",
-        moq: "200",
-        image: "",
-        keywords: ["usb", "flash", "drive", "storage", "tech"]
+        subcategory: "powerbank",
+        keywords: ["powerbank", "usb", "battery", "charging"]
     },
     {
         id: 10,
-        name: "Eco-Friendly Tote Bag",
-        price: "₹85",
-        category: "corporate",
-        subcategory: "bags",
-        moq: "300",
-        image: "",
-        keywords: ["bag", "tote", "eco", "friendly", "corporate"]
+        name: "Festive Decorative Items",
+        price: "₹150",
+        moq: "MOQ: 500",
+        category: "festival",
+        subcategory: "decorations",
+        keywords: ["decoration", "festive", "ornament", "celebration"]
     },
     {
         id: 11,
         name: "Bluetooth Speaker",
         price: "₹450",
+        moq: "MOQ: 50",
         category: "tech",
         subcategory: "audio",
-        moq: "150",
-        image: "",
-        keywords: ["speaker", "bluetooth", "audio", "portable", "tech"]
+        keywords: ["speaker", "bluetooth", "audio", "music"]
     },
     {
         id: 12,
-        name: "Custom Mousepad",
-        price: "₹35",
-        category: "tech",
-        subcategory: "accessories",
-        moq: "1000",
-        image: "",
-        keywords: ["mousepad", "custom", "computer", "tech", "desk"]
-    },
-    {
-        id: 13,
-        name: "Aroma Diffuser",
-        price: "₹320",
-        category: "home",
-        subcategory: "wellness",
-        moq: "200",
-        image: "",
-        keywords: ["diffuser", "aroma", "wellness", "home", "relaxation"]
-    },
-    {
-        id: 14,
-        name: "Christmas Ornament Set",
-        price: "₹125",
-        category: "festival",
-        subcategory: "decoration",
-        moq: "500",
-        image: "",
-        keywords: ["christmas", "ornament", "decoration", "festival", "set"]
-    },
-    {
-        id: 15,
-        name: "Smart Phone Stand",
-        price: "₹65",
-        category: "tech",
-        subcategory: "accessories",
-        moq: "600",
-        image: "",
-        keywords: ["phone", "stand", "smart", "holder", "tech"]
-    },
-    {
-        id: 16,
-        name: "Executive Planner",
-        price: "₹110",
-        category: "stationery",
-        subcategory: "planning",
-        moq: "300",
-        image: "",
-        keywords: ["planner", "executive", "calendar", "schedule", "business"]
-    },
-    {
-        id: 17,
-        name: "Laptop Cooling Pad",
-        price: "₹380",
-        category: "tech",
-        subcategory: "computer",
-        moq: "100",
-        image: "",
-        keywords: ["laptop", "cooling", "pad", "computer", "tech"]
-    },
-    {
-        id: 18,
-        name: "Scented Candle Set",
-        price: "₹140",
-        category: "home",
-        subcategory: "decoration",
-        moq: "250",
-        image: "",
-        keywords: ["candle", "scented", "home", "decoration", "relaxation"]
+        name: "Executive Diary 2025",
+        price: "₹120",
+        moq: "MOQ: 300",
+        category: "corporate",
+        subcategory: "diary",
+        keywords: ["diary", "executive", "2025", "planner"]
     }
 ];
 
-// Category subcategory mapping
+// Subcategory mapping
 const subcategories = {
-    corporate: ["office", "stationery", "drinkware", "bags", "accessories"],
-    festival: ["traditional", "decoration", "gifts", "seasonal"],
-    stationery: ["writing", "planning", "organization", "supplies"],
-    tech: ["audio", "accessories", "storage", "computer", "mobile"],
-    home: ["drinkware", "decoration", "wellness", "kitchen", "living"]
+    corporate: ["stationery", "bottles", "mugs", "diary", "bags"],
+    festival: ["hampers", "decorations", "sweets", "gifts"],
+    stationery: ["pens", "calendars", "notebooks", "files"],
+    promotional: ["bags", "keychains", "magnets", "banners"],
+    tech: ["accessories", "powerbank", "audio", "cables"]
 };
 
 // DOM elements
 const searchInput = document.getElementById('searchInput');
 const categoryFilter = document.getElementById('categoryFilter');
 const subcategoryFilter = document.getElementById('subcategoryFilter');
-const clearFiltersBtn = document.getElementById('clearFilters');
-const productGrid = document.getElementById('productGrid');
-const noProducts = document.getElementById('noProducts');
+const productsGrid = document.getElementById('productsGrid');
+const resultsCount = document.getElementById('resultsCount');
 
-// State
-let filteredProducts = [...products];
-
-// Initialize the application
+// Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
-    renderProducts(products);
+    displayProducts(products);
+    updateResultsCount(products.length);
     setupEventListeners();
-    
-    // Add some visual feedback for loading
-    setTimeout(() => {
-        document.body.classList.add('loaded');
-    }, 100);
 });
 
-// Event listeners
+// Setup event listeners
 function setupEventListeners() {
-    searchInput.addEventListener('input', debounce(handleSearch, 300));
-    categoryFilter.addEventListener('change', handleCategoryChange);
-    subcategoryFilter.addEventListener('change', filterProducts);
-    clearFiltersBtn.addEventListener('click', clearAllFilters);
+    // Real-time search
+    searchInput.addEventListener('input', debounce(applyFilters, 300));
     
-    // Add smooth scrolling to anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
+    // Category change
+    categoryFilter.addEventListener('change', function() {
+        updateSubcategories();
+        applyFilters();
+    });
+    
+    // Subcategory change
+    subcategoryFilter.addEventListener('change', applyFilters);
+    
+    // Mobile menu toggle (if needed)
+    setupMobileInteractions();
+}
+
+// Update subcategories based on selected category
+function updateSubcategories() {
+    const selectedCategory = categoryFilter.value;
+    const subcategoryOptions = subcategories[selectedCategory] || [];
+    
+    // Clear existing options
+    subcategoryFilter.innerHTML = '<option value="">All Subcategories</option>';
+    
+    // Add new options
+    subcategoryOptions.forEach(subcategory => {
+        const option = document.createElement('option');
+        option.value = subcategory;
+        option.textContent = subcategory.charAt(0).toUpperCase() + subcategory.slice(1);
+        subcategoryFilter.appendChild(option);
     });
 }
 
-// Debounce function for search
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Handle search input
-function handleSearch() {
-    filterProducts();
-}
-
-// Handle category change
-function handleCategoryChange() {
-    const selectedCategory = categoryFilter.value;
-    updateSubcategoryOptions(selectedCategory);
-    filterProducts();
-}
-
-// Update subcategory options based on selected category
-function updateSubcategoryOptions(category) {
-    subcategoryFilter.innerHTML = '<option value="">All Subcategories</option>';
-    
-    if (category && subcategories[category]) {
-        subcategories[category].forEach(sub => {
-            const option = document.createElement('option');
-            option.value = sub;
-            option.textContent = sub.charAt(0).toUpperCase() + sub.slice(1);
-            subcategoryFilter.appendChild(option);
-        });
-    }
-}
-
-// Filter products based on current filters
-function filterProducts() {
+// Apply filters to products
+function applyFilters() {
     const searchTerm = searchInput.value.toLowerCase().trim();
     const selectedCategory = categoryFilter.value;
     const selectedSubcategory = subcategoryFilter.value;
     
-    filteredProducts = products.filter(product => {
+    const filteredProducts = products.filter(product => {
         // Search filter
         const matchesSearch = !searchTerm || 
             product.name.toLowerCase().includes(searchTerm) ||
@@ -295,237 +189,217 @@ function filterProducts() {
         return matchesSearch && matchesCategory && matchesSubcategory;
     });
     
-    renderProducts(filteredProducts);
+    displayProducts(filteredProducts);
+    updateResultsCount(filteredProducts.length);
 }
 
-// Clear all filters
-function clearAllFilters() {
-    searchInput.value = '';
-    categoryFilter.value = '';
-    subcategoryFilter.value = '';
-    updateSubcategoryOptions('');
-    filteredProducts = [...products];
-    renderProducts(filteredProducts);
-    
-    // Add visual feedback
-    clearFiltersBtn.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-        clearFiltersBtn.style.transform = 'scale(1)';
-    }, 150);
-}
-
-// Render products to the grid
-function renderProducts(productsToRender) {
-    if (productsToRender.length === 0) {
-        productGrid.style.display = 'none';
-        noProducts.style.display = 'block';
+// Display products in the grid
+function displayProducts(productsToShow) {
+    if (productsToShow.length === 0) {
+        productsGrid.innerHTML = `
+            <div class="no-products">
+                <div class="no-products-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>No products found</h3>
+                <p>Try adjusting your search or filters</p>
+            </div>
+        `;
         return;
     }
     
-    productGrid.style.display = 'grid';
-    noProducts.style.display = 'none';
+    productsGrid.innerHTML = productsToShow.map(product => `
+        <div class="product-card" data-category="${product.category}" data-subcategory="${product.subcategory}">
+            <div class="product-image">
+                <i class="fas fa-gift"></i>
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">${product.name}</h3>
+                <div class="product-price">${product.price}</div>
+                <div class="product-moq">${product.moq}</div>
+            </div>
+        </div>
+    `).join('');
     
-    productGrid.innerHTML = productsToRender.map(product => createProductCard(product)).join('');
-    
-    // Add stagger animation to product cards
-    const cards = productGrid.querySelectorAll('.product-card');
-    cards.forEach((card, index) => {
+    // Add animation to newly loaded products
+    animateProducts();
+}
+
+// Animate products on load
+function animateProducts() {
+    const productCards = document.querySelectorAll('.product-card');
+    productCards.forEach((card, index) => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(20px)';
+        
         setTimeout(() => {
+            card.style.transition = 'all 0.5s ease';
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
         }, index * 50);
     });
 }
 
-// Create individual product card HTML
-function createProductCard(product) {
-    return `
-        <div class="product-card" data-category="${product.category}" data-subcategory="${product.subcategory}">
-            <div class="product-image">
-                <i class="fas fa-gift"></i>
-                <div class="moq-badge">MOQ: ${product.moq}</div>
-            </div>
-            <div class="product-info">
-                <h3 class="product-name">${product.name}</h3>
-                <div class="product-price">${product.price}</div>
-                <div class="product-category">${product.category} • ${product.subcategory}</div>
-            </div>
+// Update results count
+function updateResultsCount(count) {
+    const totalProducts = products.length;
+    if (count === totalProducts) {
+        resultsCount.textContent = `Showing all ${count} products`;
+    } else {
+        resultsCount.textContent = `Showing ${count} of ${totalProducts} products`;
+    }
+}
+
+// Debounce function for search input
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Setup mobile interactions
+function setupMobileInteractions() {
+    // Add touch support for product cards
+    const productCards = document.querySelectorAll('.product-card');
+    productCards.forEach(card => {
+        card.addEventListener('touchstart', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        card.addEventListener('touchend', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+    
+    // Mobile filter toggle
+    createMobileFilterToggle();
+}
+
+// Create mobile filter toggle
+function createMobileFilterToggle() {
+    if (window.innerWidth <= 768) {
+        const filterSection = document.querySelector('.filter-section');
+        const searchWrapper = document.querySelector('.search-wrapper');
+        
+        // Create toggle button
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'mobile-filter-toggle';
+        toggleBtn.innerHTML = '<i class="fas fa-filter"></i> Show Filters';
+        
+        // Insert after search bar
+        searchWrapper.insertBefore(toggleBtn, filterSection);
+        
+        // Hide filters initially on mobile
+        filterSection.style.display = 'none';
+        
+        // Toggle functionality
+        toggleBtn.addEventListener('click', function() {
+            const isVisible = filterSection.style.display !== 'none';
+            filterSection.style.display = isVisible ? 'none' : 'flex';
+            this.innerHTML = isVisible ? 
+                '<i class="fas fa-filter"></i> Show Filters' : 
+                '<i class="fas fa-times"></i> Hide Filters';
+        });
+    }
+}
+
+// Smooth scrolling for navigation links
+document.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('#')) {
+        e.preventDefault();
+        const targetId = e.target.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    }
+});
+
+// Handle window resize
+window.addEventListener('resize', debounce(function() {
+    // Recreate mobile filter toggle if needed
+    const existingToggle = document.querySelector('.mobile-filter-toggle');
+    if (existingToggle) {
+        existingToggle.remove();
+    }
+    
+    // Reset filter display
+    const filterSection = document.querySelector('.filter-section');
+    if (window.innerWidth > 768) {
+        filterSection.style.display = 'flex';
+    } else {
+        createMobileFilterToggle();
+    }
+}, 250));
+
+// Loading state management
+function showLoading() {
+    productsGrid.innerHTML = `
+        <div class="loading-container">
+            <div class="loading"></div>
+            <p>Loading products...</p>
         </div>
     `;
 }
 
-// Add intersection observer for animations
-const observeElements = () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
+// Add intersection observer for scroll animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
 
-    // Observe sections for animations
-    document.querySelectorAll('.delivery-info, .moq-info, .feature-card, .term-card').forEach(el => {
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe elements for scroll animations
+document.addEventListener('DOMContentLoaded', function() {
+    const animatedElements = document.querySelectorAll('.feature-card, .terms-card, .delivery-item, .moq-tier');
+    
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
         observer.observe(el);
     });
-};
-
-// Initialize animations after DOM load
-setTimeout(observeElements, 100);
-
-// Add some interactive features
-document.addEventListener('DOMContentLoaded', function() {
-    // Add hover effects to delivery items
-    document.querySelectorAll('.delivery-item').forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateX(10px) scale(1.02)';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateX(0) scale(1)';
-        });
-    });
-    
-    // Add click animation to MOQ tiers
-    document.querySelectorAll('.moq-tier').forEach(tier => {
-        tier.addEventListener('click', function() {
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 150);
-        });
-    });
-    
-    // Add typing effect to search placeholder
-    const searchPlaceholders = [
-        "Search products... (e.g., diary, bottle, pen)",
-        "Try searching for 'corporate gifts'...",
-        "Find the perfect bulk items...",
-        "Search by category or name..."
-    ];
-    
-    let placeholderIndex = 0;
-    setInterval(() => {
-        if (searchInput && document.activeElement !== searchInput) {
-            placeholderIndex = (placeholderIndex + 1) % searchPlaceholders.length;
-            searchInput.placeholder = searchPlaceholders[placeholderIndex];
-        }
-    }, 3000);
 });
 
-// Add smooth reveal animations
-const addRevealAnimations = () => {
-    const style = document.createElement('style');
-    style.textContent = `
-        .animate-in {
-            animation: slideInUp 0.6s ease forwards;
-        }
-        
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .product-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .feature-card:hover .feature-icon,
-        .term-card:hover .term-icon {
-            transform: rotateY(180deg);
-            transition: transform 0.6s ease;
-        }
-        
-        .delivery-item:hover .delivery-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-          .moq-tier:hover {
-            box-shadow: 0 8px 25px rgba(26, 32, 44, 0.3);
-        }
-    `;
-    document.head.appendChild(style);
-};
-
-addRevealAnimations();
-
-// Performance optimization: Lazy loading for product images
-const lazyLoadImages = () => {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    observer.unobserve(img);
-                }
-            }
+// Performance optimization
+if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+        // Preload critical images
+        const criticalImages = ['logo.png'];
+        criticalImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
         });
     });
+}
 
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-};
-
-// Add accessibility improvements
-const addAccessibilityFeatures = () => {
-    // Add keyboard navigation for product cards
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            if (e.target.classList.contains('product-card')) {
-                e.target.click();
-            }
-        }
-    });
-      // Add focus indicators
-    const style = document.createElement('style');
-    style.textContent = `
-        .product-card:focus,
-        .delivery-item:focus,
-        .moq-tier:focus,
-        .feature-card:focus,
-        .term-card:focus {
-            outline: 2px solid #1a202c;
-            outline-offset: 2px;
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-};
-
-addAccessibilityFeatures();
-
-// Add error handling for network issues
-window.addEventListener('error', (e) => {
+// Error handling for failed operations
+window.addEventListener('error', function(e) {
     console.error('An error occurred:', e.error);
-    // Could show a user-friendly error message here
+    // Could show user-friendly error message here
 });
 
-// Export functions for potential testing
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        products,
-        filterProducts,
-        createProductCard,
-        clearAllFilters
-    };
+// Service Worker registration for PWA capabilities (optional)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        // Uncomment when service worker is created
+        // navigator.serviceWorker.register('/sw.js');
+    });
 }
