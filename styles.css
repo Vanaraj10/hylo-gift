@@ -287,7 +287,7 @@ body {
     align-items: center;
     text-align: center;
     padding: 1.5rem;
-    background: var(--background-light);
+    background: #efefef;
     border-radius: 12px;
     transition: all 0.3s ease;
     border: 2px solid transparent;
@@ -322,7 +322,8 @@ body {
 }
 
 .delivery-item-horizontal .delivery-content p {
-    font-size: 0.9rem;
+    font-size: 1rem;
+    font-weight: 600;
     color: var(--text-secondary);
 }
 
@@ -375,7 +376,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 1.2rem;
-    background: var(--background-light);
+    background: #efefef;
     border-radius: 12px;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -897,10 +898,9 @@ body {
     .delivery-moq-section {
         padding: 1rem;
     }
-    
-    .delivery-timeline-horizontal,
+      .delivery-timeline-horizontal,
     .moq-tiers-horizontal {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.8rem;
     }
       .delivery-section-horizontal h3,
@@ -954,9 +954,35 @@ body {
         gap: 0.8rem;
     }
     
-    .delivery-timeline-horizontal,
+    .delivery-timeline-horizontal {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+    
     .moq-tiers-horizontal {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+    
+    .delivery-item-horizontal {
+        padding: 0.8rem;
+    }
+    
+    .moq-tier-horizontal {
+        padding: 0.6rem;
+        font-size: 0.8rem;
+        min-height: 40px;
+    }
+    
+    .delivery-time-image {
+        width: 35px;
+        height: 35px;
+        margin-bottom: 0.5rem;
+    }
+    
+    .time-icon {
+        width: 25px;
+        height: 25px;
     }
 }
 
