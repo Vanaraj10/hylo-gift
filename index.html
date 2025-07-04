@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyLoApp - Bulk Gift Solutions</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="logo.png" alt="HyLoApp Logo" class="logo">
+                    <span class="brand-name">HyLoApp</span>
+                </div>
+                
+                <div class="tagline">
+                    <h1>One Stop Solutions for all your Bulk Needs</h1>
+                </div>
+                
+                <div class="bulk-notice">
+                    <span class="bulk-text">Bulk Orders Only</span>
+                    <span class="no-retail">No Retail</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search & Filter Section -->
+    <section class="search-filter-section">
+        <div class="container">
+            <div class="search-filter-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search products... (e.g., diary, bottle, pen)">
+                </div>
+                
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="categoryFilter">Category</label>
+                        <select id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="corporate">Corporate</option>
+                            <option value="festival">Festival</option>
+                            <option value="stationery">Stationery</option>
+                            <option value="tech">Tech Accessories</option>
+                            <option value="home">Home & Living</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="subcategoryFilter">Subcategory</label>
+                        <select id="subcategoryFilter">
+                            <option value="">All Subcategories</option>
+                        </select>
+                    </div>
+                    
+                    <button class="filter-btn" id="clearFilters">
+                        <i class="fas fa-times"></i>
+                        Clear Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-grid">
+                <!-- Delivery Information Sidebar -->
+                <aside class="delivery-info">
+                    <h2><i class="fas fa-truck"></i> Where We Deliver</h2>
+                    <div class="delivery-timeline">
+                        <div class="delivery-item">
+                            <div class="delivery-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="delivery-content">
+                                <h3>24 Hours</h3>
+                                <p>Across Chennai</p>
+                            </div>
+                        </div>
+                        
+                        <div class="delivery-item">
+                            <div class="delivery-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="delivery-content">
+                                <h3>48 Hours</h3>
+                                <p>Across Tamil Nadu</p>
+                            </div>
+                        </div>
+                        
+                        <div class="delivery-item">
+                            <div class="delivery-icon">
+                                <i class="fas fa-map"></i>
+                            </div>
+                            <div class="delivery-content">
+                                <h3>72 Hours</h3>
+                                <p>Across Southern India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="delivery-item">
+                            <div class="delivery-icon">
+                                <i class="fas fa-globe-asia"></i>
+                            </div>
+                            <div class="delivery-content">
+                                <h3>7 Days</h3>
+                                <p>Across India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="delivery-item">
+                            <div class="delivery-icon">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="delivery-content">
+                                <h3>Worldwide Export</h3>
+                                <p>Across Countries</p>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Product Display Area -->
+                <section class="product-display">
+                    <div class="product-grid" id="productGrid">
+                        <!-- Products will be dynamically loaded here -->
+                    </div>
+                    
+                    <div class="no-products" id="noProducts" style="display: none;">
+                        <i class="fas fa-search"></i>
+                        <h3>No products found</h3>
+                        <p>Try adjusting your search or filters</p>
+                    </div>
+                </section>
+
+                <!-- MOQ Information Sidebar -->
+                <aside class="moq-info">
+                    <h2><i class="fas fa-boxes"></i> How We Deliver - MOQ</h2>
+                    <div class="moq-tiers">
+                        <div class="moq-tier">
+                            <div class="moq-number">100s</div>
+                            <div class="moq-label">Small Bulk</div>
+                        </div>
+                        
+                        <div class="moq-tier">
+                            <div class="moq-number">500s</div>
+                            <div class="moq-label">Medium Bulk</div>
+                        </div>
+                        
+                        <div class="moq-tier">
+                            <div class="moq-number">1000s</div>
+                            <div class="moq-label">Large Bulk</div>
+                        </div>
+                        
+                        <div class="moq-tier">
+                            <div class="moq-number">5000s</div>
+                            <div class="moq-label">Extra Large</div>
+                        </div>
+                        
+                        <div class="moq-tier">
+                            <div class="moq-number">10,000s</div>
+                            <div class="moq-label">Enterprise</div>
+                        </div>
+                        
+                        <div class="moq-tier special">
+                            <div class="moq-number">Container</div>
+                            <div class="moq-label">Based Orders</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Why Us Section -->
+    <section class="why-us-section">
+        <div class="container">
+            <h2>Why Choose HyLoApp?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <h3>GST Invoice</h3>
+                    <p>For Every Order</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3>Samples Available</h3>
+                    <p>Can Be Provided</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <h3>Logo Branding</h3>
+                    <p>Can Be Printed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Terms Section -->
+    <section class="business-terms">
+        <div class="container">
+            <h2>Our Terms & Business Scope</h2>
+            <div class="terms-grid">
+                <div class="term-card">
+                    <div class="term-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Payment Terms</h3>
+                    <p>100% Advance Payment Required</p>
+                </div>
+                
+                <div class="term-card">
+                    <div class="term-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Customer Scope</h3>
+                    <p>Unloading & On-site Delivery Handling</p>
+                </div>
+                
+                <div class="term-card">
+                    <div class="term-icon">
+                        <i class="fas fa-truck-loading"></i>
+                    </div>
+                    <h3>Our Scope</h3>
+                    <p>Loading & Professional Packing</p>
+                </div>
+                
+                <div class="term-card">
+                    <div class="term-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Logistics Support</h3>
+                    <p>Guidance on Shipping & Delivery</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="logo.png" alt="HyLoApp Logo" class="footer-logo">
+                    <p>Your trusted partner for bulk gift solutions across India and worldwide.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#delivery">Delivery Info</a></li>
+                        <li><a href="#moq">MOQ Details</a></li>
+                        <li><a href="#terms">Business Terms</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-envelope"></i> info@hyloapp.com</p>
+                    <p><i class="fas fa-phone"></i> +91 XXXXX XXXXX</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HyLoApp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
