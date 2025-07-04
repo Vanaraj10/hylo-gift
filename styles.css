@@ -326,6 +326,28 @@ body {
     color: var(--text-secondary);
 }
 
+/* Delivery Time Images */
+.delivery-time-image {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--background);
+    border: 2px solid var(--border-light);
+}
+
+.time-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
 /* Horizontal MOQ Section */
 .moq-section-horizontal h3 {
     color: var(--text-primary);
@@ -709,9 +731,8 @@ body {
     }
 }
 
-@media (max-width: 992px) {
-    .delivery-timeline-horizontal {
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+@media (max-width: 992px) {    .delivery-timeline-horizontal {
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.8rem;
     }
     
@@ -746,25 +767,34 @@ body {
         padding: 1.5rem;
         margin-bottom: 2rem;
     }
-    
-    .delivery-timeline-horizontal {
+      .delivery-timeline-horizontal {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.8rem;
     }
     
     .moq-tiers-horizontal {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 0.8rem;
     }
     
     .delivery-item-horizontal {
         padding: 1rem;
     }
-    
-    .delivery-item-horizontal .delivery-icon {
+      .delivery-item-horizontal .delivery-icon {
         width: 35px;
         height: 35px;
         font-size: 0.9rem;
+    }
+    
+    .delivery-time-image {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 0.8rem;
+    }
+    
+    .time-icon {
+        width: 35px;
+        height: 35px;
     }
     
     .delivery-item-horizontal .delivery-content h4 {
@@ -873,10 +903,20 @@ body {
         grid-template-columns: 1fr;
         gap: 0.8rem;
     }
-    
-    .delivery-section-horizontal h3,
+      .delivery-section-horizontal h3,
     .moq-section-horizontal h3 {
         font-size: 1.2rem;
+    }
+    
+    .delivery-time-image {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 0.6rem;
+    }
+    
+    .time-icon {
+        width: 30px;
+        height: 30px;
     }
     
     .search-input {
