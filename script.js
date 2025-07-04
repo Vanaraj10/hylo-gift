@@ -1,245 +1,109 @@
-// Sample product data
-const products = [
-    {
-        id: 1,
-        name: "Corporate Notebook Set",
-        price: "₹85",
-        moq: "MOQ: 500",
-        category: "corporate",
-        subcategory: "stationery",
-        keywords: ["notebook", "diary", "corporate", "writing"]
-    },
-    {
-        id: 2,
-        name: "Stainless Steel Water Bottle",
-        price: "₹125",
-        moq: "MOQ: 100",
-        category: "corporate",
-        subcategory: "bottles",
-        keywords: ["bottle", "water", "steel", "corporate", "drink"]
-    },
-    {
-        id: 3,
-        name: "Premium Pen Set",
-        price: "₹45",
-        moq: "MOQ: 1000",
-        category: "stationery",
-        subcategory: "pens",
-        keywords: ["pen", "writing", "stationery", "office"]
-    },
-    {
-        id: 4,
-        name: "Festival Gift Hamper",
-        price: "₹250",
-        moq: "MOQ: 200",
-        category: "festival",
-        subcategory: "hampers",
-        keywords: ["festival", "hamper", "gift", "celebration"]
-    },
-    {
-        id: 5,
-        name: "Tech Accessories Kit",
-        price: "₹180",
-        moq: "MOQ: 300",
-        category: "tech",
-        subcategory: "accessories",
-        keywords: ["tech", "accessories", "electronic", "gadget"]
-    },
-    {
-        id: 6,
-        name: "Promotional Tote Bag",
-        price: "₹95",
-        moq: "MOQ: 500",
-        category: "promotional",
-        subcategory: "bags",
-        keywords: ["bag", "tote", "promotional", "carry"]
-    },
-    {
-        id: 7,
-        name: "Desk Calendar 2025",
-        price: "₹65",
-        moq: "MOQ: 1000",
-        category: "stationery",
-        subcategory: "calendars",
-        keywords: ["calendar", "desk", "2025", "office"]
-    },
-    {
-        id: 8,
-        name: "Corporate Mug Set",
-        price: "₹75",
-        moq: "MOQ: 250",
-        category: "corporate",
-        subcategory: "mugs",
-        keywords: ["mug", "coffee", "corporate", "ceramic"]
-    },
-    {
-        id: 9,
-        name: "USB Power Bank",
-        price: "₹320",
-        moq: "MOQ: 100",
-        category: "tech",
-        subcategory: "powerbank",
-        keywords: ["powerbank", "usb", "battery", "charging"]
-    },
-    {
-        id: 10,
-        name: "Festive Decorative Items",
-        price: "₹150",
-        moq: "MOQ: 500",
-        category: "festival",
-        subcategory: "decorations",
-        keywords: ["decoration", "festive", "ornament", "celebration"]
-    },
-    {
-        id: 11,
-        name: "Bluetooth Speaker",
-        price: "₹450",
-        moq: "MOQ: 50",
-        category: "tech",
-        subcategory: "audio",
-        keywords: ["speaker", "bluetooth", "audio", "music"]
-    },
-    {
-        id: 12,
-        name: "Executive Diary 2025",
-        price: "₹120",
-        moq: "MOQ: 300",
-        category: "corporate",
-        subcategory: "diary",
-        keywords: ["diary", "executive", "2025", "planner"]
+// Fetch products from Supabase with pagination
+const SUPABASE_URL = 'https://wpxgoxlfyscqgkppnnja.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndweGdveGxmeXNjcWdrcHBubmphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE2Mzg4NDAsImV4cCI6MjA2NzIxNDg0MH0.kJR8V_aZEFQ6EDNq4p0YVQjymGWnChRJCSW4cYeXqeA';
+const PAGE_SIZE = 16;
+let currentPage = 1;
+let totalProducts = 0;
+let supabaseClient;
+
+async function initSupabase() {
+    if (!window.supabase) {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js';
+        script.onload = () => {
+            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            fetchAndRenderProducts();
+        };
+        document.head.appendChild(script);
+    } else {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        fetchAndRenderProducts();
     }
-];
-
-// DOM elements
-const searchInput = document.getElementById('searchInput');
-const categoryFilter = document.getElementById('categoryFilter');
-const productsGrid = document.getElementById('productsGrid');
-const resultsCount = document.getElementById('resultsCount');
-
-// Initialize the page
-document.addEventListener('DOMContentLoaded', function() {
-    displayProducts(products);
-    updateResultsCount(products.length);
-    setupEventListeners();
-});
-
-// Setup event listeners
-function setupEventListeners() {
-    // Real-time search
-    searchInput.addEventListener('input', debounce(applyFilters, 300));
-    
-    // Category change
-    categoryFilter.addEventListener('change', applyFilters);
-    
-    // Mobile menu toggle (if needed)
-    setupMobileInteractions();
 }
 
-// Apply filters to products
-function applyFilters() {
-    const searchTerm = searchInput.value.toLowerCase().trim();
-    const selectedCategory = categoryFilter.value;
-    
-    const filteredProducts = products.filter(product => {
-        // Search filter
-        const matchesSearch = !searchTerm || 
-            product.name.toLowerCase().includes(searchTerm) ||
-            product.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm));
-        
-        // Category filter
-        const matchesCategory = !selectedCategory || product.category === selectedCategory;
-        
-        return matchesSearch && matchesCategory;
-    });
-    
-    displayProducts(filteredProducts);
-    updateResultsCount(filteredProducts.length);
+async function fetchProducts(page = 1, search = '', category = '') {
+    let from = (page - 1) * PAGE_SIZE;
+    let to = from + PAGE_SIZE - 1;
+    let query = supabaseClient.from('products').select('*', { count: 'exact' }).order('id', { ascending: false }).range(from, to);
+    if (search) {
+        query = query.ilike('product_name', `%${search}%`);
+    }
+    if (category) {
+        query = query.eq('product_category', category);
+    }
+    const { data, count, error } = await query;
+    if (error) throw error;
+    totalProducts = count;
+    return data;
 }
 
-// Display products in the grid
-function displayProducts(productsToShow) {
-    if (productsToShow.length === 0) {
-        productsGrid.innerHTML = `
-            <div class="no-products">
-                <div class="no-products-icon">
-                    <i class="fas fa-search"></i>
-                </div>
-                <h3>No products found</h3>
-                <p>Try adjusting your search or filters</p>
-            </div>
-        `;
+async function fetchAndRenderProducts(page = 1) {
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const productsGrid = document.getElementById('productsGrid');
+    const resultsCount = document.getElementById('resultsCount');
+    const search = searchInput ? searchInput.value.trim() : '';
+    const category = categoryFilter ? categoryFilter.value : '';
+    productsGrid.innerHTML = '<div class="loading">Loading...</div>';
+    try {
+        const products = await fetchProducts(page, search, category);
+        renderProducts(products);
+        renderPagination();
+        resultsCount.textContent = `Showing ${products.length} of ${totalProducts} products`;
+    } catch (e) {
+        productsGrid.innerHTML = '<div class="no-products"><h3>Error loading products</h3></div>';
+    }
+}
+
+function renderProducts(products) {
+    const productsGrid = document.getElementById('productsGrid');
+    if (!products || products.length === 0) {
+        productsGrid.innerHTML = `<div class="no-products"><div class="no-products-icon"><i class="fas fa-search"></i></div><h3>No products found</h3><p>Try adjusting your search or filters</p></div>`;
         return;
     }
-      productsGrid.innerHTML = productsToShow.map(product => `
-        <div class="product-card" data-category="${product.category}">
+    productsGrid.innerHTML = products.map(product => `
+        <div class="product-card" data-category="${product.product_category}">
             <div class="product-image">
-                <i class="fas fa-gift"></i>
+                <img src="${product.product_image}" alt="${product.product_name}" style="width:100%;height:100%;object-fit:cover;" />
             </div>
             <div class="product-info">
-                <h3 class="product-name">${product.name}</h3>
-                <div class="product-price">${product.price}</div>
+                <h3 class="product-name">${product.product_name}</h3>
+                <div class="product-price">₹${product.product_price}</div>
             </div>
         </div>
     `).join('');
-    
-    // Add animation to newly loaded products
-    animateProducts();
 }
 
-// Animate products on load
-function animateProducts() {
-    const productCards = document.querySelectorAll('.product-card');
-    productCards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            card.style.transition = 'all 0.5s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 50);
-    });
-}
-
-// Update results count
-function updateResultsCount(count) {
-    const totalProducts = products.length;
-    if (count === totalProducts) {
-        resultsCount.textContent = `Showing all ${count} products`;
-    } else {
-        resultsCount.textContent = `Showing ${count} of ${totalProducts} products`;
+function renderPagination() {
+    const productsGrid = document.getElementById('productsGrid');
+    let totalPages = Math.ceil(totalProducts / PAGE_SIZE);
+    if (totalPages <= 1) return;
+    let paginationHtml = '<div class="pagination">';
+    for (let i = 1; i <= totalPages; i++) {
+        paginationHtml += `<button class="pagination-btn${i === currentPage ? ' active' : ''}" data-page="${i}">${i}</button>`;
     }
-}
-
-// Debounce function for search input
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
+    paginationHtml += '</div>';
+    productsGrid.insertAdjacentHTML('afterend', paginationHtml);
+    document.querySelectorAll('.pagination-btn').forEach(btn => {
+        btn.onclick = (e) => {
+            currentPage = parseInt(e.target.getAttribute('data-page'));
+            fetchAndRenderProducts(currentPage);
         };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Setup mobile interactions
-function setupMobileInteractions() {
-    // Add touch support for product cards
-    const productCards = document.querySelectorAll('.product-card');
-    productCards.forEach(card => {
-        card.addEventListener('touchstart', function() {
-            this.style.transform = 'translateY(-2px)';
-        });
-        
-        card.addEventListener('touchend', function() {
-            this.style.transform = 'translateY(0)';
-        });
     });
-
 }
 
+// Setup event listeners for search and filter
+function setupProductEvents() {
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    if (searchInput) searchInput.addEventListener('input', () => { currentPage = 1; fetchAndRenderProducts(); });
+    if (categoryFilter) categoryFilter.addEventListener('change', () => { currentPage = 1; fetchAndRenderProducts(); });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    initSupabase();
+    setupProductEvents();
+});
 
 // Smooth scrolling for navigation links
 document.addEventListener('click', function(e) {
