@@ -476,7 +476,7 @@ body {
 
 /* Why Us Section */
 .why-us-section {
-    padding: 4rem 0;
+    padding: 2.5rem 0;
     background: var(--gradient-primary);
     color: white;
     position: relative;
@@ -494,24 +494,24 @@ body {
 
 .why-us-section h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     position: relative;
     z-index: 1;
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
 }
 
 .feature-card {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
-    padding: 2rem;
-    border-radius: 16px;
+    padding: 1.5rem;
+    border-radius: 12px;
     text-align: center;
     transition: all 0.3s ease;
     border: 1px solid rgba(255,255,255,0.2);
@@ -520,97 +520,97 @@ body {
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     background: rgba(255,255,255,0.15);
     box-shadow: var(--shadow-lg);
 }
 
 .feature-icon {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     background: var(--accent-color);
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 2rem;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
     box-shadow: var(--shadow);
 }
 
 .feature-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .feature-card p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     opacity: 0.9;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 /* Terms Section */
 .terms-section {
-    padding: 4rem 0;
+    padding: 2.5rem 0;
     background: var(--background);
 }
 
 .terms-section h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     color: var(--text-primary);
 }
 
 .terms-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
 }
 
 .terms-card {
     background: var(--background-light);
-    padding: 2rem;
-    border-radius: 16px;
+    padding: 1.5rem;
+    border-radius: 12px;
     text-align: center;
     transition: all 0.3s ease;
     border: 2px solid transparent;
 }
 
 .terms-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     border-color: var(--accent-color);
     background: var(--background);
     box-shadow: var(--shadow-lg);
 }
 
 .terms-icon {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     background: var(--gradient-primary);
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 2rem;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
     color: white;
     box-shadow: var(--shadow);
 }
 
 .terms-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: var(--text-primary);
 }
 
 .terms-card p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 /* Footer */
@@ -896,21 +896,34 @@ body {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
-    
-    .why-us-section h2,
+      .why-us-section h2,
     .terms-section h2 {
-        font-size: 2rem;
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .why-us-section,
+    .terms-section {
+        padding: 2rem 0;
     }
     
     .features-grid,
     .terms-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1rem;
     }
     
     .feature-card,
     .terms-card {
-        padding: 1.5rem;
+        padding: 1.2rem;
+    }
+    
+    .feature-icon,
+    .terms-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
     }
     
     .footer-content {
