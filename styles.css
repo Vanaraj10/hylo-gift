@@ -106,6 +106,32 @@ body {
     letter-spacing: 0.5px;
 }
 
+/* Header Contact Styles */
+.header-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.contact-item i {
+    color: var(--accent-color);
+    font-size: 1rem;
+}
+
+.contact-item span {
+    font-weight: 500;
+}
+
 /* Search Section */
 .search-section {
     background: var(--background);
@@ -754,8 +780,7 @@ body {
         font-size: 0.9rem;
         min-height: 45px;
     }
-    
-    .header-content {
+      .header-content {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
@@ -763,6 +788,19 @@ body {
     
     .logo-section {
         justify-content: center;
+    }
+    
+    .header-contact {
+        order: 2;
+        gap: 0.3rem;
+    }
+    
+    .contact-item {
+        font-size: 0.8rem;
+    }
+    
+    .bulk-notice {
+        order: 3;
     }
     
     .logo-text h1 {
