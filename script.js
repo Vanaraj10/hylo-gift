@@ -110,19 +110,9 @@ const products = [
     }
 ];
 
-// Subcategory mapping
-const subcategories = {
-    corporate: ["stationery", "bottles", "mugs", "diary", "bags"],
-    festival: ["hampers", "decorations", "sweets", "gifts"],
-    stationery: ["pens", "calendars", "notebooks", "files"],
-    promotional: ["bags", "keychains", "magnets", "banners"],
-    tech: ["accessories", "powerbank", "audio", "cables"]
-};
-
 // DOM elements
 const searchInput = document.getElementById('searchInput');
 const categoryFilter = document.getElementById('categoryFilter');
-const subcategoryFilter = document.getElementById('subcategoryFilter');
 const productsGrid = document.getElementById('productsGrid');
 const resultsCount = document.getElementById('resultsCount');
 
@@ -139,40 +129,16 @@ function setupEventListeners() {
     searchInput.addEventListener('input', debounce(applyFilters, 300));
     
     // Category change
-    categoryFilter.addEventListener('change', function() {
-        updateSubcategories();
-        applyFilters();
-    });
-    
-    // Subcategory change
-    subcategoryFilter.addEventListener('change', applyFilters);
+    categoryFilter.addEventListener('change', applyFilters);
     
     // Mobile menu toggle (if needed)
     setupMobileInteractions();
-}
-
-// Update subcategories based on selected category
-function updateSubcategories() {
-    const selectedCategory = categoryFilter.value;
-    const subcategoryOptions = subcategories[selectedCategory] || [];
-    
-    // Clear existing options
-    subcategoryFilter.innerHTML = '<option value="">All Subcategories</option>';
-    
-    // Add new options
-    subcategoryOptions.forEach(subcategory => {
-        const option = document.createElement('option');
-        option.value = subcategory;
-        option.textContent = subcategory.charAt(0).toUpperCase() + subcategory.slice(1);
-        subcategoryFilter.appendChild(option);
-    });
 }
 
 // Apply filters to products
 function applyFilters() {
     const searchTerm = searchInput.value.toLowerCase().trim();
     const selectedCategory = categoryFilter.value;
-    const selectedSubcategory = subcategoryFilter.value;
     
     const filteredProducts = products.filter(product => {
         // Search filter
@@ -183,10 +149,7 @@ function applyFilters() {
         // Category filter
         const matchesCategory = !selectedCategory || product.category === selectedCategory;
         
-        // Subcategory filter
-        const matchesSubcategory = !selectedSubcategory || product.subcategory === selectedSubcategory;
-        
-        return matchesSearch && matchesCategory && matchesSubcategory;
+        return matchesSearch && matchesCategory;
     });
     
     displayProducts(filteredProducts);
@@ -207,16 +170,14 @@ function displayProducts(productsToShow) {
         `;
         return;
     }
-    
-    productsGrid.innerHTML = productsToShow.map(product => `
-        <div class="product-card" data-category="${product.category}" data-subcategory="${product.subcategory}">
+      productsGrid.innerHTML = productsToShow.map(product => `
+        <div class="product-card" data-category="${product.category}">
             <div class="product-image">
                 <i class="fas fa-gift"></i>
             </div>
             <div class="product-info">
                 <h3 class="product-name">${product.name}</h3>
                 <div class="product-price">${product.price}</div>
-                <div class="product-moq">${product.moq}</div>
             </div>
         </div>
     `).join('');
@@ -276,38 +237,9 @@ function setupMobileInteractions() {
             this.style.transform = 'translateY(0)';
         });
     });
-    
-    // Mobile filter toggle
-    createMobileFilterToggle();
+
 }
 
-// Create mobile filter toggle
-function createMobileFilterToggle() {
-    if (window.innerWidth <= 768) {
-        const filterSection = document.querySelector('.filter-section');
-        const searchWrapper = document.querySelector('.search-wrapper');
-        
-        // Create toggle button
-        const toggleBtn = document.createElement('button');
-        toggleBtn.className = 'mobile-filter-toggle';
-        toggleBtn.innerHTML = '<i class="fas fa-filter"></i> Show Filters';
-        
-        // Insert after search bar
-        searchWrapper.insertBefore(toggleBtn, filterSection);
-        
-        // Hide filters initially on mobile
-        filterSection.style.display = 'none';
-        
-        // Toggle functionality
-        toggleBtn.addEventListener('click', function() {
-            const isVisible = filterSection.style.display !== 'none';
-            filterSection.style.display = isVisible ? 'none' : 'flex';
-            this.innerHTML = isVisible ? 
-                '<i class="fas fa-filter"></i> Show Filters' : 
-                '<i class="fas fa-times"></i> Hide Filters';
-        });
-    }
-}
 
 // Smooth scrolling for navigation links
 document.addEventListener('click', function(e) {

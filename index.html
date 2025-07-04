@@ -14,7 +14,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
   </head>
-  <body>    <!-- Header Section -->
+  <body>
+    <!-- Header Section -->
     <header class="header">
       <div class="container">
         <div class="header-content">
@@ -54,10 +55,11 @@
         <section class="delivery-moq-section">
           <!-- Where We Deliver -->
           <div class="delivery-section-horizontal">
-            <h3><i class="fas fa-shipping-fast"></i> Where We Deliver</h3>            <div class="delivery-timeline-horizontal">
+            <h3><i class="fas fa-shipping-fast"></i> Where We Deliver</h3>
+            <div class="delivery-timeline-horizontal">
               <div class="delivery-item-horizontal">
                 <div class="delivery-time-image">
-                  <img src="24h.jpg" alt="24 Hours" class="time-icon">
+                  <img src="24h.jpg" alt="24 Hours" class="time-icon" />
                 </div>
                 <div class="delivery-content">
                   <h4>Within 24 Hours</h4>
@@ -67,7 +69,7 @@
 
               <div class="delivery-item-horizontal">
                 <div class="delivery-time-image">
-                  <img src="48h.png" alt="48 Hours" class="time-icon">
+                  <img src="48h.png" alt="48 Hours" class="time-icon" />
                 </div>
                 <div class="delivery-content">
                   <h4>Within 48 Hours</h4>
@@ -77,7 +79,7 @@
 
               <div class="delivery-item-horizontal">
                 <div class="delivery-time-image">
-                  <img src="72h.png" alt="72 Hours" class="time-icon">
+                  <img src="72h.png" alt="72 Hours" class="time-icon" />
                 </div>
                 <div class="delivery-content">
                   <h4>Within 72 Hours</h4>
@@ -87,7 +89,7 @@
 
               <div class="delivery-item-horizontal">
                 <div class="delivery-time-image">
-                  <img src="7d.png" alt="7 Days" class="time-icon">
+                  <img src="7d.png" alt="7 Days" class="time-icon" />
                 </div>
                 <div class="delivery-content">
                   <h4>Within 7 Days</h4>
@@ -119,12 +121,17 @@
               <div class="moq-tier-horizontal">Container</div>
             </div>
           </div>
-        </section>
-
-        <section class="search-section">
+        </section>        <section class="search-section">
           <div class="container">
             <div class="search-wrapper">
               <div class="search-bar">
+                <div class="free-delivery-notice">
+                  <div class="delivery-badge">
+                    <i class="fas fa-truck"></i>
+                    <span>Free Delivery in Chennai</span>
+                  </div>
+                </div>
+
                 <div class="search-input-wrapper">
                   <i class="fas fa-search search-icon"></i>
                   <input
@@ -134,11 +141,8 @@
                     class="search-input"
                   />
                 </div>
-              </div>
 
-              <div class="filter-section">
                 <div class="filter-group">
-                  <label for="categoryFilter">Category</label>
                   <select id="categoryFilter" class="filter-select">
                     <option value="">All Categories</option>
                     <option value="corporate">Corporate Gifts</option>
@@ -148,18 +152,6 @@
                     <option value="tech">Tech Accessories</option>
                   </select>
                 </div>
-
-                <div class="filter-group">
-                  <label for="subcategoryFilter">Subcategory</label>
-                  <select id="subcategoryFilter" class="filter-select">
-                    <option value="">All Subcategories</option>
-                  </select>
-                </div>
-
-                <button class="filter-btn" onclick="applyFilters()">
-                  <i class="fas fa-filter"></i>
-                  Apply Filters
-                </button>
               </div>
             </div>
           </div>
@@ -274,7 +266,7 @@
 
           <div class="footer-section">
             <h4>Contact Info</h4>
-            <p><i class="fas fa-phone"></i> Contact us for bulk orders</p>
+            <p><i class="fas fa-phone"></i>+91 94445 08281</p>
             <p><i class="fas fa-envelope"></i> info@hyloapp.com</p>
           </div>
         </div>
