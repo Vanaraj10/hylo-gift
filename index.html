@@ -51,7 +51,48 @@
     <!-- Main Content Area -->
     <main class="main-content">
       <div class="container">
-        <!-- Delivery and MOQ Information - Horizontal Layout -->
+        <section class="search-section">
+          <div class="container">
+            <div class="search-wrapper">
+              <div class="search-bar">
+                <div class="search-input-wrapper">
+                  <i class="fas fa-search search-icon"></i>
+                  <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search products... (e.g., diary, bottle, pens)"
+                    class="search-input"
+                  />
+                </div>
+
+                <div class="filter-group">
+                  <select id="categoryFilter" class="filter-select">
+                    <option value="">All Categories</option>
+                    <option value="corporate">Corporate Gifts</option>
+                    <option value="festival">Festival Gifts</option>
+                    <option value="stationery">Stationery</option>
+                    <option value="promotional">Promotional Items</option>
+                    <option value="tech">Tech Accessories</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="product-section">
+          <div class="section-header">
+            <h2>Our Products</h2>
+            <div class="results-count">
+              <span id="resultsCount">Showing all products</span>
+            </div>
+          </div>
+
+          <div class="products-grid" id="productsGrid">
+            <!-- Products will be populated by JavaScript -->
+          </div>
+        </section>
+
         <section class="delivery-moq-section">
           <!-- Where We Deliver -->
           <div class="delivery-section-horizontal">
@@ -126,48 +167,6 @@
               <div class="moq-tier-horizontal">10,000+</div>
               <div class="moq-tier-horizontal">Container</div>
             </div>
-          </div>
-        </section>
-        <section class="search-section">
-          <div class="container">
-            <div class="search-wrapper">
-              <div class="search-bar">
-                <div class="search-input-wrapper">
-                  <i class="fas fa-search search-icon"></i>
-                  <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search products... (e.g., diary, bottle, pens)"
-                    class="search-input"
-                  />
-                </div>
-
-                <div class="filter-group">
-                  <select id="categoryFilter" class="filter-select">
-                    <option value="">All Categories</option>
-                    <option value="corporate">Corporate Gifts</option>
-                    <option value="festival">Festival Gifts</option>
-                    <option value="stationery">Stationery</option>
-                    <option value="promotional">Promotional Items</option>
-                    <option value="tech">Tech Accessories</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Product Display Area -->
-        <section class="product-section">
-          <div class="section-header">
-            <h2>Our Products</h2>
-            <div class="results-count">
-              <span id="resultsCount">Showing all products</span>
-            </div>
-          </div>
-
-          <div class="products-grid" id="productsGrid">
-            <!-- Products will be populated by JavaScript -->
           </div>
         </section>
       </div>
