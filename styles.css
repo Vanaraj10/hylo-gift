@@ -174,9 +174,13 @@ body {
 
 .search-input:focus {
     outline: none;
-    border-color: var(--primary-color);
-    background: var(--background);
-    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-input::placeholder {
+    color: #9ca3af;
+    font-style: italic;
 }
 
 .filter-group {
@@ -466,6 +470,15 @@ body {
     line-height: 1.3;
 }
 
+.product-name mark,
+.product-meta mark {
+    background-color: #fef3cd;
+    color: #856404;
+    padding: 0.1rem 0.2rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+}
+
 .product-price {
     font-size: 18px;
     font-weight: 700;
@@ -476,31 +489,32 @@ body {
 /* Product metadata styling */
 .product-meta {
     display: flex;
-    gap: 8px;
-    margin: 8px 0;
+    gap: 0.5rem;
     flex-wrap: wrap;
+    margin-bottom: 0.75rem;
 }
 
 .product-category,
 .product-brand {
-    background: #f8f9fa;
-    color: #6c757d;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
+    background: #f1f5f9;
+    color: #475569;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    border: 1px solid #e2e8f0;
 }
 
 .product-category {
-    background: #e3f2fd;
-    color: #1976d2;
+    background: #dbeafe;
+    color: #1e40af;
+    border-color: #bfdbfe;
 }
 
 .product-brand {
-    background: #f3e5f5;
-    color: #7b1fa2;
+    background: #ecfdf5;
+    color: #059669;
+    border-color: #a7f3d0;
 }
 
 /* Why Us Section */
@@ -1458,5 +1472,129 @@ select:focus {
     .filter-section select,
     .filter-section input {
         width: 100%;
+    }
+}
+
+/* Tag Management Styles */
+.tag {
+    position: relative;
+    padding: 0.5rem 0.75rem;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    transition: all 0.2s ease;
+}
+
+.tag-name {
+    margin-right: 0.5rem;
+}
+
+.tag-edit,
+.tag-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    margin-left: 0.25rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+    font-size: 0.75rem;
+}
+
+.tag-edit {
+    color: #2563eb;
+}
+
+.tag-edit:hover {
+    background: #2563eb;
+    color: white;
+}
+
+.tag-delete {
+    color: #dc2626;
+}
+
+.tag-delete:hover {
+    background: #dc2626;
+    color: white;
+}
+
+.category-tag {
+    background: #dbeafe;
+    border-color: #93c5fd;
+    color: #1e40af;
+}
+
+.brand-tag {
+    background: #fef3c7;
+    border-color: #fcd34d;
+    color: #92400e;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.management-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.management-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.management-header .icon {
+    color: #2563eb;
+}
+
+.management-form {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.management-input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.management-input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+@media (max-width: 768px) {
+    .management-form {
+        flex-direction: column;
+    }
+    
+    .tag-list {
+        gap: 0.25rem;
+    }
+    
+    .tag {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.5rem;
     }
 }

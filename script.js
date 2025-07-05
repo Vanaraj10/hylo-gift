@@ -25,7 +25,6 @@ async function initializeApp() {
     try {
         await Promise.all([
             loadCategories(),
-            loadBrands(),
             fetchAndRenderProducts()
         ]);
     } catch (error) {
@@ -59,75 +58,78 @@ async function loadCategories() {
     }
 }
 
-async function loadBrands() {
+async function fetchProducts(page = 1, search = '', category = '') {
     try {
-        const { data: brands, error } = await supabaseClient
-            .from('brands')
-            .select('*')
-            .order('name');
-        
-        if (error) throw error;
-        
-        const brandFilter = document.getElementById('brandFilter');
-        if (brandFilter && brands) {
-            // Clear existing options except "All Brands"
-            brandFilter.innerHTML = '<option value="">All Brands</option>';
+        // If search is provided, get all products first (no pagination for search)
+        // Otherwise use pagination for normal browsing
+        let query = supabaseClient
+            .from('products')
+            .select(`
+                *,
+                categories:category_id(name),
+                brands:brand_id(name)
+            `, { count: 'exact' })
+            .order('id', { ascending: false });
+
+        // Apply category filter if specified
+        if (category) {
+            query = query.eq('category_id', category);
+        }
+
+        // For search, we need to get all data first, then filter
+        if (search) {
+            // Get all products to search through
+            const { data: allData, count, error } = await query;
+            if (error) throw error;
+
+            const searchLower = search.toLowerCase();
             
-            brands.forEach(brand => {
-                const option = document.createElement('option');
-                option.value = brand.id;
-                option.textContent = brand.name;
-                brandFilter.appendChild(option);
+            // Filter products that match search in name, category, or brand
+            const filteredData = allData.filter(product => {
+                const productName = product.product_name?.toLowerCase() || '';
+                const categoryName = product.categories?.name?.toLowerCase() || '';
+                const brandName = product.brands?.name?.toLowerCase() || '';
+                
+                return productName.includes(searchLower) || 
+                       categoryName.includes(searchLower) || 
+                       brandName.includes(searchLower);
             });
+
+            // Apply pagination to filtered results
+            const from = (page - 1) * PAGE_SIZE;
+            const to = from + PAGE_SIZE;
+            const paginatedData = filteredData.slice(from, to);
+            
+            totalProducts = filteredData.length;
+            return paginatedData;
+        } else {
+            // Normal pagination for browsing without search
+            const from = (page - 1) * PAGE_SIZE;
+            const to = from + PAGE_SIZE - 1;
+            
+            query = query.range(from, to);
+            const { data, count, error } = await query;
+            if (error) throw error;
+            
+            totalProducts = count;
+            return data;
         }
     } catch (error) {
-        console.error('Error loading brands:', error);
+        console.error('Error fetching products:', error);
+        throw error;
     }
-}
-
-async function fetchProducts(page = 1, search = '', category = '', brand = '') {
-    let from = (page - 1) * PAGE_SIZE;
-    let to = from + PAGE_SIZE - 1;
-    
-    // Join with categories and brands tables to get their names
-    let query = supabaseClient
-        .from('products')
-        .select(`
-            *,
-            categories:category_id(name),
-            brands:brand_id(name)
-        `, { count: 'exact' })
-        .order('id', { ascending: false })
-        .range(from, to);
-    
-    if (search) {
-        query = query.ilike('product_name', `%${search}%`);
-    }
-    if (category) {
-        query = query.eq('category_id', category);
-    }
-    if (brand) {
-        query = query.eq('brand_id', brand);
-    }
-    
-    const { data, count, error } = await query;
-    if (error) throw error;
-    totalProducts = count;
-    return data;
 }
 
 async function fetchAndRenderProducts(page = 1) {
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
-    const brandFilter = document.getElementById('brandFilter');
     const productsGrid = document.getElementById('productsGrid');
     const resultsCount = document.getElementById('resultsCount');
     const search = searchInput ? searchInput.value.trim() : '';
     const category = categoryFilter ? categoryFilter.value : '';
-    const brand = brandFilter ? brandFilter.value : '';
     productsGrid.innerHTML = '<div class="loading">Loading...</div>';
     try {
-        const products = await fetchProducts(page, search, category, brand);
+        const products = await fetchProducts(page, search, category);
         renderProducts(products);
         renderPagination();
         resultsCount.textContent = `Showing ${products.length} of ${totalProducts} products`;
@@ -143,20 +145,35 @@ function renderProducts(products) {
         productsGrid.innerHTML = `<div class="no-products"><div class="no-products-icon"><i class="fas fa-search"></i></div><h3>No products found</h3><p>Try adjusting your search or filters</p></div>`;
         return;
     }
+    
+    // Get current search term for highlighting
+    const searchInput = document.getElementById('searchInput');
+    const searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : '';
+    
     productsGrid.innerHTML = products.map(product => {
         const categoryName = product.categories?.name || 'Unknown Category';
         const brandName = product.brands?.name || 'Unknown Brand';
         
+        // Highlight search matches
+        const highlightText = (text, search) => {
+            if (!search) return text;
+            const regex = new RegExp(`(${search})`, 'gi');
+            return text.replace(regex, '<mark>$1</mark>');
+        };
+        
+        const highlightedName = searchTerm ? highlightText(product.product_name, searchTerm) : product.product_name;
+        const highlightedCategory = searchTerm ? highlightText(categoryName, searchTerm) : categoryName;
+        const highlightedBrand = searchTerm ? highlightText(brandName, searchTerm) : brandName;
+        
         return `
-            <div class="product-card" data-category="${product.category_id}" data-brand="${product.brand_id}">
+            <div class="product-card" data-category="${product.category_id}">
                 <div class="product-image">
                     <img src="${product.product_image}" alt="${product.product_name}" style="width:100%;height:100%;object-fit:cover;" />
                 </div>
                 <div class="product-info">
-                    <h3 class="product-name">${product.product_name}</h3>
+                    <h3 class="product-name">${highlightedName}</h3>
                     <div class="product-meta">
-                        <span class="product-category">${categoryName}</span>
-                        <span class="product-brand">${brandName}</span>
+                        <span class="product-brand">${highlightedBrand}</span>
                     </div>
                     <div class="product-price">₹${product.product_price}</div>
                 </div>
@@ -251,13 +268,11 @@ function debounce(func, wait) {
 function setupProductEvents() {
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
-    const brandFilter = document.getElementById('brandFilter');
-    
-    // Debounced search function
+      // Debounced search function - faster response for enhanced search
     const debouncedSearch = debounce(() => {
         currentPage = 1;
         fetchAndRenderProducts();
-    }, 300);
+    }, 200);
     
     if (searchInput) {
         searchInput.addEventListener('input', debouncedSearch);
@@ -272,13 +287,6 @@ function setupProductEvents() {
     
     if (categoryFilter) {
         categoryFilter.addEventListener('change', () => { 
-            currentPage = 1; 
-            fetchAndRenderProducts(); 
-        });
-    }
-    
-    if (brandFilter) {
-        brandFilter.addEventListener('change', () => { 
             currentPage = 1; 
             fetchAndRenderProducts(); 
         });
