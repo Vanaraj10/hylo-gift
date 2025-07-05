@@ -216,8 +216,7 @@ window.addEventListener('resize', () => {
 
 async function fetchProducts(page = 1, search = "", category = "") {
   try {
-    // If search is provided, get all products first (no pagination for search)
-    // Otherwise use pagination for normal browsing
+    // Always get all products first to apply custom sorting
     let query = supabaseClient
       .from("products")
       .select(
@@ -228,23 +227,24 @@ async function fetchProducts(page = 1, search = "", category = "") {
             `,
         { count: "exact" }
       )
-      .order("id", { ascending: false });
+      .order("created_at", { ascending: false }); // Order by creation time first
 
     // Apply category filter if specified
     if (category) {
       query = query.eq("category_id", category);
     }
 
-    // For search, we need to get all data first, then filter
-    if (search) {
-      // Get all products to search through
-      const { data: allData, count, error } = await query;
-      if (error) throw error;
+    // Get all products to apply custom sorting and filtering
+    const { data: allData, count, error } = await query;
+    if (error) throw error;
 
+    let filteredData = allData;
+
+    // Apply search filter if specified
+    if (search) {
       const searchLower = search.toLowerCase();
 
-      // Filter products that match search in name, category, or brand
-      const filteredData = allData.filter((product) => {
+      filteredData = allData.filter((product) => {
         const productName = product.product_name?.toLowerCase() || "";
         const categoryName = product.categories?.name?.toLowerCase() || "";
         const brandName = product.brands?.name?.toLowerCase() || "";
@@ -255,26 +255,33 @@ async function fetchProducts(page = 1, search = "", category = "") {
           brandName.includes(searchLower)
         );
       });
-
-      // Apply pagination to filtered results
-      const from = (page - 1) * PAGE_SIZE;
-      const to = from + PAGE_SIZE;
-      const paginatedData = filteredData.slice(from, to);
-
-      totalProducts = filteredData.length;
-      return paginatedData;
-    } else {
-      // Normal pagination for browsing without search
-      const from = (page - 1) * PAGE_SIZE;
-      const to = from + PAGE_SIZE - 1;
-
-      query = query.range(from, to);
-      const { data, count, error } = await query;
-      if (error) throw error;
-
-      totalProducts = count;
-      return data;
     }
+
+    // Custom sorting: Products with "gift" in category name first, then by creation time
+    const sortedData = filteredData.sort((a, b) => {
+      const aCategoryName = a.categories?.name?.toLowerCase() || "";
+      const bCategoryName = b.categories?.name?.toLowerCase() || "";
+      
+      const aHasGift = aCategoryName.includes("gift");
+      const bHasGift = bCategoryName.includes("gift");
+      
+      // If one has "gift" and the other doesn't, prioritize the one with "gift"
+      if (aHasGift && !bHasGift) return -1;
+      if (!aHasGift && bHasGift) return 1;
+      
+      // If both have "gift" or both don't have "gift", sort by creation time (newest first)
+      const aDate = new Date(a.created_at);
+      const bDate = new Date(b.created_at);
+      return bDate - aDate;
+    });
+
+    // Apply pagination to sorted results
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE;
+    const paginatedData = sortedData.slice(from, to);
+
+    totalProducts = sortedData.length;
+    return paginatedData;
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
@@ -288,11 +295,11 @@ async function fetchAndRenderProducts(page = 1) {
   const resultsCount = document.getElementById("resultsCount");
   const search = searchInput ? searchInput.value.trim() : "";
   const category = categoryFilter ? categoryFilter.value : "";
-  productsGrid.innerHTML = '<div class="loading">Loading...</div>';
-  try {
+  productsGrid.innerHTML = '<div class="loading">Loading...</div>';  try {
     const products = await fetchProducts(page, search, category);
     renderProducts(products);
     renderPagination();
+    
     resultsCount.textContent = `Showing ${products.length} of ${totalProducts} products`;
   } catch (e) {
     console.error("Error fetching products:", e);
@@ -342,6 +349,7 @@ function renderProducts(products) {
       const highlightedBrand = searchTerm
         ? highlightText(brandName, searchTerm)
         : brandName;
+      
       return `
             <div class="product-card" data-category="${
               product.category_id
@@ -354,6 +362,7 @@ function renderProducts(products) {
                 <div class="product-info">
                     <h3 class="product-name">${highlightedName}</h3>
                     <div class="product-meta">
+                        <span class="product-category">${highlightedCategory}</span>
                         <span class="product-brand">${highlightedBrand}</span>
                     </div>                    <div class="product-price-moq">
                         <div class="product-price">₹${
