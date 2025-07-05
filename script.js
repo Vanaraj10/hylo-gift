@@ -780,15 +780,126 @@ function shareProduct() {
     const currentUrl = window.location.href.split('?')[0]; // Remove any existing parameters
     const shareUrl = `${currentUrl}?product=${productId}`;
     
-    // Copy URL to clipboard
+    // Prepare share data
+    const shareData = {
+        title: `${product.product_name} - HyLoApp`,
+        text: `Check out this product: ${product.product_name} - ₹${product.product_price} (MOQ: ${product.product_moq || 1}) - ${product.categories?.name || 'Product'} from ${product.brands?.name || 'HyLoApp'}`,
+        url: shareUrl
+    };
+    
+    // Try Web Share API first (native mobile sharing)
+    if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+        navigator.share(shareData)
+            .then(() => {
+                showToast('Product shared successfully!', 'success');
+            })
+            .catch((error) => {
+                console.error('Error sharing:', error);
+                // Fallback to custom share options
+                showCustomShareOptions(shareData, shareUrl);
+            });
+    } else {
+        // Fallback to custom share options
+        showCustomShareOptions(shareData, shareUrl);
+    }
+}
+
+// Custom share options for non-Web Share API browsers
+function showCustomShareOptions(shareData, shareUrl) {
+    // Create share modal
+    const shareModal = document.createElement('div');
+    shareModal.className = 'share-modal-overlay';
+    shareModal.innerHTML = `
+        <div class="share-modal">
+            <div class="share-modal-header">
+                <h3><i class="fas fa-share-alt"></i> Share Product</h3>
+                <button class="share-modal-close" onclick="this.closest('.share-modal-overlay').remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="share-modal-content">
+                <div class="share-options">
+                    <button class="share-option" onclick="shareToWhatsApp('${encodeURIComponent(shareData.text + ' ' + shareUrl)}')">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </button>
+                    <button class="share-option" onclick="shareToTelegram('${encodeURIComponent(shareData.text)}', '${encodeURIComponent(shareUrl)}')">
+                        <i class="fab fa-telegram"></i>
+                        <span>Telegram</span>
+                    </button>
+                    <button class="share-option" onclick="shareToEmail('${encodeURIComponent(shareData.title)}', '${encodeURIComponent(shareData.text + ' ' + shareUrl)}')">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </button>
+                    <button class="share-option" onclick="shareToSMS('${encodeURIComponent(shareData.text + ' ' + shareUrl)}')">
+                        <i class="fas fa-sms"></i>
+                        <span>SMS</span>
+                    </button>
+                    <button class="share-option" onclick="copyLinkToClipboard('${shareUrl}'); this.closest('.share-modal-overlay').remove();">
+                        <i class="fas fa-copy"></i>
+                        <span>Copy Link</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add styles
+    shareModal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10010;
+        animation: fadeIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(shareModal);
+    
+    // Close on overlay click
+    shareModal.addEventListener('click', (e) => {
+        if (e.target === shareModal) {
+            shareModal.remove();
+        }
+    });
+}
+
+// Platform-specific share functions
+function shareToWhatsApp(text) {
+    const url = `https://wa.me/?text=${text}`;
+    window.open(url, '_blank');
+}
+
+function shareToTelegram(text, url) {
+    const telegramUrl = `https://t.me/share/url?url=${url}&text=${text}`;
+    window.open(telegramUrl, '_blank');
+}
+
+function shareToEmail(subject, body) {
+    const emailUrl = `mailto:?subject=${subject}&body=${body}`;
+    window.open(emailUrl, '_blank');
+}
+
+function shareToSMS(text) {
+    const smsUrl = `sms:?body=${text}`;
+    window.open(smsUrl, '_blank');
+}
+
+function copyLinkToClipboard(url) {
     if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(shareUrl).then(() => {
+        navigator.clipboard.writeText(url).then(() => {
             showToast('Product link copied to clipboard!', 'success');
         }).catch(() => {
-            fallbackCopyTextToClipboard(shareUrl);
+            fallbackCopyTextToClipboard(url);
         });
     } else {
-        fallbackCopyTextToClipboard(shareUrl);
+        fallbackCopyTextToClipboard(url);
     }
 }
 
