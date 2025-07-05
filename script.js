@@ -58,8 +58,7 @@ async function loadCategories() {
     }
 }
 
-async function fetchProducts(page = 1, search = '', category = '') {
-    try {
+async function fetchProducts(page = 1, search = '', category = '') {    try {
         // If search is provided, get all products first (no pagination for search)
         // Otherwise use pagination for normal browsing
         let query = supabaseClient
@@ -173,8 +172,7 @@ function renderProducts(products) {
         const highlightedName = searchTerm ? highlightText(product.product_name, searchTerm) : product.product_name;
         const highlightedCategory = searchTerm ? highlightText(categoryName, searchTerm) : categoryName;
         const highlightedBrand = searchTerm ? highlightText(brandName, searchTerm) : brandName;
-        
-        return `
+          return `
             <div class="product-card" data-category="${product.category_id}" onclick="openProductModal(${index})">
                 <div class="product-image">
                     <img src="${product.product_image}" alt="${product.product_name}" style="width:100%;height:100%;object-fit:cover;" />
@@ -185,6 +183,9 @@ function renderProducts(products) {
                         <span class="product-brand">${highlightedBrand}</span>
                     </div>
                     <div class="product-price">₹${product.product_price}</div>
+                    <div class="product-moq">
+                        <span>MOQ: ${(product.product_moq || 1).toLocaleString()} Units</span>
+                    </div>
                 </div>
             </div>
         `;
@@ -203,11 +204,16 @@ function updateModalContent() {
     setTimeout(() => {
         // Update modal content
         modalImage.src = product.product_image;
-        modalImage.alt = product.product_name;
-        document.getElementById('modalProductName').textContent = product.product_name;
+        modalImage.alt = product.product_name;        document.getElementById('modalProductName').textContent = product.product_name;
         document.getElementById('modalProductCategory').textContent = product.categories?.name || 'Unknown Category';
         document.getElementById('modalProductBrand').textContent = product.brands?.name || 'Unknown Brand';
-        document.getElementById('modalProductPrice').textContent = `₹${product.product_price}`;        // Generate and display simple numeric product ID (1-based)
+        document.getElementById('modalProductPrice').textContent = `₹${product.product_price}`;
+        
+        // Display individual product MOQ
+        const productMOQ = product.product_moq || 1;
+        document.getElementById('modalProductMOQ').textContent = productMOQ.toLocaleString();
+        
+        // Generate and display simple numeric product ID (1-based)
         const productId = currentProductIndex + 1;
         document.getElementById('modalProductId').textContent = productId;
         
