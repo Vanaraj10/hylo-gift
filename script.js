@@ -143,6 +143,9 @@ let currentProducts = [];
 let currentProductIndex = 0;
 let touchStartX = 0;
 let touchEndX = 0;
+let touchStartY = 0;
+let touchEndY = 0;
+let isSwipeGesture = false;
 
 function renderProducts(products) {
     currentProducts = products; // Store products for modal navigation
@@ -272,28 +275,77 @@ function updateModalNavigation() {
     }
 }
 
-// Touch/Swipe functionality
+// Touch/Swipe functionality - Enhanced for full modal area
 function setupModalTouchEvents() {
-    const modalImage = document.querySelector('.product-modal-image');
+    const modalContent = document.querySelector('.product-modal-content');
+    const modalBody = document.querySelector('.product-modal-body');
     
-    modalImage.addEventListener('touchstart', handleTouchStart, { passive: true });
-    modalImage.addEventListener('touchend', handleTouchEnd, { passive: true });
+    // Add touch events to both modal content and body for better coverage
+    modalContent.addEventListener('touchstart', handleTouchStart, { passive: true });
+    modalContent.addEventListener('touchend', handleTouchEnd, { passive: true });
+    modalContent.addEventListener('touchmove', handleTouchMove, { passive: true });
+    
+    modalBody.addEventListener('touchstart', handleTouchStart, { passive: true });
+    modalBody.addEventListener('touchend', handleTouchEnd, { passive: true });
+    modalBody.addEventListener('touchmove', handleTouchMove, { passive: true });
 }
 
 function removeModalTouchEvents() {
-    const modalImage = document.querySelector('.product-modal-image');
+    const modalContent = document.querySelector('.product-modal-content');
+    const modalBody = document.querySelector('.product-modal-body');
     
-    modalImage.removeEventListener('touchstart', handleTouchStart);
-    modalImage.removeEventListener('touchend', handleTouchEnd);
+    if (modalContent) {
+        modalContent.removeEventListener('touchstart', handleTouchStart);
+        modalContent.removeEventListener('touchend', handleTouchEnd);
+        modalContent.removeEventListener('touchmove', handleTouchMove);
+    }
+    
+    if (modalBody) {
+        modalBody.removeEventListener('touchstart', handleTouchStart);
+        modalBody.removeEventListener('touchend', handleTouchEnd);
+        modalBody.removeEventListener('touchmove', handleTouchMove);
+    }
 }
 
 function handleTouchStart(e) {
     touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    isSwipeGesture = false;
+}
+
+function handleTouchMove(e) {
+    if (!touchStartX || !touchStartY) return;
+    
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    
+    const deltaX = Math.abs(currentX - touchStartX);
+    const deltaY = Math.abs(currentY - touchStartY);
+    
+    // Determine if this is a horizontal swipe gesture
+    if (deltaX > deltaY && deltaX > 10) {
+        isSwipeGesture = true;
+        e.preventDefault(); // Prevent scrolling during horizontal swipe
+    }
 }
 
 function handleTouchEnd(e) {
+    if (!touchStartX) return;
+    
     touchEndX = e.changedTouches[0].clientX;
-    handleSwipe();
+    touchEndY = e.changedTouches[0].clientY;
+    
+    // Only handle swipe if it was detected as a swipe gesture
+    if (isSwipeGesture) {
+        handleSwipe();
+    }
+    
+    // Reset touch coordinates
+    touchStartX = 0;
+    touchStartY = 0;
+    touchEndX = 0;
+    touchEndY = 0;
+    isSwipeGesture = false;
 }
 
 function handleSwipe() {
