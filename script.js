@@ -12,25 +12,104 @@ async function initSupabase() {
         script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js';
         script.onload = () => {
             supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            fetchAndRenderProducts();
+            initializeApp();
         };
         document.head.appendChild(script);
     } else {
         supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        fetchAndRenderProducts();
+        initializeApp();
     }
 }
 
-async function fetchProducts(page = 1, search = '', category = '') {
+async function initializeApp() {
+    try {
+        await Promise.all([
+            loadCategories(),
+            loadBrands(),
+            fetchAndRenderProducts()
+        ]);
+    } catch (error) {
+        console.error('Error initializing app:', error);
+    }
+}
+
+async function loadCategories() {
+    try {
+        const { data: categories, error } = await supabaseClient
+            .from('categories')
+            .select('*')
+            .order('name');
+        
+        if (error) throw error;
+        
+        const categoryFilter = document.getElementById('categoryFilter');
+        if (categoryFilter && categories) {
+            // Clear existing options except "All Categories"
+            categoryFilter.innerHTML = '<option value="">All Categories</option>';
+            
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                categoryFilter.appendChild(option);
+            });
+        }
+    } catch (error) {
+        console.error('Error loading categories:', error);
+    }
+}
+
+async function loadBrands() {
+    try {
+        const { data: brands, error } = await supabaseClient
+            .from('brands')
+            .select('*')
+            .order('name');
+        
+        if (error) throw error;
+        
+        const brandFilter = document.getElementById('brandFilter');
+        if (brandFilter && brands) {
+            // Clear existing options except "All Brands"
+            brandFilter.innerHTML = '<option value="">All Brands</option>';
+            
+            brands.forEach(brand => {
+                const option = document.createElement('option');
+                option.value = brand.id;
+                option.textContent = brand.name;
+                brandFilter.appendChild(option);
+            });
+        }
+    } catch (error) {
+        console.error('Error loading brands:', error);
+    }
+}
+
+async function fetchProducts(page = 1, search = '', category = '', brand = '') {
     let from = (page - 1) * PAGE_SIZE;
     let to = from + PAGE_SIZE - 1;
-    let query = supabaseClient.from('products').select('*', { count: 'exact' }).order('id', { ascending: false }).range(from, to);
+    
+    // Join with categories and brands tables to get their names
+    let query = supabaseClient
+        .from('products')
+        .select(`
+            *,
+            categories:category_id(name),
+            brands:brand_id(name)
+        `, { count: 'exact' })
+        .order('id', { ascending: false })
+        .range(from, to);
+    
     if (search) {
         query = query.ilike('product_name', `%${search}%`);
     }
     if (category) {
-        query = query.eq('product_category', category);
+        query = query.eq('category_id', category);
     }
+    if (brand) {
+        query = query.eq('brand_id', brand);
+    }
+    
     const { data, count, error } = await query;
     if (error) throw error;
     totalProducts = count;
@@ -40,17 +119,20 @@ async function fetchProducts(page = 1, search = '', category = '') {
 async function fetchAndRenderProducts(page = 1) {
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
+    const brandFilter = document.getElementById('brandFilter');
     const productsGrid = document.getElementById('productsGrid');
     const resultsCount = document.getElementById('resultsCount');
     const search = searchInput ? searchInput.value.trim() : '';
     const category = categoryFilter ? categoryFilter.value : '';
+    const brand = brandFilter ? brandFilter.value : '';
     productsGrid.innerHTML = '<div class="loading">Loading...</div>';
     try {
-        const products = await fetchProducts(page, search, category);
+        const products = await fetchProducts(page, search, category, brand);
         renderProducts(products);
         renderPagination();
         resultsCount.textContent = `Showing ${products.length} of ${totalProducts} products`;
     } catch (e) {
+        console.error('Error fetching products:', e);
         productsGrid.innerHTML = '<div class="no-products"><h3>Error loading products</h3></div>';
     }
 }
@@ -61,17 +143,26 @@ function renderProducts(products) {
         productsGrid.innerHTML = `<div class="no-products"><div class="no-products-icon"><i class="fas fa-search"></i></div><h3>No products found</h3><p>Try adjusting your search or filters</p></div>`;
         return;
     }
-    productsGrid.innerHTML = products.map(product => `
-        <div class="product-card" data-category="${product.product_category}">
-            <div class="product-image">
-                <img src="${product.product_image}" alt="${product.product_name}" style="width:100%;height:100%;object-fit:cover;" />
+    productsGrid.innerHTML = products.map(product => {
+        const categoryName = product.categories?.name || 'Unknown Category';
+        const brandName = product.brands?.name || 'Unknown Brand';
+        
+        return `
+            <div class="product-card" data-category="${product.category_id}" data-brand="${product.brand_id}">
+                <div class="product-image">
+                    <img src="${product.product_image}" alt="${product.product_name}" style="width:100%;height:100%;object-fit:cover;" />
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">${product.product_name}</h3>
+                    <div class="product-meta">
+                        <span class="product-category">${categoryName}</span>
+                        <span class="product-brand">${brandName}</span>
+                    </div>
+                    <div class="product-price">₹${product.product_price}</div>
+                </div>
             </div>
-            <div class="product-info">
-                <h3 class="product-name">${product.product_name}</h3>
-                <div class="product-price">₹${product.product_price}</div>
-            </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 function renderPagination() {
@@ -96,8 +187,28 @@ function renderPagination() {
 function setupProductEvents() {
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
-    if (searchInput) searchInput.addEventListener('input', () => { currentPage = 1; fetchAndRenderProducts(); });
-    if (categoryFilter) categoryFilter.addEventListener('change', () => { currentPage = 1; fetchAndRenderProducts(); });
+    const brandFilter = document.getElementById('brandFilter');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', () => { 
+            currentPage = 1; 
+            fetchAndRenderProducts(); 
+        });
+    }
+    
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', () => { 
+            currentPage = 1; 
+            fetchAndRenderProducts(); 
+        });
+    }
+    
+    if (brandFilter) {
+        brandFilter.addEventListener('change', () => { 
+            currentPage = 1; 
+            fetchAndRenderProducts(); 
+        });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
