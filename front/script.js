@@ -81,7 +81,9 @@ async function loadBrandsCarousel() {
         if (error) throw error;
         
         // Filter brands that have logos
-        brandsList = brands.filter(brand => brand.logo);        if (brandsList.length > 0) {
+        brandsList = brands.filter(brand => brand.logo);
+        
+        if (brandsList.length > 0) {
             renderBrandCarousel();
             
             // Show the carousel section
@@ -110,15 +112,34 @@ function renderBrandCarousel() {
     const brandDisplay = document.getElementById('brandDisplay');
     if (!brandDisplay || brandsList.length === 0) return;
     
-    const currentBrand = brandsList[currentBrandIndex];
+    // Determine how many logos to show based on screen size
+    const isMobile = window.innerWidth <= 768;
+    const logosPerSlide = isMobile ? 1 : 2;
     
-    brandDisplay.innerHTML = `
-        <div class="brand-logo-item active">
+    // Clear existing content
+    brandDisplay.innerHTML = '';
+    
+    // Create brand items for current slide
+    for (let i = 0; i < logosPerSlide && (currentBrandIndex + i) < brandsList.length; i++) {
+        const brandIndex = currentBrandIndex + i;
+        const brand = brandsList[brandIndex];
+        
+        const brandItem = document.createElement('div');
+        brandItem.className = 'brand-item';
+        brandItem.innerHTML = `
             <div class="brand-logo-wrapper">
-                <img src="${currentBrand.logo}" alt="${currentBrand.name}" title="${currentBrand.name}" loading="lazy">
+                <img src="${brand.logo}" alt="${brand.name}" title="${brand.name}" loading="lazy">
             </div>
-            <span class="brand-name-label">${currentBrand.name}</span>
-        </div>    `;
+            <span class="brand-name-label">${brand.name}</span>
+        `;
+        
+        brandDisplay.appendChild(brandItem);
+        
+        // Add animation delay for staggered effect
+        setTimeout(() => {
+            brandItem.classList.add('active');
+        }, i * 100);
+    }
     
     updateNavigationButtons();
 }
@@ -126,29 +147,38 @@ function renderBrandCarousel() {
 function navigateBrand(direction) {
     if (brandsList.length === 0) return;
     
-    const previousIndex = currentBrandIndex;
-    currentBrandIndex += direction;
+    // Determine how many logos to show based on screen size
+    const isMobile = window.innerWidth <= 768;
+    const logosPerSlide = isMobile ? 1 : 2;
     
-    // Loop around
+    // Calculate new index
+    const previousIndex = currentBrandIndex;
+    currentBrandIndex += direction * logosPerSlide;
+    
+    // Handle wrapping
     if (currentBrandIndex >= brandsList.length) {
         currentBrandIndex = 0;
     } else if (currentBrandIndex < 0) {
-        currentBrandIndex = brandsList.length - 1;
+        currentBrandIndex = Math.max(0, brandsList.length - logosPerSlide);
     }
     
     // Add transition effect
     const brandDisplay = document.getElementById('brandDisplay');
     if (brandDisplay) {
-        const currentItem = brandDisplay.querySelector('.brand-logo-item');
-        if (currentItem) {
-            currentItem.classList.remove('active');
-            
+        const currentItems = brandDisplay.querySelectorAll('.brand-item');
+        
+        // Fade out current items
+        currentItems.forEach((item, index) => {
             setTimeout(() => {
-                renderBrandCarousel();
-            }, 250);
-        } else {
+                item.classList.remove('active');
+            }, index * 50);
+        });
+        
+        // Render new items after transition
+        setTimeout(() => {
             renderBrandCarousel();
-        }    }
+        }, 300);
+    }
 }
 
 function updateNavigationButtons() {
@@ -156,17 +186,33 @@ function updateNavigationButtons() {
     const nextBtn = document.querySelector('.brand-next');
     
     if (prevBtn && nextBtn) {
+        const isMobile = window.innerWidth <= 768;
+        const logosPerSlide = isMobile ? 1 : 2;
+        
         // Always enable buttons since we loop around
         prevBtn.disabled = false;
         nextBtn.disabled = false;
         
-        // If only one brand, disable both buttons
-        if (brandsList.length <= 1) {
+        // If we have fewer brands than logos per slide, disable both buttons
+        if (brandsList.length <= logosPerSlide) {
             prevBtn.disabled = true;
             nextBtn.disabled = true;
         }
     }
 }
+
+// Add window resize listener to handle responsive changes
+window.addEventListener('resize', () => {
+    // Debounce resize events
+    clearTimeout(window.resizeTimer);
+    window.resizeTimer = setTimeout(() => {
+        if (brandsList.length > 0) {
+            // Reset to start and re-render
+            currentBrandIndex = 0;
+            renderBrandCarousel();
+        }
+    }, 250);
+});
 
 async function fetchProducts(page = 1, search = "", category = "") {
   try {

@@ -2598,7 +2598,7 @@ option {
     box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
 }
 
-/* Brand Carousel Section - Single Logo Display */
+/* Brand Carousel Section - Multiple Logo Display */
 .brands-carousel-section {
     margin: 4rem 0;
     padding: 4rem 0;
@@ -2610,6 +2610,9 @@ option {
     border: 1px solid rgba(255, 255, 255, 0.8);
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 0.5s;
 }
 
 .brands-carousel-section::before {
@@ -2659,11 +2662,13 @@ option {
     margin-bottom: 2rem;
 }
 
+/* Brand display container - responsive grid */
 .brand-display {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 400px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 logos on large screens */
+    gap: 2rem;
+    width: 100%;
+    max-width: 600px;
     height: 240px;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
@@ -2675,35 +2680,7 @@ option {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     z-index: 2;
-}
-
-/* Extra large screens */
-@media (min-width: 1400px) {
-    .brands-carousel-container {
-        height: 320px;
-        gap: 3rem;
-    }
-    
-    .brand-display {
-        width: 450px;
-        height: 270px;
-    }
-    
-    .brand-logo-wrapper {
-        width: 160px;
-        height: 100px;
-    }
-    
-    .brand-logo-wrapper img {
-        max-height: 90px;
-        max-width: 150px;
-    }
-    
-    .brand-nav-btn {
-        width: 55px;
-        height: 55px;
-        font-size: 1.3rem;
-    }
+    padding: 2rem;
 }
 
 .brand-display:hover {
@@ -2713,25 +2690,34 @@ option {
         0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-.brand-logo-item {
+/* Individual brand item */
+.brand-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    width: 100%;
-    height: 100%;
-    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.5s ease;
 }
 
-.brand-logo-item.active {
+.brand-item.active {
     opacity: 1;
     transform: translateY(0);
 }
 
+.brand-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Brand logo wrapper */
 .brand-logo-wrapper {
     width: 140px;
     height: 90px;
@@ -2753,7 +2739,7 @@ option {
     transition: all 0.3s ease;
 }
 
-.brand-display:hover .brand-logo-wrapper img {
+.brand-item:hover .brand-logo-wrapper img {
     filter: 
         drop-shadow(0 6px 20px rgba(0, 0, 0, 0.15))
         saturate(1.2)
@@ -2761,6 +2747,7 @@ option {
     transform: scale(1.05);
 }
 
+/* Brand name label */
 .brand-name-label {
     font-size: 0.9rem;
     font-weight: 600;
@@ -2769,14 +2756,14 @@ option {
     line-height: 1.2;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    margin-top: 0.5rem;
     transition: color 0.3s ease;
 }
 
-.brand-display:hover .brand-name-label {
+.brand-item:hover .brand-name-label {
     color: var(--accent-color);
 }
 
+/* Navigation buttons */
 .brand-nav-btn {
     display: flex;
     align-items: center;
@@ -2814,53 +2801,8 @@ option {
     transform: none;
 }
 
-/* Add subtle entrance animation */
-.brands-carousel-section {
-    opacity: 0;
-    animation: fadeInUp 1s ease forwards;
-    animation-delay: 0.5s;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* Responsive Design for Brand Carousel */
-@media (max-width: 1024px) {
-    .brands-carousel-container {
-        height: 260px;
-        gap: 2rem;
-    }
-    
-    .brand-display {
-        width: 360px;
-        height: 220px;
-    }
-    
-    .brand-logo-wrapper {
-        width: 110px;
-        height: 75px;
-    }
-    
-    .brand-logo-wrapper img {
-        max-height: 65px;
-        max-width: 100px;
-    }
-    
-    .brand-nav-btn {
-        width: 48px;
-        height: 48px;
-        font-size: 1.15rem;
-    }
-}
-
+/* Mobile - 1 logo */
 @media (max-width: 768px) {
     .brands-carousel-section {
         margin: 2.5rem 0;
@@ -2884,11 +2826,14 @@ option {
     }
     
     .brand-display {
+        grid-template-columns: 1fr; /* 1 logo on mobile */
         width: 320px;
         height: 180px;
+        padding: 1.5rem;
+        gap: 0;
     }
     
-    .brand-logo-item {
+    .brand-item {
         padding: 1.5rem;
     }
     
@@ -2938,9 +2883,10 @@ option {
     .brand-display {
         width: 260px;
         height: 150px;
+        padding: 1.2rem;
     }
     
-    .brand-logo-item {
+    .brand-item {
         padding: 1.2rem;
         gap: 0.8rem;
     }
@@ -2954,7 +2900,8 @@ option {
         max-height: 50px;
         max-width: 90px;
     }
-      .brand-name-label {
+    
+    .brand-name-label {
         font-size: 0.8rem;
     }
     
@@ -2962,6 +2909,89 @@ option {
         width: 35px;
         height: 35px;
         font-size: 0.9rem;
+    }
+}
+
+/* Tablet - 2 logos */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .brands-carousel-container {
+        height: 260px;
+        gap: 2rem;
+    }
+    
+    .brand-display {
+        grid-template-columns: repeat(2, 1fr); /* 2 logos on tablet */
+        width: 500px;
+        height: 220px;
+        gap: 1.5rem;
+        padding: 1.8rem;
+    }
+    
+    .brand-logo-wrapper {
+        width: 110px;
+        height: 75px;
+    }
+    
+    .brand-logo-wrapper img {
+        max-height: 65px;
+        max-width: 100px;
+    }
+    
+    .brand-nav-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.15rem;
+    }
+}
+
+/* Large screens - 2 logos */
+@media (min-width: 1025px) {
+    .brand-display {
+        grid-template-columns: repeat(2, 1fr); /* 2 logos on large screens */
+        max-width: 600px;
+        gap: 2rem;
+    }
+}
+
+/* Extra large screens */
+@media (min-width: 1400px) {
+    .brands-carousel-container {
+        height: 320px;
+        gap: 3rem;
+    }
+    
+    .brand-display {
+        width: 650px;
+        height: 270px;
+        gap: 2.5rem;
+        padding: 2.5rem;
+    }
+    
+    .brand-logo-wrapper {
+        width: 160px;
+        height: 100px;
+    }
+    
+    .brand-logo-wrapper img {
+        max-height: 90px;
+        max-width: 150px;
+    }
+    
+    .brand-nav-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 1.3rem;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
