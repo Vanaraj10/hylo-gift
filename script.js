@@ -191,30 +191,44 @@ function renderProducts(products) {
     }).join('');
 }
 
-function openProductModal(index) {
-    currentProductIndex = index;
-    const product = currentProducts[index];
+function updateModalContent() {
+    const product = currentProducts[currentProductIndex];
     
     if (!product) return;
     
-    // Update modal content
-    document.getElementById('modalProductImage').src = product.product_image;
-    document.getElementById('modalProductImage').alt = product.product_name;
-    document.getElementById('modalProductName').textContent = product.product_name;
-    document.getElementById('modalProductCategory').textContent = product.categories?.name || 'Unknown Category';
-    document.getElementById('modalProductBrand').textContent = product.brands?.name || 'Unknown Brand';
-    document.getElementById('modalProductPrice').textContent = `₹${product.product_price}`;
+    // Add a subtle fade effect during image change
+    const modalImage = document.getElementById('modalProductImage');
+    modalImage.style.opacity = '0.7';
     
-    // Handle discount
-    const discountBadge = document.getElementById('modalProductDiscount');
-    if (product.product_discount && product.product_discount > 0) {
-        discountBadge.textContent = `${product.product_discount}% OFF`;
-        discountBadge.style.display = 'inline-block';
-    } else {
-        discountBadge.style.display = 'none';
-    }
+    setTimeout(() => {
+        // Update modal content
+        modalImage.src = product.product_image;
+        modalImage.alt = product.product_name;
+        document.getElementById('modalProductName').textContent = product.product_name;
+        document.getElementById('modalProductCategory').textContent = product.categories?.name || 'Unknown Category';
+        document.getElementById('modalProductBrand').textContent = product.brands?.name || 'Unknown Brand';
+        document.getElementById('modalProductPrice').textContent = `₹${product.product_price}`;
+        
+        // Handle discount
+        const discountBadge = document.getElementById('modalProductDiscount');
+        if (product.product_discount && product.product_discount > 0) {
+            discountBadge.textContent = `${product.product_discount}% OFF`;
+            discountBadge.style.display = 'inline-block';
+        } else {
+            discountBadge.style.display = 'none';
+        }
+        
+        document.getElementById('modalProductDescription').textContent = product.product_description || 'No description available.';
+        
+        // Restore image opacity
+        modalImage.style.opacity = '1';
+    }, 150);
+}
+
+function openProductModal(index) {
+    currentProductIndex = index;
     
-    document.getElementById('modalProductDescription').textContent = product.product_description || 'No description available.';
+    updateModalContent();
     
     // Show modal
     const modal = document.getElementById('productModal');
@@ -229,7 +243,7 @@ function openProductModal(index) {
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
     
-    // Add touch event listeners for swiping
+    // Add touch event listeners for swiping (only once)
     setupModalTouchEvents();
 }
 
@@ -250,7 +264,9 @@ function navigateProduct(direction) {
     const newIndex = currentProductIndex + direction;
     
     if (newIndex >= 0 && newIndex < currentProducts.length) {
-        openProductModal(newIndex);
+        currentProductIndex = newIndex;
+        updateModalContent();
+        updateModalNavigation();
     }
 }
 
@@ -276,18 +292,27 @@ function updateModalNavigation() {
 }
 
 // Touch/Swipe functionality - Enhanced for full modal area
+let touchEventsAttached = false;
+
 function setupModalTouchEvents() {
+    // Prevent duplicate event listeners
+    if (touchEventsAttached) {
+        return;
+    }
+    
     const modalContent = document.querySelector('.product-modal-content');
     const modalBody = document.querySelector('.product-modal-body');
     
     // Add touch events to both modal content and body for better coverage
     modalContent.addEventListener('touchstart', handleTouchStart, { passive: true });
     modalContent.addEventListener('touchend', handleTouchEnd, { passive: true });
-    modalContent.addEventListener('touchmove', handleTouchMove, { passive: true });
+    modalContent.addEventListener('touchmove', handleTouchMove, { passive: false });
     
     modalBody.addEventListener('touchstart', handleTouchStart, { passive: true });
     modalBody.addEventListener('touchend', handleTouchEnd, { passive: true });
-    modalBody.addEventListener('touchmove', handleTouchMove, { passive: true });
+    modalBody.addEventListener('touchmove', handleTouchMove, { passive: false });
+    
+    touchEventsAttached = true;
 }
 
 function removeModalTouchEvents() {
@@ -305,11 +330,15 @@ function removeModalTouchEvents() {
         modalBody.removeEventListener('touchend', handleTouchEnd);
         modalBody.removeEventListener('touchmove', handleTouchMove);
     }
+    
+    touchEventsAttached = false;
 }
 
 function handleTouchStart(e) {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
+    touchEndX = 0;
+    touchEndY = 0;
     isSwipeGesture = false;
 }
 
@@ -323,7 +352,7 @@ function handleTouchMove(e) {
     const deltaY = Math.abs(currentY - touchStartY);
     
     // Determine if this is a horizontal swipe gesture
-    if (deltaX > deltaY && deltaX > 10) {
+    if (deltaX > deltaY && deltaX > 20) {
         isSwipeGesture = true;
         e.preventDefault(); // Prevent scrolling during horizontal swipe
     }

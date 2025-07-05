@@ -19,6 +19,36 @@
     --gradient-primary: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
     --gradient-accent: linear-gradient(135deg, #d73527 0%, #b91c1c 100%);
     --gradient-secondary: linear-gradient(135deg, #2b6cb0 0%, #1e40af 100%);
+    
+    /* Typography System */
+    --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-family-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    
+    /* Font Sizes */
+    --text-xs: 0.75rem;      /* 12px */
+    --text-sm: 0.875rem;     /* 14px */
+    --text-base: 1rem;       /* 16px */
+    --text-lg: 1.125rem;     /* 18px */
+    --text-xl: 1.25rem;      /* 20px */
+    --text-2xl: 1.5rem;      /* 24px */
+    --text-3xl: 1.875rem;    /* 30px */
+    --text-4xl: 2.25rem;     /* 36px */
+    --text-5xl: 3rem;        /* 48px */
+    
+    /* Font Weights */
+    --font-light: 300;
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-extrabold: 800;
+    
+    /* Line Heights */
+    --leading-tight: 1.25;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --leading-loose: 2;
 }
 
 /* Reset and Base Styles */
@@ -28,11 +58,111 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
+    font-family: var(--font-family-primary);
+    font-size: var(--text-base);
+    font-weight: var(--font-normal);
+    line-height: var(--leading-normal);
     color: var(--text-primary);
     background-color: var(--background-light);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Classes */
+.text-xs { font-size: var(--text-xs); }
+.text-sm { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg { font-size: var(--text-lg); }
+.text-xl { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.text-4xl { font-size: var(--text-4xl); }
+.text-5xl { font-size: var(--text-5xl); }
+
+.font-light { font-weight: var(--font-light); }
+.font-normal { font-weight: var(--font-normal); }
+.font-medium { font-weight: var(--font-medium); }
+.font-semibold { font-weight: var(--font-semibold); }
+.font-bold { font-weight: var(--font-bold); }
+.font-extrabold { font-weight: var(--font-extrabold); }
+
+.leading-tight { line-height: var(--leading-tight); }
+.leading-snug { line-height: var(--leading-snug); }
+.leading-normal { line-height: var(--leading-normal); }
+.leading-relaxed { line-height: var(--leading-relaxed); }
+.leading-loose { line-height: var(--leading-loose); }
+
+/* Heading Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-display);
+    font-weight: var(--font-semibold);
+    line-height: var(--leading-tight);
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+h1 { font-size: var(--text-4xl); font-weight: var(--font-bold); }
+h2 { font-size: var(--text-3xl); font-weight: var(--font-semibold); }
+h3 { font-size: var(--text-2xl); font-weight: var(--font-semibold); }
+h4 { font-size: var(--text-xl); font-weight: var(--font-medium); }
+h5 { font-size: var(--text-lg); font-weight: var(--font-medium); }
+h6 { font-size: var(--text-base); font-weight: var(--font-medium); }
+
+/* Form Elements - Consistent Typography */
+input, textarea, select, button {
+    font-family: var(--font-family-primary);
+    font-size: var(--text-base);
+    font-weight: var(--font-normal);
+    line-height: var(--leading-normal);
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="number"], 
+input[type="search"],
+input[type="url"],
+input[type="tel"],
+textarea, 
+select {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-base) !important;
+    font-weight: var(--font-normal) !important;
+    line-height: var(--leading-normal) !important;
+}
+
+/* Button typography enforcement */
+button, 
+.btn, 
+.btn-primary, 
+.btn-secondary, 
+.btn-success, 
+.btn-danger,
+.action-btn,
+.pagination-btn,
+.search-btn {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-sm) !important;
+    font-weight: var(--font-medium) !important;
+    line-height: var(--leading-normal) !important;
+}
+
+/* Text Content */
+p {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    margin-bottom: 1rem;
+}
+
+small {
+    font-size: var(--text-sm);
+    font-weight: var(--font-normal);
 }
 
 .container {
@@ -74,16 +204,20 @@ body {
 }
 
 .logo-text h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-family: var(--font-family-display);
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
     margin-bottom: 0.2rem;
+    line-height: var(--leading-tight);
 }
 
 .tagline {
-    font-size: 1.3rem;
+    font-family: var(--font-family-primary);
+    font-size: var(--text-sm);
+    font-weight: var(--font-normal);
     opacity: 0.9;
-    font-weight: 400;
-    margin: 0px auto;
+    margin: 0;
+    line-height: var(--leading-normal);
 }
 
 .bulk-notice {
@@ -96,14 +230,16 @@ body {
     backdrop-filter: blur(10px);
     padding: 0.7rem 1.2rem;
     border-radius: 6px;
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-semibold);
+    font-size: var(--text-sm);
     border: 1px solid rgba(255,255,255,0.2);
     display: flex;
     align-items: center;
     gap: 0.5rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.025em;
+    line-height: var(--leading-tight);
 }
 
 /* Header Contact Styles */
@@ -119,17 +255,20 @@ body {
     align-items: center;
     gap: 0.5rem;
     color: white;
-    font-size: 0.9rem;
+    font-family: var(--font-family-primary);
+    font-size: var(--text-sm);
+    font-weight: var(--font-normal);
     opacity: 0.9;
+    line-height: var(--leading-normal);
 }
 
 .contact-item i {
     color: var(--accent-color);
-    font-size: 1rem;
+    font-size: var(--text-base);
 }
 
 .contact-item span {
-    font-weight: 500;
+    font-weight: var(--font-medium);
 }
 
 /* Search Section */
@@ -166,7 +305,10 @@ body {
     padding: 1rem 1rem 1rem 3rem;
     border: 2px solid var(--border-color);
     border-radius: 8px;
-    font-size: 1rem;
+    font-family: var(--font-family-primary);
+    font-size: var(--text-base);
+    font-weight: var(--font-normal);
+    line-height: var(--leading-normal);
     transition: all 0.3s ease;
     background: var(--background);
     color: var(--text-primary);
@@ -179,8 +321,9 @@ body {
 }
 
 .search-input::placeholder {
-    color: #9ca3af;
-    font-style: italic;
+    color: var(--text-light);
+    font-style: normal;
+    font-weight: var(--font-normal);
 }
 
 .filter-group {
@@ -190,9 +333,10 @@ body {
 }
 
 .filter-group label {
-    font-weight: 500;
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-medium);
+    font-size: var(--text-sm);
     color: var(--text-primary);
-    font-size: 0.9rem;
     margin-bottom: 0.5rem;
     display: block;
 }
@@ -200,12 +344,15 @@ body {
 .filter-select {
     min-width: 180px;
     padding: 12px 16px;
-    border: 2px solid #e1e5e9;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
-    background: white;
-    font-size: 14px;
-    color: #333;
+    background: var(--background);
+    font-family: var(--font-family-primary);
+    font-size: var(--text-base);
+    font-weight: var(--font-normal);
+    color: var(--text-primary);
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .filter-select:focus {
@@ -542,6 +689,7 @@ body {
     margin-bottom: 2rem;
     position: relative;
     z-index: 1;
+    color: rgb(179, 179, 179);
 }
 
 .features-grid {
@@ -1686,13 +1834,13 @@ select:focus {
 .product-modal-body {
     background: white;
     border-radius: 1rem;
-    max-width: 1200px;
+    max-width: 800px;
     width: 100%;
     max-height: 90vh;
     overflow: hidden;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
     gap: 0;
     position: relative;
     touch-action: pan-y pinch-zoom;
@@ -1708,7 +1856,8 @@ select:focus {
     align-items: center;
     justify-content: center;
     position: relative;
-    min-height: 400px;
+    min-height: 300px;
+    max-height: 400px;
     touch-action: pan-x;
     user-select: none;
 }
@@ -1717,7 +1866,8 @@ select:focus {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 1rem 0 0 1rem;
+    border-radius: 1rem 1rem 0 0;
+    transition: opacity 0.3s ease;
 }
 
 .product-modal-indicators {
@@ -1735,7 +1885,8 @@ select:focus {
     flex-direction: column;
     gap: 1.5rem;
     overflow-y: auto;
-    max-height: 90vh;
+    max-height: 60vh;
+    flex: 1;
 }
 
 .product-modal-info h2 {
@@ -1841,202 +1992,167 @@ select:focus {
     color: var(--accent-color);
 }
 
-/* Mobile Responsive Styles */
-@media (max-width: 768px) {
-    .product-modal-content {
-        padding: 1rem;
-    }
-    
-    .product-modal-body {
-        grid-template-columns: 1fr;
-        max-height: 95vh;
-        overflow-y: auto;
-    }
-    
-    .product-modal-image {
-        min-height: 300px;
-        border-radius: 1rem 1rem 0 0;
-    }
-    
-    .product-modal-image img {
-        border-radius: 1rem 1rem 0 0;
-    }
-    
-    .product-modal-info {
-        padding: 1.5rem;
-        max-height: none;
-        overflow-y: visible;
-    }
-    
-    .product-modal-info h2 {
-        font-size: 1.5rem;
-    }
-    
-    .product-modal-price span:first-child {
-        font-size: 1.75rem;
-    }
-    
-    .product-modal-actions {
-        flex-direction: column;
-    }
-    
-    .btn-primary,
-    .btn-secondary {
-        min-width: auto;
-        width: 100%;
-    }
-    
-    .product-modal-nav {
-        width: 2.5rem;
-        height: 2.5rem;
-        font-size: 1rem;
-    }
-    
-    .product-modal-close {
-        width: 2.5rem;
-        height: 2.5rem;
-        font-size: 1rem;
-        top: 0.5rem;
-        right: 0.5rem;
-    }
+/* Typography Enforcement Rules - Enhanced Consistency */
+/* Ensure ALL form elements follow the typography system */
+input, textarea, select, button, .btn, .form-input, .form-select, .form-textarea {
+    font-family: var(--font-family-primary) !important;
+    line-height: var(--leading-normal) !important;
 }
 
-@media (max-width: 480px) {
-    .product-modal-content {
-        padding: 0.5rem;
-    }
-    
-    .product-modal-info {
-        padding: 1rem;
-        gap: 1rem;
-    }
-    
-    .product-modal-info h2 {
-        font-size: 1.3rem;
-    }
-    
-    .product-modal-nav {
-        display: none; /* Hide navigation on very small screens */
-    }
+/* Specific typography rules for different element types */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="number"], 
+input[type="search"],
+input[type="url"],
+input[type="tel"],
+textarea, 
+select {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-base) !important;
+    font-weight: var(--font-normal) !important;
+    line-height: var(--leading-normal) !important;
 }
 
-/* Touch/Swipe Support */
-.product-modal-image {
-    touch-action: pan-x;
-    user-select: none;
+/* Button typography enforcement */
+button, 
+.btn, 
+.btn-primary, 
+.btn-secondary, 
+.btn-success, 
+.btn-danger,
+.action-btn,
+.pagination-btn,
+.search-btn {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-sm) !important;
+    font-weight: var(--font-medium) !important;
+    line-height: var(--leading-normal) !important;
 }
 
-/* Smooth animations */
-.product-modal-body {
-    animation: modalSlideIn 0.3s ease-out;
+/* Label and form label typography */
+label, 
+.form-label,
+.filter-group label {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-sm) !important;
+    font-weight: var(--font-medium) !important;
+    line-height: var(--leading-normal) !important;
 }
 
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+/* Placeholder text consistency */
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-base) !important;
+    font-weight: var(--font-normal) !important;
+    opacity: 0.7;
 }
 
-/* Product card hover effect update */
-.product-card {
-    cursor: pointer;
-    transition: all 0.3s ease;
+/* Table typography */
+table, th, td {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-sm) !important;
+    line-height: var(--leading-normal) !important;
 }
 
-.product-card:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+th {
+    font-weight: var(--font-semibold) !important;
 }
 
-/* Enhanced Touch and Swipe Support for Product Modal */
-.product-modal-content {
-    touch-action: pan-y pinch-zoom;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+td {
+    font-weight: var(--font-normal) !important;
 }
 
-.product-modal-body {
-    touch-action: pan-y pinch-zoom;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    position: relative;
-    overflow: hidden;
+/* Navigation and menu typography */
+nav, .nav, .menu {
+    font-family: var(--font-family-primary) !important;
 }
 
-/* Add subtle visual feedback for touch interactions */
-.product-modal-content:active,
-.product-modal-body:active {
-    transform: scale(0.99);
-    transition: transform 0.1s ease;
+/* Card and content typography */
+.card, .product-card, .feature-card, .terms-card {
+    font-family: var(--font-family-primary) !important;
 }
 
-/* Improve touch targets for navigation arrows on mobile */
-@media (max-width: 768px) {
-    .product-modal-nav {
-        width: 60px !important;
-        height: 60px !important;
-        font-size: 1.5rem !important;
-        background: rgba(0, 0, 0, 0.8) !important;
-        backdrop-filter: blur(10px) !important;
-    }
-    
-    .product-modal-nav.prev {
-        left: 10px !important;
-    }
-    
-    .product-modal-nav.next {
-        right: 10px !important;
-    }
-    
-    /* Add swipe indicator on mobile */
-    .product-modal-body::after {
-        content: '← Swipe to navigate →';
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        opacity: 0.7;
-        pointer-events: none;
-        z-index: 1000;
-        animation: fadeInOut 3s ease-in-out;
-    }
+/* Badge and tag typography */
+.badge, .tag, .product-category, .product-brand {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-medium) !important;
+    line-height: var(--leading-normal) !important;
 }
 
-@keyframes fadeInOut {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 0.7; }
+/* List typography */
+ul, ol, li {
+    font-family: var(--font-family-primary) !important;
+    line-height: var(--leading-relaxed) !important;
 }
 
-/* Prevent text selection during swipe gestures */
-.product-modal-content *,
-.product-modal-body * {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+/* Link typography */
+a {
+    font-family: var(--font-family-primary) !important;
+    text-decoration: none;
+    transition: all 0.2s ease;
 }
 
-/* Allow text selection for description and title */
-.product-modal-info h2,
-.product-modal-description p {
-    -webkit-user-select: text !important;
-    -moz-user-select: text !important;
-    -ms-user-select: text !important;
-    user-select: text !important;
+/* Code and pre typography */
+code, pre {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace !important;
+}
+
+/* Span and inline element typography */
+span, .inline-text {
+    font-family: var(--font-family-primary) !important;
+}
+
+/* Ensure consistent typography in all containers */
+.container, .wrapper, .content {
+    font-family: var(--font-family-primary) !important;
+}
+
+/* Modal and overlay typography */
+.modal, .overlay, .popup {
+    font-family: var(--font-family-primary) !important;
+}
+
+/* Dropdown and select option typography */
+option {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-base) !important;
+}
+
+/* Tooltip and popover typography */
+.tooltip, .popover {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-sm) !important;
+    line-height: var(--leading-normal) !important;
+}
+
+/* Alert and notification typography */
+.alert, .notification, .message {
+    font-family: var(--font-family-primary) !important;
+    line-height: var(--leading-normal) !important;
+}
+
+/* Form validation message typography */
+.error-message, .success-message, .info-message {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-sm) !important;
+    line-height: var(--leading-normal) !important;
+}
+
+/* Loading and status text typography */
+.loading, .status, .info {
+    font-family: var(--font-family-primary) !important;
+    font-size: var(--text-sm) !important;
+    line-height: var(--leading-normal) !important;
+}
+
+/* Ensure consistent font smoothing across all text */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
