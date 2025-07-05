@@ -2281,6 +2281,9 @@ select:focus {
     .product-price-moq .product-moq span {
         font-size: 0.7rem;
     }
+    .product-modal-body {
+        grid-template-columns: 1fr; /* Stack on small screens */
+    }
 }
 
 /* Extra small screens - ensure price and MOQ stay on same line */
