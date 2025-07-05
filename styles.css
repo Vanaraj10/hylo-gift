@@ -808,7 +808,7 @@ small {
 }
 
 .feature-card {
-    background: rgba(17, 126, 52, 0.9);
+    background: rgba(0, 219, 69, 0.7);
     backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 12px;
@@ -821,7 +821,7 @@ small {
 
 .feature-card:hover {
     transform: translateY(-3px);
-    background: rgba(24, 230, 41, 0.9);
+    background: rgba(61, 255, 77, 0.2);
     box-shadow: var(--shadow-lg);
 }
 
