@@ -2026,13 +2026,12 @@ select:focus {
 }
 
 .product-id-label {
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .product-id-text {
     font-family: 'Courier New', monospace;
     background: #f8fafc;
-    padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     font-weight: 600;
     color: #374151;
@@ -2096,7 +2095,7 @@ select:focus {
 }
 
 .product-id-text {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--accent-color);
     font-family: 'Courier New', monospace;
@@ -2160,7 +2159,7 @@ select:focus {
     }
     
     .product-id-text {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .share-product-btn {
