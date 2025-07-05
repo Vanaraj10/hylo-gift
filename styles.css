@@ -173,14 +173,46 @@ small {
 
 /* Header Styles */
 .header {
-    background: linear-gradient(135deg, #2c2c2c 0%, #333e52 100%);
-    color: rgb(0, 0, 0);
+    background: linear-gradient(135deg, 
+        #1a1a1a 0%, 
+        #2c2520 15%, 
+        #4a3d28 30%, 
+        #6b5532 45%, 
+        #8b6f3f 60%, 
+        #b8944f 75%, 
+        #d4ac67 90%, 
+        #e6c78a 100%);
+    position: relative;
+    overflow: hidden;
+    color: #1a1a1a;
     padding: 1rem 0;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 8px 32px rgba(212, 172, 103, 0.3), 
+                0 4px 16px rgba(184, 148, 79, 0.2);
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 3px solid var(--accent-color);
+    border-bottom: 3px solid #d4ac67;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(230, 199, 138, 0.4) 50%, 
+        transparent 100%);
+    animation: shimmerGold 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes shimmerGold {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
 }
 
 .header-content {
