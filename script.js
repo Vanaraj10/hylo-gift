@@ -34,7 +34,7 @@ async function initializeApp() {
     await Promise.all([
       loadCategories(),
       fetchAndRenderProducts(),
-      loadBrandsMarquee(), // Load brands marquee on app initialization
+      loadBrandsCarousel(), // Load brands carousel on app initialization
     ]);
   } catch (error) {
     console.error("Error initializing app:", error);
@@ -67,69 +67,105 @@ async function loadCategories() {
   }
 }
 
-async function loadBrandsMarquee() {
-  try {
-    const { data: brands, error } = await supabaseClient
-      .from("brands")
-      .select("*")
-      .order("name");
+// Brand carousel variables
+let brandsList = [];
+let currentBrandIndex = 0;
 
-    if (error) throw error;
-
-    const brandsMarquee = document.getElementById("brandsMarquee");
-    if (brandsMarquee && brands && brands.length > 0) {
-      // Filter brands that have logos - each brand appears only once
-      const brandsWithLogos = brands.filter((brand) => brand.logo);
-      if (brandsWithLogos.length > 0) {
-        // Create brand items - duplicate them for seamless infinite scroll
-        const brandItemsHTML = brandsWithLogos
-          .map(
-            (brand) => `
-                    <div class="brand-logo-item">
-                        <div class="brand-logo-wrapper">
-                            <img src="${brand.logo}" alt="${brand.name}" title="${brand.name}" loading="lazy">
-                        </div>
-                        <span class="brand-name-label">${brand.name}</span>
-                    </div>
-                `
-          )
-          .join("");
-
-        // Duplicate the brands multiple times for seamless infinite scroll
-        const repeatedBrands = brandItemsHTML.repeat(4); // Show brands 4 times for smooth continuous scroll
-        brandsMarquee.innerHTML = repeatedBrands;
-
-        // Show the marquee section
-        const marqueeSection = document.querySelector(
-          ".brands-marquee-section"
-        );
-        if (marqueeSection) {
-          marqueeSection.style.display = "block";
+async function loadBrandsCarousel() {
+    try {
+        const { data: brands, error } = await supabaseClient
+            .from('brands')
+            .select('*')
+            .order('name');
+        
+        if (error) throw error;
+        
+        // Filter brands that have logos
+        brandsList = brands.filter(brand => brand.logo);        if (brandsList.length > 0) {
+            renderBrandCarousel();
+            
+            // Show the carousel section
+            const carouselSection = document.querySelector('.brands-carousel-section');
+            if (carouselSection) {
+                carouselSection.style.display = 'block';
+            }
+        } else {
+            // Hide the entire carousel section if no brands have logos
+            const carouselSection = document.querySelector('.brands-carousel-section');
+            if (carouselSection) {
+                carouselSection.style.display = 'none';
+            }
         }
-      } else {
-        // Hide the entire marquee section if no brands have logos
-        const marqueeSection = document.querySelector(
-          ".brands-marquee-section"
-        );
-        if (marqueeSection) {
-          marqueeSection.style.display = "none";
+    } catch (error) {
+        console.error('Error loading brands carousel:', error);
+        // Hide carousel section on error
+        const carouselSection = document.querySelector('.brands-carousel-section');
+        if (carouselSection) {
+            carouselSection.style.display = 'none';
         }
-      }
-    } else {
-      // Hide marquee section if no brands exist
-      const marqueeSection = document.querySelector(".brands-marquee-section");
-      if (marqueeSection) {
-        marqueeSection.style.display = "none";
-      }
     }
-  } catch (error) {
-    console.error("Error loading brands marquee:", error);
-    // Hide marquee section on error
-    const marqueeSection = document.querySelector(".brands-marquee-section");
-    if (marqueeSection) {
-      marqueeSection.style.display = "none";
+}
+
+function renderBrandCarousel() {
+    const brandDisplay = document.getElementById('brandDisplay');
+    if (!brandDisplay || brandsList.length === 0) return;
+    
+    const currentBrand = brandsList[currentBrandIndex];
+    
+    brandDisplay.innerHTML = `
+        <div class="brand-logo-item active">
+            <div class="brand-logo-wrapper">
+                <img src="${currentBrand.logo}" alt="${currentBrand.name}" title="${currentBrand.name}" loading="lazy">
+            </div>
+            <span class="brand-name-label">${currentBrand.name}</span>
+        </div>    `;
+    
+    updateNavigationButtons();
+}
+
+function navigateBrand(direction) {
+    if (brandsList.length === 0) return;
+    
+    const previousIndex = currentBrandIndex;
+    currentBrandIndex += direction;
+    
+    // Loop around
+    if (currentBrandIndex >= brandsList.length) {
+        currentBrandIndex = 0;
+    } else if (currentBrandIndex < 0) {
+        currentBrandIndex = brandsList.length - 1;
     }
-  }
+    
+    // Add transition effect
+    const brandDisplay = document.getElementById('brandDisplay');
+    if (brandDisplay) {
+        const currentItem = brandDisplay.querySelector('.brand-logo-item');
+        if (currentItem) {
+            currentItem.classList.remove('active');
+            
+            setTimeout(() => {
+                renderBrandCarousel();
+            }, 250);
+        } else {
+            renderBrandCarousel();
+        }    }
+}
+
+function updateNavigationButtons() {
+    const prevBtn = document.querySelector('.brand-prev');
+    const nextBtn = document.querySelector('.brand-next');
+    
+    if (prevBtn && nextBtn) {
+        // Always enable buttons since we loop around
+        prevBtn.disabled = false;
+        nextBtn.disabled = false;
+        
+        // If only one brand, disable both buttons
+        if (brandsList.length <= 1) {
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+        }
+    }
 }
 
 async function fetchProducts(page = 1, search = "", category = "") {

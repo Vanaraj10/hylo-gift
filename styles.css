@@ -461,7 +461,7 @@ small {
 
 .delivery-timeline-horizontal {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
 }
 
@@ -475,6 +475,8 @@ small {
     border-radius: 12px;
     transition: all 0.3s ease;
     border: 2px solid transparent;
+    min-height: 220px;
+    justify-content: space-between;
 }
 
 .delivery-item-horizontal:hover {
@@ -485,8 +487,8 @@ small {
 }
 
 .delivery-item-horizontal .delivery-icon {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background: var(--gradient-primary);
     border-radius: 12px;
     display: flex;
@@ -496,6 +498,14 @@ small {
     font-size: 1.2rem;
     margin-bottom: 1rem;
     box-shadow: var(--shadow);
+}
+
+.delivery-item-horizontal .delivery-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .delivery-item-horizontal .delivery-content h4 {
@@ -1230,7 +1240,8 @@ small {
 
 @media (max-width: 1200px) {
     .delivery-timeline-horizontal {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0.8rem;
     }
     
     .moq-tiers-horizontal {
@@ -1243,23 +1254,23 @@ small {
     }
 }
 
-@media (max-width: 992px) {    .delivery-timeline-horizontal {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 992px) {
+    .delivery-timeline-horizontal {
+        grid-template-columns: repeat(3, 1fr);
         gap: 0.8rem;
     }
     
     .moq-tiers-horizontal {
         grid-template-columns: repeat(3, 1fr);
         gap: 0.8rem;
-    }
-    
-    .delivery-item-horizontal {
-        padding: 1rem;
+    }    .delivery-item-horizontal {
+        padding: 1.2rem;
+        min-height: 200px;
     }
     
     .delivery-item-horizontal .delivery-icon {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         font-size: 1rem;
     }
     
@@ -1287,14 +1298,13 @@ small {
     .moq-tiers-horizontal {
         grid-template-columns: repeat(3, 1fr);
         gap: 0.8rem;
-    }
-    
-    .delivery-item-horizontal {
+    }    .delivery-item-horizontal {
         padding: 1rem;
+        min-height: 180px;
     }
       .delivery-item-horizontal .delivery-icon {
-        width: 35px;
-        height: 35px;
+        width: 45px;
+        height: 45px;
         font-size: 0.9rem;
     }
     
@@ -1593,10 +1603,9 @@ small {
     .moq-tiers-horizontal {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.6rem;
-    }
-    
-    .delivery-item-horizontal {
+    }    .delivery-item-horizontal {
         padding: 0.8rem;
+        min-height: 160px;
     }
     
     .moq-tier-horizontal {
@@ -1604,11 +1613,30 @@ small {
         font-size: 0.8rem;
         min-height: 40px;
     }
-    
-    .delivery-time-image {
+      .delivery-time-image {
         width: 35px;
         height: 35px;
         margin-bottom: 0.5rem;
+    }
+    
+    .moq-grid {
+        gap: 0.2rem;
+        margin-top: 0.2rem;
+    }
+    
+    .moq-grid-row {
+        gap: 0.2rem;
+    }
+    
+    .moq-item {
+        font-size: 0.6rem;
+        padding: 0.1rem 0.2rem;
+        min-height: 18px;
+    }
+    
+    .moq-grid-card .delivery-content h4 {
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
     }
       .time-icon {
         width: 25px;
@@ -2472,34 +2500,51 @@ option {
 }
 
 /* MOQ Grid Styling */
+.moq-grid-card {
+    justify-content: center;
+}
+
 .moq-grid-card .delivery-content {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.moq-grid-card .delivery-content h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
 }
 
 .moq-grid {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
 }
 
 .moq-grid-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 0.5rem;
+    gap: 0.3rem;
     align-items: center;
 }
 
 .moq-item {
     background: rgba(255, 255, 255, 0.1);
-    padding: 0.4rem 0.6rem;
-    border-radius: 0.375rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 500;
     color: var(--text-primary);
     border: 1px solid rgba(74, 144, 226, 0.1);
     transition: all 0.3s ease;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .moq-item:hover {
@@ -2521,8 +2566,8 @@ option {
     box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
 }
 
-/* Brand Marquee Section - Modern Professional Design */
-.brands-marquee-section {
+/* Brand Carousel Section - Single Logo Display */
+.brands-carousel-section {
     margin: 4rem 0;
     padding: 4rem 0;
     background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
@@ -2535,7 +2580,7 @@ option {
     overflow: hidden;
 }
 
-.brands-marquee-section::before {
+.brands-carousel-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -2551,18 +2596,7 @@ option {
     animation: shimmer 6s ease-in-out infinite;
 }
 
-@keyframes shimmer {
-    0%, 100% { 
-        transform: translateX(-100%); 
-        opacity: 0;
-    }
-    50% { 
-        transform: translateX(100%); 
-        opacity: 1;
-    }
-}
-
-.brands-marquee-section h3 {
+.brands-carousel-section h3 {
     color: var(--text-primary);
     font-size: 2rem;
     font-weight: 800;
@@ -2577,154 +2611,179 @@ option {
     letter-spacing: -0.02em;
 }
 
-.brands-marquee-section h3 i {
+.brands-carousel-section h3 i {
     color: var(--accent-color);
     font-size: 1.8rem;
     animation: pulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+.brands-carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    height: 280px;
+    margin-bottom: 2rem;
 }
 
-.brands-marquee-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 140px;
-    background: linear-gradient(90deg, 
-        rgba(255,255,255,0.95) 0%, 
-        transparent 10%, 
-        transparent 90%, 
-        rgba(255,255,255,0.95) 100%);
+.brand-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 240px;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
     box-shadow: 
-        inset 0 4px 20px rgba(0, 0, 0, 0.06),
-        inset 0 1px 4px rgba(0, 0, 0, 0.04);
-    backdrop-filter: blur(10px);
-}
-
-.brands-marquee {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    animation: scroll-brands-smooth 4s linear infinite;
-    white-space: nowrap;
-    height: 100%;
-    will-change: transform;
-}
-
-.brand-logo-item {
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    height: auto;
-    width: auto;
-    min-width: 120px;
-    max-width: 180px;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 16px;
-    box-shadow: 
-        0 8px 24px rgba(0, 0, 0, 0.08),
-        0 2px 8px rgba(0, 0, 0, 0.04);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        0 15px 35px rgba(0, 0, 0, 0.1),
+        0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    position: relative;
-}
-
-.brand-logo-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, transparent 0%, rgba(74, 144, 226, 0.04) 100%);
-    border-radius: 16px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.brand-logo-item:hover::before {
-    opacity: 1;
-}
-
-.brand-logo-item:hover {
-    transform: translateY(-8px) scale(1.08);
-    box-shadow: 
-        0 16px 40px rgba(0, 0, 0, 0.12),
-        0 8px 16px rgba(0, 0, 0, 0.08);
-    background: rgba(255, 255, 255, 1);
-    border-color: rgba(74, 144, 226, 0.2);
-    animation-play-state: running; /* Ensure animation continues */
-}
-
-.brand-logo-wrapper {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     z-index: 2;
 }
 
+/* Extra large screens */
+@media (min-width: 1400px) {
+    .brands-carousel-container {
+        height: 320px;
+        gap: 3rem;
+    }
+    
+    .brand-display {
+        width: 450px;
+        height: 270px;
+    }
+    
+    .brand-logo-wrapper {
+        width: 160px;
+        height: 100px;
+    }
+    
+    .brand-logo-wrapper img {
+        max-height: 90px;
+        max-width: 150px;
+    }
+    
+    .brand-nav-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 1.3rem;
+    }
+}
+
+.brand-display:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.brand-logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.brand-logo-item.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.brand-logo-wrapper {
+    width: 140px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
 .brand-logo-wrapper img {
-    max-height: 50px;
-    max-width: 100%;
+    max-height: 80px;
+    max-width: 130px;
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: 12px;
     filter: 
-        drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1))
+        drop-shadow(0 4px 15px rgba(0, 0, 0, 0.1))
         saturate(1.1)
         contrast(1.05);
     transition: all 0.3s ease;
 }
 
-.brand-logo-item:hover .brand-logo-wrapper img {
+.brand-display:hover .brand-logo-wrapper img {
     filter: 
-        drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15))
+        drop-shadow(0 6px 20px rgba(0, 0, 0, 0.15))
         saturate(1.2)
         contrast(1.1);
     transform: scale(1.05);
 }
 
 .brand-name-label {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--text-secondary);
     text-align: center;
     line-height: 1.2;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    position: relative;
-    z-index: 2;
+    margin-top: 0.5rem;
     transition: color 0.3s ease;
 }
 
-.brand-logo-item:hover .brand-name-label {
+.brand-display:hover .brand-name-label {
     color: var(--accent-color);
 }
 
-@keyframes scroll-brands-smooth {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-25%); /* Move by 25% since we have 4 repetitions */
-    }
+.brand-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(74, 144, 226, 0.2);
+    border-radius: 50%;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 3;
 }
 
-/* Animation never pauses - continuous scrolling */
+.brand-nav-btn:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+}
+
+.brand-nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.brand-nav-btn:disabled:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--accent-color);
+    transform: none;
+}
 
 /* Add subtle entrance animation */
-.brands-marquee-section {
+.brands-carousel-section {
     opacity: 0;
     animation: fadeInUp 1s ease forwards;
     animation-delay: 0.5s;
@@ -2741,98 +2800,136 @@ option {
     }
 }
 
-/* Responsive Design for Brand Showcase */
+/* Responsive Design for Brand Carousel */
+@media (max-width: 1024px) {
+    .brands-carousel-container {
+        height: 260px;
+        gap: 2rem;
+    }
+    
+    .brand-display {
+        width: 360px;
+        height: 220px;
+    }
+    
+    .brand-logo-wrapper {
+        width: 110px;
+        height: 75px;
+    }
+    
+    .brand-logo-wrapper img {
+        max-height: 65px;
+        max-width: 100px;
+    }
+    
+    .brand-nav-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.15rem;
+    }
+}
+
 @media (max-width: 768px) {
-    .brands-marquee-section {
+    .brands-carousel-section {
         margin: 2.5rem 0;
         padding: 2.5rem 0;
         border-radius: 16px;
     }
     
-    .brands-marquee-section h3 {
-        font-size: 1.6rem;
+    .brands-carousel-section h3 {
+        font-size: 1.8rem;
         margin-bottom: 2rem;
         gap: 0.75rem;
     }
     
-    .brands-marquee-section h3 i {
-        font-size: 1.4rem;
+    .brands-carousel-section h3 i {
+        font-size: 1.6rem;
     }
     
-    .brands-marquee-container {
-        height: 120px;
-        border-radius: 16px;
+    .brands-carousel-container {
+        height: 220px;
+        gap: 1.5rem;
+    }
+    
+    .brand-display {
+        width: 320px;
+        height: 180px;
     }
     
     .brand-logo-item {
-        min-width: 100px;
-        max-width: 140px;
-        padding: 1.2rem;
-        border-radius: 12px;
+        padding: 1.5rem;
     }
     
     .brand-logo-wrapper {
-        height: 50px;
+        width: 130px;
+        height: 75px;
     }
     
     .brand-logo-wrapper img {
-        max-height: 40px;
+        max-height: 65px;
+        max-width: 120px;
     }
     
     .brand-name-label {
-        font-size: 0.7rem;
-    }      .brands-marquee {
-        gap: 2rem;
-        animation: scroll-brands-smooth 5s linear infinite;
+        font-size: 0.9rem;
+    }
+    
+    .brand-nav-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
     }
 }
 
 @media (max-width: 480px) {
-    .brands-marquee-section {
+    .brands-carousel-section {
         margin: 2rem 0;
         padding: 2rem 0;
         border-radius: 12px;
     }
     
-    .brands-marquee-section h3 {
-        font-size: 1.4rem;
+    .brands-carousel-section h3 {
+        font-size: 1.6rem;
         margin-bottom: 1.5rem;
         gap: 0.5rem;
     }
     
-    .brands-marquee-section h3 i {
-        font-size: 1.2rem;
+    .brands-carousel-section h3 i {
+        font-size: 1.4rem;
     }
     
-    .brands-marquee-container {
-        height: 100px;
-        border-radius: 12px;
+    .brands-carousel-container {
+        height: 180px;
+        gap: 1rem;
+    }
+    
+    .brand-display {
+        width: 260px;
+        height: 150px;
     }
     
     .brand-logo-item {
-        min-width: 80px;
-        max-width: 120px;
-        padding: 1rem;
-        border-radius: 10px;
+        padding: 1.2rem;
+        gap: 0.8rem;
     }
     
     .brand-logo-wrapper {
-        height: 40px;
+        width: 100px;
+        height: 60px;
     }
     
     .brand-logo-wrapper img {
-        max-height: 32px;
+        max-height: 50px;
+        max-width: 90px;
+    }
+      .brand-name-label {
+        font-size: 0.8rem;
     }
     
-    .brand-name-label {
-        font-size: 0.65rem;
-    }      .brands-marquee {
-        gap: 1.5rem;
-        animation: scroll-brands-smooth 3s linear infinite;
-    }
-      .brand-logo-item:hover {
-        transform: translateY(-4px) scale(1.05);
-        animation-play-state: running; /* Ensure animation continues */
+    .brand-nav-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
     }
 }
 
@@ -2956,38 +3053,3 @@ option {
 .share-option:nth-child(3) i { color: #dc2626; } /* Email */
 .share-option:nth-child(4) i { color: #059669; } /* SMS */
 .share-option:nth-child(5) i { color: #4f46e5; } /* Copy */
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Responsive adjustments for share modal */
-@media (max-width: 480px) {
-    .share-options {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .share-option {
-        padding: 0.875rem;
-    }
-    
-    .share-option i {
-        font-size: 1.25rem;
-    }
-    
-    .share-option span {
-        font-size: 0.8rem;
-    }
-}
