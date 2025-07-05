@@ -362,7 +362,7 @@ function renderProducts(products) {
                 <div class="product-info">
                     <h3 class="product-name">${highlightedName}</h3>
                     <div class="product-meta">
-                        <span class="product-category">${highlightedCategory}</span>
+                  
                         <span class="product-brand">${highlightedBrand}</span>
                     </div>                    <div class="product-price-moq">
                         <div class="product-price">₹${
