@@ -25,7 +25,8 @@ async function initializeApp() {
     try {
         await Promise.all([
             loadCategories(),
-            fetchAndRenderProducts()
+            fetchAndRenderProducts(),
+            loadBrandsMarquee() // Load brands marquee on app initialization
         ]);
     } catch (error) {
         console.error('Error initializing app:', error);
@@ -52,9 +53,64 @@ async function loadCategories() {
                 option.textContent = category.name;
                 categoryFilter.appendChild(option);
             });
+        }    } catch (error) {
+        console.error('Error loading categories:', error);
+    }
+}
+
+async function loadBrandsMarquee() {
+    try {
+        const { data: brands, error } = await supabaseClient
+            .from('brands')
+            .select('*')
+            .order('name');
+        
+        if (error) throw error;
+        
+        const brandsMarquee = document.getElementById('brandsMarquee');
+        if (brandsMarquee && brands && brands.length > 0) {
+            // Filter brands that have logos - each brand appears only once
+            const brandsWithLogos = brands.filter(brand => brand.logo);
+              if (brandsWithLogos.length > 0) {
+                // Create brand items - duplicate them for seamless infinite scroll
+                const brandItemsHTML = brandsWithLogos.map(brand => `
+                    <div class="brand-logo-item">
+                        <div class="brand-logo-wrapper">
+                            <img src="${brand.logo}" alt="${brand.name}" title="${brand.name}" loading="lazy">
+                        </div>
+                        <span class="brand-name-label">${brand.name}</span>
+                    </div>
+                `).join('');
+                
+                // Duplicate the brands multiple times for seamless infinite scroll
+                const repeatedBrands = brandItemsHTML.repeat(4); // Show brands 4 times for smooth continuous scroll
+                brandsMarquee.innerHTML = repeatedBrands;
+                
+                // Show the marquee section
+                const marqueeSection = document.querySelector('.brands-marquee-section');
+                if (marqueeSection) {
+                    marqueeSection.style.display = 'block';
+                }
+            } else {
+                // Hide the entire marquee section if no brands have logos
+                const marqueeSection = document.querySelector('.brands-marquee-section');
+                if (marqueeSection) {
+                    marqueeSection.style.display = 'none';
+                }            }
+        } else {
+            // Hide marquee section if no brands exist
+            const marqueeSection = document.querySelector('.brands-marquee-section');
+            if (marqueeSection) {
+                marqueeSection.style.display = 'none';
+            }
         }
     } catch (error) {
-        console.error('Error loading categories:', error);
+        console.error('Error loading brands marquee:', error);
+        // Hide marquee section on error
+        const marqueeSection = document.querySelector('.brands-marquee-section');
+        if (marqueeSection) {
+            marqueeSection.style.display = 'none';
+        }
     }
 }
 
@@ -807,3 +863,5 @@ document.addEventListener('DOMContentLoaded', function() {
         handleUrlParameters();
     };
 });
+
+// Brand marquee functionality is already defined above - no need for duplicate

@@ -17,7 +17,7 @@
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --gradient-primary: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
-    --gradient-accent: linear-gradient(135deg, #d73527 0%, #b91c1c 100%);
+    --gradient-accent: linear-gradient(135deg, #141110 0%, #b91c1c 100%);
     --gradient-secondary: linear-gradient(135deg, #2b6cb0 0%, #1e40af 100%);
     
     /* Typography System */
@@ -173,7 +173,7 @@ small {
 
 /* Header Styles */
 .header {
-    background: linear-gradient(135deg, #f3f4f6 0%, #d1d5db 100%);
+    background: linear-gradient(135deg, #2c2c2c 0%, #333e52 100%);
     color: rgb(0, 0, 0);
     padding: 1rem 0;
     box-shadow: var(--shadow-lg);
@@ -189,7 +189,7 @@ small {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .logo-section {
@@ -249,14 +249,14 @@ small {
     flex-direction: column;
     gap: 0.5rem;
     align-items: center;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .contact-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-family: var(--font-family-primary);
     font-size: var(--text-sm);
     font-weight: var(--font-normal);
@@ -776,8 +776,8 @@ small {
 /* Why Us Section */
 .why-us-section {
     padding: 2.5rem 0;
-    background: var(--gradient-primary);
-    color: white;
+    background: rgb(167, 167, 167);
+    color: rgb(255, 255, 255);
     position: relative;
 }
 
@@ -798,7 +798,7 @@ small {
     margin-bottom: 2rem;
     position: relative;
     z-index: 1;
-    color: rgb(179, 179, 179);
+    color: rgb(255, 255, 255);
 }
 
 .features-grid {
@@ -808,7 +808,7 @@ small {
 }
 
 .feature-card {
-    background: rgba(255,255,255,0.1);
+    background: rgba(17, 126, 52, 0.9);
     backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 12px;
@@ -821,7 +821,7 @@ small {
 
 .feature-card:hover {
     transform: translateY(-3px);
-    background: rgba(255,255,255,0.15);
+    background: rgba(24, 230, 41, 0.9);
     box-shadow: var(--shadow-lg);
 }
 
@@ -842,7 +842,7 @@ small {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: wheat;
+    color: rgb(255, 255, 255);
 }
 
 .feature-card p {
@@ -2518,21 +2518,317 @@ option {
     box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
 }
 
-/* Responsive adjustments for MOQ grid */
+/* Brand Marquee Section - Modern Professional Design */
+.brands-marquee-section {
+    margin: 4rem 0;
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.08),
+        0 4px 12px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+.brands-marquee-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg, 
+        transparent 30%, 
+        rgba(74, 144, 226, 0.02) 50%, 
+        transparent 70%
+    );
+    animation: shimmer 6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { 
+        transform: translateX(-100%); 
+        opacity: 0;
+    }
+    50% { 
+        transform: translateX(100%); 
+        opacity: 1;
+    }
+}
+
+.brands-marquee-section h3 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.02em;
+}
+
+.brands-marquee-section h3 i {
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.brands-marquee-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(90deg, 
+        rgba(255,255,255,0.95) 0%, 
+        transparent 10%, 
+        transparent 90%, 
+        rgba(255,255,255,0.95) 100%);
+    border-radius: 20px;
+    box-shadow: 
+        inset 0 4px 20px rgba(0, 0, 0, 0.06),
+        inset 0 1px 4px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(10px);
+}
+
+.brands-marquee {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    animation: scroll-brands-smooth 4s linear infinite;
+    white-space: nowrap;
+    height: 100%;
+    will-change: transform;
+}
+
+.brand-logo-item {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: auto;
+    width: auto;
+    min-width: 120px;
+    max-width: 180px;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    position: relative;
+}
+
+.brand-logo-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(74, 144, 226, 0.04) 100%);
+    border-radius: 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.brand-logo-item:hover::before {
+    opacity: 1;
+}
+
+.brand-logo-item:hover {
+    transform: translateY(-8px) scale(1.08);
+    box-shadow: 
+        0 16px 40px rgba(0, 0, 0, 0.12),
+        0 8px 16px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(74, 144, 226, 0.2);
+    animation-play-state: running; /* Ensure animation continues */
+}
+
+.brand-logo-wrapper {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.brand-logo-wrapper img {
+    max-height: 50px;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    filter: 
+        drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1))
+        saturate(1.1)
+        contrast(1.05);
+    transition: all 0.3s ease;
+}
+
+.brand-logo-item:hover .brand-logo-wrapper img {
+    filter: 
+        drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15))
+        saturate(1.2)
+        contrast(1.1);
+    transform: scale(1.05);
+}
+
+.brand-name-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+.brand-logo-item:hover .brand-name-label {
+    color: var(--accent-color);
+}
+
+@keyframes scroll-brands-smooth {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-25%); /* Move by 25% since we have 4 repetitions */
+    }
+}
+
+/* Animation never pauses - continuous scrolling */
+
+/* Add subtle entrance animation */
+.brands-marquee-section {
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design for Brand Showcase */
 @media (max-width: 768px) {
-    .moq-grid-row {
-        gap: 0.3rem;
+    .brands-marquee-section {
+        margin: 2.5rem 0;
+        padding: 2.5rem 0;
+        border-radius: 16px;
     }
     
-    .moq-item {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.4rem;
+    .brands-marquee-section h3 {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+        gap: 0.75rem;
+    }
+    
+    .brands-marquee-section h3 i {
+        font-size: 1.4rem;
+    }
+    
+    .brands-marquee-container {
+        height: 120px;
+        border-radius: 16px;
+    }
+    
+    .brand-logo-item {
+        min-width: 100px;
+        max-width: 140px;
+        padding: 1.2rem;
+        border-radius: 12px;
+    }
+    
+    .brand-logo-wrapper {
+        height: 50px;
+    }
+    
+    .brand-logo-wrapper img {
+        max-height: 40px;
+    }
+    
+    .brand-name-label {
+        font-size: 0.7rem;
+    }      .brands-marquee {
+        gap: 2rem;
+        animation: scroll-brands-smooth 5s linear infinite;
     }
 }
 
 @media (max-width: 480px) {
-    .moq-item {
-        font-size: 0.7rem;
-        padding: 0.25rem 0.3rem;
+    .brands-marquee-section {
+        margin: 2rem 0;
+        padding: 2rem 0;
+        border-radius: 12px;
+    }
+    
+    .brands-marquee-section h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+        gap: 0.5rem;
+    }
+    
+    .brands-marquee-section h3 i {
+        font-size: 1.2rem;
+    }
+    
+    .brands-marquee-container {
+        height: 100px;
+        border-radius: 12px;
+    }
+    
+    .brand-logo-item {
+        min-width: 80px;
+        max-width: 120px;
+        padding: 1rem;
+        border-radius: 10px;
+    }
+    
+    .brand-logo-wrapper {
+        height: 40px;
+    }
+    
+    .brand-logo-wrapper img {
+        max-height: 32px;
+    }
+    
+    .brand-name-label {
+        font-size: 0.65rem;
+    }      .brands-marquee {
+        gap: 1.5rem;
+        animation: scroll-brands-smooth 3s linear infinite;
+    }
+      .brand-logo-item:hover {
+        transform: translateY(-4px) scale(1.05);
+        animation-play-state: running; /* Ensure animation continues */
     }
 }
