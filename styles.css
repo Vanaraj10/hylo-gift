@@ -776,7 +776,7 @@ small {
 /* Why Us Section */
 .why-us-section {
     padding: 2.5rem 0;
-    background: rgb(167, 167, 167);
+    background: linear-gradient(135deg, #2c2c2c 0%, #333e52 100%);
     color: rgb(255, 255, 255);
     position: relative;
 }
@@ -808,7 +808,7 @@ small {
 }
 
 .feature-card {
-    background: rgba(0, 219, 69, 0.7);
+    background: rgba(131, 131, 131, 0.7);
     backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 12px;
@@ -821,7 +821,7 @@ small {
 
 .feature-card:hover {
     transform: translateY(-3px);
-    background: rgba(61, 255, 77, 0.2);
+    background: rgba(214, 214, 214, 0.2);
     box-shadow: var(--shadow-lg);
 }
 
