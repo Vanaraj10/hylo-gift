@@ -1,7 +1,7 @@
 // Fetch products from Supabase with pagination
 const SUPABASE_URL = 'https://wpxgoxlfyscqgkppnnja.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndweGdveGxmeXNjcWdrcHBubmphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE2Mzg4NDAsImV4cCI6MjA2NzIxNDg0MH0.kJR8V_aZEFQ6EDNq4p0YVQjymGWnChRJCSW4cYeXqeA';
-const PAGE_SIZE = 16;
+const PAGE_SIZE = 20;
 let currentPage = 1;
 let totalProducts = 0;
 let supabaseClient;
@@ -166,21 +166,85 @@ function renderProducts(products) {
 }
 
 function renderPagination() {
-    const productsGrid = document.getElementById('productsGrid');
-    let totalPages = Math.ceil(totalProducts / PAGE_SIZE);
+    // Remove any existing pagination
+    const existingPagination = document.querySelector('.pagination');
+    if (existingPagination) {
+        existingPagination.remove();
+    }
+    
+    const totalPages = Math.ceil(totalProducts / PAGE_SIZE);
     if (totalPages <= 1) return;
+    
+    const productsGrid = document.getElementById('productsGrid');
+    const paginationContainer = document.createElement('div');
+    paginationContainer.className = 'pagination-container';
+    
     let paginationHtml = '<div class="pagination">';
-    for (let i = 1; i <= totalPages; i++) {
+    
+    // Previous button
+    if (currentPage > 1) {
+        paginationHtml += `<button class="pagination-btn" data-page="${currentPage - 1}">
+            <i class="fas fa-chevron-left"></i>
+        </button>`;
+    }
+    
+    // Page numbers
+    const startPage = Math.max(1, currentPage - 2);
+    const endPage = Math.min(totalPages, currentPage + 2);
+    
+    if (startPage > 1) {
+        paginationHtml += `<button class="pagination-btn" data-page="1">1</button>`;
+        if (startPage > 2) {
+            paginationHtml += '<span class="pagination-ellipsis">...</span>';
+        }
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
         paginationHtml += `<button class="pagination-btn${i === currentPage ? ' active' : ''}" data-page="${i}">${i}</button>`;
     }
+    
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+            paginationHtml += '<span class="pagination-ellipsis">...</span>';
+        }
+        paginationHtml += `<button class="pagination-btn" data-page="${totalPages}">${totalPages}</button>`;
+    }
+    
+    // Next button
+    if (currentPage < totalPages) {
+        paginationHtml += `<button class="pagination-btn" data-page="${currentPage + 1}">
+            <i class="fas fa-chevron-right"></i>
+        </button>`;
+    }
+    
     paginationHtml += '</div>';
-    productsGrid.insertAdjacentHTML('afterend', paginationHtml);
-    document.querySelectorAll('.pagination-btn').forEach(btn => {
+    paginationContainer.innerHTML = paginationHtml;
+    
+    productsGrid.parentNode.insertBefore(paginationContainer, productsGrid.nextSibling);
+    
+    // Add event listeners
+    paginationContainer.querySelectorAll('.pagination-btn').forEach(btn => {
         btn.onclick = (e) => {
-            currentPage = parseInt(e.target.getAttribute('data-page'));
-            fetchAndRenderProducts(currentPage);
+            const page = parseInt(e.target.closest('.pagination-btn').getAttribute('data-page'));
+            if (page && page !== currentPage) {
+                currentPage = page;
+                fetchAndRenderProducts(currentPage);
+            }
         };
     });
+}
+
+// Debounce function for search optimization
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
 // Setup event listeners for search and filter
@@ -189,10 +253,20 @@ function setupProductEvents() {
     const categoryFilter = document.getElementById('categoryFilter');
     const brandFilter = document.getElementById('brandFilter');
     
+    // Debounced search function
+    const debouncedSearch = debounce(() => {
+        currentPage = 1;
+        fetchAndRenderProducts();
+    }, 300);
+    
     if (searchInput) {
-        searchInput.addEventListener('input', () => { 
-            currentPage = 1; 
-            fetchAndRenderProducts(); 
+        searchInput.addEventListener('input', debouncedSearch);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                currentPage = 1;
+                fetchAndRenderProducts();
+            }
         });
     }
     
@@ -231,8 +305,8 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Handle window resize
-window.addEventListener('resize', debounce(function() {
+// Handle window resize with debouncing
+const handleResize = debounce(function() {
     // Recreate mobile filter toggle if needed
     const existingToggle = document.querySelector('.mobile-filter-toggle');
     if (existingToggle) {
@@ -241,12 +315,16 @@ window.addEventListener('resize', debounce(function() {
     
     // Reset filter display
     const filterSection = document.querySelector('.filter-section');
-    if (window.innerWidth > 768) {
-        filterSection.style.display = 'flex';
-    } else {
-        createMobileFilterToggle();
+    if (filterSection) {
+        if (window.innerWidth > 768) {
+            filterSection.style.display = 'flex';
+        } else {
+            createMobileFilterToggle();
+        }
     }
-}, 250));
+}, 250);
+
+window.addEventListener('resize', handleResize);
 
 // Loading state management
 function showLoading() {
@@ -256,6 +334,39 @@ function showLoading() {
             <p>Loading products...</p>
         </div>
     `;
+}
+
+// Mobile filter toggle functionality
+function createMobileFilterToggle() {
+    const filterSection = document.querySelector('.filter-section');
+    if (!filterSection) return;
+    
+    // Create toggle button
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'mobile-filter-toggle';
+    toggleBtn.innerHTML = `
+        <i class="fas fa-filter"></i>
+        <span>Filters</span>
+        <i class="fas fa-chevron-down"></i>
+    `;
+    
+    // Insert before filter section
+    filterSection.parentNode.insertBefore(toggleBtn, filterSection);
+    
+    // Initially hide filters on mobile
+    if (window.innerWidth <= 768) {
+        filterSection.style.display = 'none';
+    }
+    
+    // Toggle functionality
+    toggleBtn.addEventListener('click', function() {
+        const isHidden = filterSection.style.display === 'none';
+        filterSection.style.display = isHidden ? 'flex' : 'none';
+        
+        const chevron = toggleBtn.querySelector('.fa-chevron-down');
+        chevron.classList.toggle('fa-chevron-up', isHidden);
+        chevron.classList.toggle('fa-chevron-down', !isHidden);
+    });
 }
 
 // Add intersection observer for scroll animations
