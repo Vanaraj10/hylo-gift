@@ -17,7 +17,7 @@
   <body>
     <!-- Header Section -->
     <header class="header">
-      <div class="container">                                                              
+      <div class="container">
         <div class="header-content">
           <div class="logo-section">
             <img src="logo.png" alt="HyLoApp Logo" class="logo" />
@@ -38,13 +38,12 @@
           </div>
 
           <div class="bulk-notice">
-            <span class="bulk-badge">
-              Bulk Orders Only
-            </span>
+            <span class="bulk-badge"> Bulk Orders Only </span>
           </div>
         </div>
       </div>
-    </header>    <!-- Search & Filter Section -->
+    </header>
+    <!-- Search & Filter Section -->
     <!-- Main Content Area -->
     <main class="main-content">
       <div class="container">
@@ -58,7 +57,7 @@
                   <span>Free Delivery Across Chennai</span>
                 </div>
               </div>
-                <div class="search-bar">
+              <div class="search-bar">
                 <div class="search-input-wrapper">
                   <i class="fas fa-search search-icon"></i>
                   <input
@@ -67,7 +66,8 @@
                     placeholder="Search products, categories, or brands... (e.g., diary, stationary, Parker)"
                     class="search-input"
                   />
-                </div>                <div class="filter-group">
+                </div>
+                <div class="filter-group">
                   <select id="categoryFilter" class="filter-select">
                     <option value="">All Categories</option>
                     <!-- Categories will be populated dynamically -->
@@ -271,7 +271,7 @@
         <button class="product-modal-close" onclick="closeProductModal()">
           <i class="fas fa-times"></i>
         </button>
-        
+
         <!-- Navigation arrows -->
         <button class="product-modal-nav prev" onclick="navigateProduct(-1)">
           <i class="fas fa-chevron-left"></i>
@@ -279,25 +279,36 @@
         <button class="product-modal-nav next" onclick="navigateProduct(1)">
           <i class="fas fa-chevron-right"></i>
         </button>
-        
+
         <div class="product-modal-body">
           <div class="product-modal-image">
-            <img id="modalProductImage" src="" alt="">
+            <img id="modalProductImage" src="" alt="" />
             <div class="product-modal-indicators">
               <!-- Indicators will be added dynamically if needed -->
             </div>
           </div>
-          
           <div class="product-modal-info">
             <h2 id="modalProductName"></h2>
             <div class="product-modal-meta">
               <span id="modalProductCategory" class="product-category"></span>
-              <span id="modalProductBrand" class="product-brand"></span>
+              <div class="brand-share-container">
+                <span id="modalProductBrand" class="product-brand"></span>
+                <button
+                  onclick="shareProduct()"
+                  class="share-icon-btn"
+                  title="Share Product"
+                >
+                  <i class="fas fa-share-alt"></i>
+                </button>
+              </div>
             </div>
             <div class="product-modal-price">
               <span id="modalProductPrice"></span>
               <span id="modalProductDiscount" class="discount-badge"></span>
+              <span class="product-id-label">ID: </span>
+              <span id="modalProductId" class="product-id-text"></span>
             </div>
+
             <div class="product-modal-description">
               <h4>Description</h4>
               <p id="modalProductDescription"></p>

@@ -207,7 +207,9 @@ function updateModalContent() {
         document.getElementById('modalProductName').textContent = product.product_name;
         document.getElementById('modalProductCategory').textContent = product.categories?.name || 'Unknown Category';
         document.getElementById('modalProductBrand').textContent = product.brands?.name || 'Unknown Brand';
-        document.getElementById('modalProductPrice').textContent = `₹${product.product_price}`;
+        document.getElementById('modalProductPrice').textContent = `₹${product.product_price}`;        // Generate and display simple numeric product ID (1-based)
+        const productId = currentProductIndex + 1;
+        document.getElementById('modalProductId').textContent = productId;
         
         // Handle discount
         const discountBadge = document.getElementById('modalProductDiscount');
@@ -665,3 +667,136 @@ if ('serviceWorker' in navigator) {
         // navigator.serviceWorker.register('/sw.js');
     });
 }
+
+// Simple Product ID Generation and Sharing Functions
+function generateSimpleProductId(product, index) {
+    // Use database ID if available, otherwise use the current index + 1
+    return product.id || (index + 1);
+}
+
+function copyProductId() {
+    const productId = document.getElementById('modalProductId').textContent;
+    
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(productId).then(() => {
+            showToast('Product ID copied!', 'success');
+        }).catch(() => {
+            fallbackCopyTextToClipboard(productId);
+        });
+    } else {
+        fallbackCopyTextToClipboard(productId);
+    }
+}
+
+function fallbackCopyTextToClipboard(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+    
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        showToast('Product link copied to clipboard!', 'success');
+    } catch (err) {
+        showToast('Failed to copy link', 'error');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+function shareProduct() {
+    const product = currentProducts[currentProductIndex];
+    if (!product) return;
+    
+    const productId = document.getElementById('modalProductId').textContent;
+    const currentUrl = window.location.href.split('?')[0]; // Remove any existing parameters
+    const shareUrl = `${currentUrl}?product=${productId}`;
+    
+    // Copy URL to clipboard
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            showToast('Product link copied to clipboard!', 'success');
+        }).catch(() => {
+            fallbackCopyTextToClipboard(shareUrl);
+        });
+    } else {
+        fallbackCopyTextToClipboard(shareUrl);
+    }
+}
+
+// Handle URL parameters to open specific product
+function handleUrlParameters() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('product');
+    
+    if (productId && currentProducts.length > 0) {
+        const productIndex = parseInt(productId) - 1; // Convert 1-based ID to 0-based index
+        if (productIndex >= 0 && productIndex < currentProducts.length) {
+            openProductModal(productIndex);
+        }
+    }
+}
+
+function showToast(message, type = 'info') {
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `
+        <div class="toast-content">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    // Add toast styles
+    toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 10002;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-family-primary);
+        font-size: 0.875rem;
+        font-weight: 500;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // Animate in
+    setTimeout(() => {
+        toast.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        toast.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 300);
+    }, 3000);
+}
+
+// Initialize URL handling when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle URL parameters after products are loaded
+    const originalFetchAndRender = fetchAndRenderProducts;
+    window.fetchAndRenderProducts = async function(page = 1) {
+        await originalFetchAndRender(page);
+        // Check for URL parameters after products are loaded
+        handleUrlParameters();
+    };
+});

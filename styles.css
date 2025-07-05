@@ -213,9 +213,10 @@ small {
 
 .tagline {
     font-family: var(--font-family-primary);
-    font-size: var(--text-sm);
+    font-size: 1.5rem;
     font-weight: var(--font-normal);
     opacity: 0.9;
+    margin-right: 5px;
     margin: 0;
     line-height: var(--leading-normal);
 }
@@ -283,6 +284,7 @@ small {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    overflow: hidden; /* Prevent horizontal overflow */
 }
 
 /* Free Delivery Notice */
@@ -327,6 +329,8 @@ small {
     align-items: center;
     gap: 2rem;
     flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .search-input-wrapper {
@@ -1319,17 +1323,17 @@ small {
         font-size: 0.8rem;
         justify-content: center;
     }
-    
-    .search-input-wrapper {
+      .search-input-wrapper {
         min-width: auto;
         max-width: none;
         flex: 2;
-        min-width: 200px;
+        min-width: 0; /* Allow flexbox to shrink below content size */
     }
     
     .search-input {
         padding: 0.8rem 0.8rem 0.8rem 2.5rem;
         font-size: 0.9rem;
+        min-width: 0; /* Allow input to shrink */
     }
     
     .search-icon {
@@ -1341,13 +1345,14 @@ small {
         min-width: auto;
         width: auto;
         flex: 1;
-        min-width: 120px;
+        min-width: 0; /* Allow flexbox to shrink below content size */
     }
     
     .filter-select {
         width: 100%;
         padding: 0.8rem;
         font-size: 0.9rem;
+        min-width: 0; /* Allow select to shrink */
     }
     
     .products-grid {
@@ -1430,24 +1435,24 @@ small {
         left: 0.8rem;
         font-size: 1rem;
     }
-    
-    .search-bar {
+      .search-bar {
         gap: 0.5rem;
     }
     
     .search-input-wrapper {
         flex: 2;
-        min-width: 180px;
+        min-width: 0; /* Allow flexbox to shrink */
     }
     
     .filter-group {
         flex: 1;
-        min-width: 100px;
+        min-width: 0; /* Allow flexbox to shrink */
     }
     
     .filter-select {
         padding: 0.8rem 0.5rem;
         font-size: 0.85rem;
+        min-width: 0; /* Allow select to shrink */
     }
     
     .products-grid {
@@ -1495,12 +1500,14 @@ small {
     }
     
     .search-input-wrapper {
-        min-width: 280px;
-        max-width: 350px;
+        min-width: 250px;
+        max-width: 320px;
+        flex: 2;
     }
     
     .filter-group {
-        min-width: 180px;
+        min-width: 150px;
+        flex: 1;
     }
     
     .free-delivery-notice {
@@ -1981,6 +1988,57 @@ select:focus {
     display: flex;
     gap: 0.75rem;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+.brand-share-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.share-icon-btn {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.share-icon-btn:hover {
+    background: #f1f5f9;
+    color: #2563eb;
+    transform: scale(1.1);
+}
+
+.product-modal-id {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0.5rem 0;
+}
+
+.product-id-label {
+    font-weight: 600;
+}
+
+.product-id-text {
+    font-family: 'Courier New', monospace;
+    background: #f8fafc;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    color: #374151;
 }
 
 .product-modal-price {
@@ -2018,58 +2076,100 @@ select:focus {
     font-size: 0.95rem;
 }
 
-.product-modal-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: auto;
-    flex-wrap: wrap;
+/* Product ID Section */
+.product-modal-id {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
 }
 
-.btn-primary {
+.product-id-container label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.product-id-display {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.product-id-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+.copy-id-btn {
     background: var(--accent-color);
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.95rem;
-    flex: 1;
     justify-content: center;
-    min-width: 200px;
+    font-size: 0.875rem;
 }
 
-.btn-primary:hover {
+.copy-id-btn:hover {
     background: var(--accent-secondary);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(215, 53, 39, 0.3);
+    transform: scale(1.05);
 }
 
-.btn-secondary {
-    background: transparent;
-    color: var(--text-primary);
-    border: 2px solid var(--border-color);
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
+.product-modal-share {
+    margin-top: 1rem;
+}
+
+.share-product-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.95rem;
     justify-content: center;
-    min-width: 150px;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
 }
 
-.btn-secondary:hover {
-    background: var(--background-light);
-    border-color: var(--accent-color);
-    color: var(--accent-color);
+.share-product-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.share-product-btn i {
+    font-size: 1.1rem;
+}
+
+/* Mobile responsiveness for product ID and share */
+@media (max-width: 768px) {
+    .product-modal-id {
+        padding: 0.75rem;
+    }
+    
+    .product-id-text {
+        font-size: 1.1rem;
+    }
+    
+    .share-product-btn {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.9rem;
+    }
 }
 
 /* Typography Enforcement Rules - Enhanced Consistency */
