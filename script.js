@@ -139,7 +139,13 @@ async function fetchAndRenderProducts(page = 1) {
     }
 }
 
+let currentProducts = [];
+let currentProductIndex = 0;
+let touchStartX = 0;
+let touchEndX = 0;
+
 function renderProducts(products) {
+    currentProducts = products; // Store products for modal navigation
     const productsGrid = document.getElementById('productsGrid');
     if (!products || products.length === 0) {
         productsGrid.innerHTML = `<div class="no-products"><div class="no-products-icon"><i class="fas fa-search"></i></div><h3>No products found</h3><p>Try adjusting your search or filters</p></div>`;
@@ -150,7 +156,7 @@ function renderProducts(products) {
     const searchInput = document.getElementById('searchInput');
     const searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : '';
     
-    productsGrid.innerHTML = products.map(product => {
+    productsGrid.innerHTML = products.map((product, index) => {
         const categoryName = product.categories?.name || 'Unknown Category';
         const brandName = product.brands?.name || 'Unknown Brand';
         
@@ -166,7 +172,7 @@ function renderProducts(products) {
         const highlightedBrand = searchTerm ? highlightText(brandName, searchTerm) : brandName;
         
         return `
-            <div class="product-card" data-category="${product.category_id}">
+            <div class="product-card" data-category="${product.category_id}" onclick="openProductModal(${index})">
                 <div class="product-image">
                     <img src="${product.product_image}" alt="${product.product_name}" style="width:100%;height:100%;object-fit:cover;" />
                 </div>
@@ -181,6 +187,155 @@ function renderProducts(products) {
         `;
     }).join('');
 }
+
+function openProductModal(index) {
+    currentProductIndex = index;
+    const product = currentProducts[index];
+    
+    if (!product) return;
+    
+    // Update modal content
+    document.getElementById('modalProductImage').src = product.product_image;
+    document.getElementById('modalProductImage').alt = product.product_name;
+    document.getElementById('modalProductName').textContent = product.product_name;
+    document.getElementById('modalProductCategory').textContent = product.categories?.name || 'Unknown Category';
+    document.getElementById('modalProductBrand').textContent = product.brands?.name || 'Unknown Brand';
+    document.getElementById('modalProductPrice').textContent = `₹${product.product_price}`;
+    
+    // Handle discount
+    const discountBadge = document.getElementById('modalProductDiscount');
+    if (product.product_discount && product.product_discount > 0) {
+        discountBadge.textContent = `${product.product_discount}% OFF`;
+        discountBadge.style.display = 'inline-block';
+    } else {
+        discountBadge.style.display = 'none';
+    }
+    
+    document.getElementById('modalProductDescription').textContent = product.product_description || 'No description available.';
+    
+    // Show modal
+    const modal = document.getElementById('productModal');
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+    
+    // Update navigation buttons
+    updateModalNavigation();
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+    
+    // Add touch event listeners for swiping
+    setupModalTouchEvents();
+}
+
+function closeProductModal() {
+    const modal = document.getElementById('productModal');
+    modal.classList.remove('active');
+    
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }, 300);
+    
+    // Remove touch event listeners
+    removeModalTouchEvents();
+}
+
+function navigateProduct(direction) {
+    const newIndex = currentProductIndex + direction;
+    
+    if (newIndex >= 0 && newIndex < currentProducts.length) {
+        openProductModal(newIndex);
+    }
+}
+
+function updateModalNavigation() {
+    const prevBtn = document.querySelector('.product-modal-nav.prev');
+    const nextBtn = document.querySelector('.product-modal-nav.next');
+    
+    if (currentProductIndex <= 0) {
+        prevBtn.style.opacity = '0.5';
+        prevBtn.style.pointerEvents = 'none';
+    } else {
+        prevBtn.style.opacity = '1';
+        prevBtn.style.pointerEvents = 'auto';
+    }
+    
+    if (currentProductIndex >= currentProducts.length - 1) {
+        nextBtn.style.opacity = '0.5';
+        nextBtn.style.pointerEvents = 'none';
+    } else {
+        nextBtn.style.opacity = '1';
+        nextBtn.style.pointerEvents = 'auto';
+    }
+}
+
+// Touch/Swipe functionality
+function setupModalTouchEvents() {
+    const modalImage = document.querySelector('.product-modal-image');
+    
+    modalImage.addEventListener('touchstart', handleTouchStart, { passive: true });
+    modalImage.addEventListener('touchend', handleTouchEnd, { passive: true });
+}
+
+function removeModalTouchEvents() {
+    const modalImage = document.querySelector('.product-modal-image');
+    
+    modalImage.removeEventListener('touchstart', handleTouchStart);
+    modalImage.removeEventListener('touchend', handleTouchEnd);
+}
+
+function handleTouchStart(e) {
+    touchStartX = e.touches[0].clientX;
+}
+
+function handleTouchEnd(e) {
+    touchEndX = e.changedTouches[0].clientX;
+    handleSwipe();
+}
+
+function handleSwipe() {
+    const swipeThreshold = 50; // Minimum distance for a swipe
+    const swipeDistance = touchEndX - touchStartX;
+    
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+        if (swipeDistance > 0) {
+            // Swipe right - go to previous
+            navigateProduct(-1);
+        } else {
+            // Swipe left - go to next
+            navigateProduct(1);
+        }
+    }
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById('productModal');
+    if (modal.classList.contains('active')) {
+        switch(e.key) {
+            case 'Escape':
+                closeProductModal();
+                break;
+            case 'ArrowLeft':
+                navigateProduct(-1);
+                break;
+            case 'ArrowRight':
+                navigateProduct(1);
+                break;
+        }
+    }
+});
+
+// Close modal when clicking outside content
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('productModal');
+    if (e.target === modal) {
+        closeProductModal();
+    }
+});
 
 function renderPagination() {
     // Remove any existing pagination
