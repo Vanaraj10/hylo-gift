@@ -173,8 +173,8 @@ small {
 
 /* Header Styles */
 .header {
-    background: var(--gradient-primary);
-    color: white;
+    background: linear-gradient(135deg, #f3f4f6 0%, #d1d5db 100%);
+    color: rgb(0, 0, 0);
     padding: 1rem 0;
     box-shadow: var(--shadow-lg);
     position: sticky;
@@ -189,6 +189,7 @@ small {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    color: black;
 }
 
 .logo-section {
@@ -213,7 +214,7 @@ small {
 
 .tagline {
     font-family: var(--font-family-primary);
-    font-size: var(--text-sm);
+    font-size: 1.2rem;
     font-weight: var(--font-normal);
     opacity: 0.9;
     margin: 0;
@@ -248,13 +249,14 @@ small {
     flex-direction: column;
     gap: 0.5rem;
     align-items: center;
+    color: black;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: white;
+    color: rgb(0, 0, 0);
     font-family: var(--font-family-primary);
     font-size: var(--text-sm);
     font-weight: var(--font-normal);
@@ -382,7 +384,7 @@ small {
 .filter-group label {
     font-family: var(--font-family-primary);
     font-weight: var(--font-medium);
-    font-size: var(--text-sm);
+    font-size: 2rem;
     color: var(--text-primary);
     margin-bottom: 0.5rem;
     display: block;
@@ -395,7 +397,7 @@ small {
     border-radius: 8px;
     background: var(--background);
     font-family: var(--font-family-primary);
-    font-size: var(--text-base);
+    font-size: 0.5rem;
     font-weight: var(--font-normal);
     color: var(--text-primary);
     transition: all 0.3s ease;
@@ -406,6 +408,20 @@ small {
     outline: none;
     border-color: #4a90e2;
     box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* Smaller font for category dropdown */
+#categoryFilter, .filter-select {
+    font-size: 0.85rem !important;
+    padding: 0.5rem 0.75rem !important;
+    min-height: 32px;
+}
+
+@media (max-width: 480px) {
+    #categoryFilter, .filter-select {
+        font-size: 0.8rem !important;
+        padding: 0.4rem 0.6rem !important;
+    }
 }
 
 /* Main Content */
@@ -679,6 +695,25 @@ small {
     font-weight: 700;
     color: #4a90e2;
     margin-top: 8px;
+}
+
+/* Product price and MOQ container */
+.product-price-moq {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.product-price-moq .product-price {
+    margin-top: 0;
+    flex: 1;
+}
+
+.product-price-moq .product-moq {
+    margin-top: 0;
+    flex-shrink: 0;
 }
 
 /* Product MOQ styling - Small and elegant */
@@ -2227,6 +2262,47 @@ select:focus {
     letter-spacing: 0.025em;
 }
 
+/* Responsive adjustments for product price-moq container */
+@media (max-width: 480px) {
+    .product-price-moq {
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+    }
+    
+    .product-price-moq .product-price {
+        font-size: 16px;
+    }
+    
+    .product-price-moq .product-moq {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+    }
+    
+    .product-price-moq .product-moq span {
+        font-size: 0.7rem;
+    }
+}
+
+/* Extra small screens - ensure price and MOQ stay on same line */
+@media (max-width: 350px) {
+    .product-price-moq {
+        gap: 0.25rem;
+    }
+    
+    .product-price-moq .product-price {
+        font-size: 15px;
+    }
+    
+    .product-price-moq .product-moq {
+        font-size: 0.65rem;
+        padding: 0.15rem 0.35rem;
+    }
+    
+    .product-price-moq .product-moq span {
+        font-size: 0.65rem;
+    }
+}
+
 /* Typography Enforcement Rules - Enhanced Consistency */
 /* Ensure ALL form elements follow the typography system */
 input, textarea, select, button, .btn, .form-input, .form-select, .form-textarea {
@@ -2390,4 +2466,73 @@ option {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+}
+
+/* MOQ Grid Styling */
+.moq-grid-card .delivery-content {
+    width: 100%;
+}
+
+.moq-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.moq-grid-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.moq-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.375rem;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    border: 1px solid rgba(74, 144, 226, 0.1);
+    transition: all 0.3s ease;
+}
+
+.moq-item:hover {
+    background: rgba(74, 144, 226, 0.1);
+    transform: scale(1.05);
+    border-color: var(--accent-color);
+}
+
+.moq-highlight {
+    background: var(--accent-color) !important;
+    color: white !important;
+    font-weight: 700 !important;
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+.moq-highlight:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+/* Responsive adjustments for MOQ grid */
+@media (max-width: 768px) {
+    .moq-grid-row {
+        gap: 0.3rem;
+    }
+    
+    .moq-item {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .moq-item {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.3rem;
+    }
 }

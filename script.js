@@ -181,10 +181,11 @@ function renderProducts(products) {
                     <h3 class="product-name">${highlightedName}</h3>
                     <div class="product-meta">
                         <span class="product-brand">${highlightedBrand}</span>
-                    </div>
-                    <div class="product-price">₹${product.product_price}</div>
-                    <div class="product-moq">
-                        <span>MOQ: ${(product.product_moq || 1).toLocaleString()} Units</span>
+                    </div>                    <div class="product-price-moq">
+                        <div class="product-price">₹${product.product_price}</div>
+                        <div class="product-moq">
+                            <span>MOQ: ${(product.product_moq || 1).toLocaleString()}</span>
+                        </div>
                     </div>
                 </div>
             </div>
