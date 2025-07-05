@@ -213,10 +213,9 @@ small {
 
 .tagline {
     font-family: var(--font-family-primary);
-    font-size: 1.5rem;
+    font-size: var(--text-sm);
     font-weight: var(--font-normal);
     opacity: 0.9;
-    margin-right: 5px;
     margin: 0;
     line-height: var(--leading-normal);
 }
@@ -329,8 +328,6 @@ small {
     align-items: center;
     gap: 2rem;
     flex-wrap: wrap;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .search-input-wrapper {
