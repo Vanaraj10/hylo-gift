@@ -2859,10 +2859,10 @@ option {
   box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
 }
 
-/* Brand Carousel Section - Multiple Logo Display */
+/* Brand Carousel Section - Single Container Structure */
 .brands-carousel-section {
-  margin: 4rem 0;
-  padding: 4rem 0;
+  margin: 4rem auto;
+  padding: 4rem 2rem;
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
   border-radius: 24px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
@@ -2873,7 +2873,7 @@ option {
   animation: fadeInUp 1s ease forwards;
   animation-delay: 0.5s;
   width: 100%;
-  max-width: 100%;
+  max-width: 1400px;
 }
 
 .brands-carousel-section::before {
@@ -2917,12 +2917,11 @@ option {
   width: 100%;
   overflow: hidden;
   position: relative;
-  background: rgba(255, 255, 255, 0.95);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%);
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  margin: 0 auto 2rem auto;
   padding: 1.5rem 0;
-  max-width: 100%;
+  border: 1px solid rgba(59, 130, 246, 0.1);
 }
 
 .brands-marquee {
@@ -2953,14 +2952,43 @@ option {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: white;
+  background: linear-gradient(145deg, #ffffff 0%, #fafbff 100%);
   border-radius: 16px;
   padding: 1rem 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.1);
   min-width: 120px;
   min-height: 80px;
   flex-shrink: 0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(59, 130, 246, 0.1) 50%,
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+}
+
+.brand-item:hover::before {
+  left: 100%;
+}
+
+.brand-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.2);
 }
 
 /* Brand logo wrapper for marquee */
@@ -3043,82 +3071,24 @@ option {
   }
 }
 
-/* Navigation buttons */
-.brand-nav-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid rgba(74, 144, 226, 0.2);
-  border-radius: 50%;
-  color: var(--accent-color);
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  z-index: 3;
-}
-
-.brand-nav-btn:hover {
-  background: var(--accent-color);
-  color: white;
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
-}
-
-.brand-nav-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.brand-nav-btn:disabled:hover {
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--accent-color);
-  transform: none;
-}
-
-/* Responsive Design for Brand Carousel */
-/* Mobile - 1 logo */
+/* Responsive Design for Brand Marquee */
+/* Mobile styles */
 @media (max-width: 768px) {
   .brands-carousel-section {
-    margin: 2rem 0;
-    padding: 1rem 1rem;
+    margin: 2rem auto;
+    padding: 2rem 1rem;
     border-radius: 16px;
+    max-width: 95%;
   }
 
   .brands-carousel-section h3 {
     font-size: 1.6rem;
     margin-bottom: 1.5rem;
     gap: 0.5rem;
-    padding: 0 1rem;
   }
 
   .brands-carousel-section h3 i {
     font-size: 1.4rem;
-  }
-
-  .brands-carousel-container {
-    height: 200px;
-    gap: 0.8rem;
-    padding: 0 1rem;
-  }
-
-  .brand-display {
-    grid-template-columns: 1fr; /* 1 logo on mobile */
-    width: 100%;
-    max-width: 280px;
-    height: 160px;
-    padding: 0.5rem;
-    gap: 0;
-    margin: 0 auto;
-  }
-
-  .brand-item {
-    padding: 0.5rem;
   }
 
   .brand-logo-wrapper {
@@ -3145,188 +3115,57 @@ option {
 
 @media (max-width: 480px) {
   .brands-carousel-section {
-    margin: 1.5rem 0;
-    padding: 1.5rem 0.5rem;
+    margin: 1.5rem auto;
+    padding: 1.5rem 0.75rem;
     border-radius: 12px;
+    max-width: 98%;
   }
 
   .brands-carousel-section h3 {
     font-size: 1.4rem;
     margin-bottom: 1.2rem;
     gap: 0.4rem;
-    padding: 0 0.5rem;
   }
-
   .brands-carousel-section h3 i {
     font-size: 1.2rem;
-  }
-
-  .brands-carousel-container {
-    height: 160px;
-    gap: 0.5rem;
-    padding: 0 0.5rem;
-  }
-
-  .brand-display {
-    width: 100%;
-    max-width: 240px;
-    height: 130px;
-    padding: 1rem;
-    margin: 0 auto;
-  }
-
-  .brand-item {
-    padding: 0.8rem;
-    gap: 0.6rem;
-  }
-
-  .brand-logo-wrapper {
-    width: 90px;
-    height: 50px;
-  }
-
-  .brand-logo-wrapper img {
-    max-height: 45px;
-    max-width: 80px;
-  }
-
-  .brand-name-label {
-    font-size: 0.75rem;
-  }
-  .brand-nav-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 0.8rem;
-    flex-shrink: 0;
   }
 }
 
 /* Extra small screens */
 @media (max-width: 375px) {
   .brands-carousel-section {
-    margin: 1rem 0;
-    padding: 1rem 0.25rem;
+    margin: 1rem auto;
+    padding: 1rem 0.5rem;
+    max-width: 95%;
   }
 
   .brands-carousel-section h3 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    padding: 0 0.25rem;
-  }
-
-  .brands-carousel-container {
-    height: 140px;
-    gap: 0.25rem;
-    padding: 0 0.25rem;
-  }
-
-  .brand-display {
-    max-width: 200px;
-    height: 110px;
-    padding: 0.8rem;
-  }
-
-  .brand-item {
-    padding: 0.6rem;
-    gap: 0.4rem;
-  }
-
-  .brand-logo-wrapper {
-    width: 75px;
-    height: 40px;
-  }
-
-  .brand-logo-wrapper img {
-    max-height: 35px;
-    max-width: 65px;
-  }
-
-  .brand-name-label {
-    font-size: 0.7rem;
-  }
-
-  .brand-nav-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 0.7rem;
   }
 }
 
-/* Tablet - 2 logos */
+/* Tablet styles */
 @media (min-width: 769px) and (max-width: 1024px) {
   .brands-carousel-section {
-    padding: 3rem 1rem;
-  }
-
-  .brands-carousel-container {
-    height: 260px;
-    gap: 1.5rem;
-    padding: 0 1rem;
-  }
-
-  .brand-display {
-    grid-template-columns: repeat(2, 1fr); /* 2 logos on tablet */
-    width: 100%;
-    max-width: 500px;
-    height: 220px;
-    gap: 1.5rem;
-    padding: 1.8rem;
-  }
-
-  .brand-logo-wrapper {
-    width: 110px;
-    height: 75px;
-  }
-
-  .brand-logo-wrapper img {
-    max-height: 65px;
-    max-width: 100px;
-  }
-
-  .brand-nav-btn {
-    width: 48px;
-    height: 48px;
-    font-size: 1.15rem;
+    padding: 3rem 1.5rem;
+    max-width: 90%;
   }
 }
 
-/* Large screens - 2 logos */
+/* Large screens */
 @media (min-width: 1025px) {
-  .brand-display {
-    grid-template-columns: repeat(2, 1fr); /* 2 logos on large screens */
-    max-width: 600px;
-    gap: 2rem;
+  .brands-carousel-section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
   }
 }
 
 /* Extra large screens */
 @media (min-width: 1400px) {
-  .brands-carousel-container {
-    height: 320px;
-    gap: 3rem;
-  }
-
-  .brand-display {
-    width: 650px;
-    height: 270px;
-    gap: 2.5rem;
-    padding: 2.5rem;
-  }
-
-  .brand-logo-wrapper {
-    width: 160px;
-    height: 100px;
-  }
-
-  .brand-logo-wrapper img {
-    max-height: 90px;
-    max-width: 150px;
-  }
-
-  .brand-nav-btn {
-    width: 55px;
-    height: 55px;
-    font-size: 1.3rem;
+  .brands-carousel-section {
+    padding: 5rem 3rem;
+    max-width: 1400px;
   }
 }
 
