@@ -270,12 +270,14 @@ function renderProducts(products) {
                 <div class="product-image">
                     <img src="${product.product_image}" alt="${
         product.product_name
-      }" style="width:100%;height:100%;object-fit:cover;" />
-                </div>                <div class="product-info">
+      }" style="width:100%;height:100%;object-fit:cover;" />                </div>                <div class="product-info">
                     <h3 class="product-name">${highlightedName}</h3>
-                    <div class="product-moq">${highlightedBrand} • MOQ: ${(
-                      product.product_moq || 1
-                    ).toLocaleString()}</div>                    <div class="product-price-line">
+                    <div class="product-brand-moq">
+                        <span class="product-brand">${highlightedBrand}</span>
+                        <span class="product-moq">MOQ: ${(
+                          product.product_moq || 1
+                        ).toLocaleString()}</span>
+                    </div>                    <div class="product-price-line">
                         ${product.product_discount ? `
                             <span class="product-price-original">₹${product.product_price}</span>
                             <span class="product-price-discounted">₹${Math.round(product.product_price * (1 - product.product_discount / 100))}</span>
@@ -305,14 +307,35 @@ function updateModalContent() {
     modalImage.src = product.product_image;
     modalImage.alt = product.product_name;
     document.getElementById("modalProductName").textContent =
-      product.product_name;
-    document.getElementById("modalProductCategory").textContent =
+      product.product_name;    document.getElementById("modalProductCategory").textContent =
       product.categories?.name || "Unknown Category";
     document.getElementById("modalProductBrand").textContent =
       product.brands?.name || "Unknown Brand";
-    document.getElementById(
-      "modalProductPrice"
-    ).textContent = `₹${product.product_price}`;
+
+    // Handle pricing with discount logic
+    const originalPriceElement = document.getElementById("modalProductPriceOriginal");
+    const discountedPriceElement = document.getElementById("modalProductPrice");
+    const discountBadge = document.getElementById("modalProductDiscount");
+
+    if (product.product_discount && product.product_discount > 0) {
+      // Show original price with strikethrough
+      originalPriceElement.textContent = `₹${product.product_price}`;
+      originalPriceElement.style.display = "inline-block";
+      
+      // Calculate and show discounted price
+      const discountedPrice = Math.round(product.product_price * (1 - product.product_discount / 100));
+      discountedPriceElement.textContent = `₹${discountedPrice}`;
+      discountedPriceElement.style.color = "#2563eb"; // Blue color for discounted price
+      
+      // Show discount badge
+      discountBadge.textContent = `${product.product_discount}% OFF`;
+      discountBadge.style.display = "inline-block";
+    } else {
+      // No discount - hide original price, show regular price
+      originalPriceElement.style.display = "none";
+      discountedPriceElement.textContent = `₹${product.product_price}`;
+      discountedPriceElement.style.color = "#1f2937"; // Regular color for normal price      discountBadge.style.display = "none";
+    }
 
     // Display individual product MOQ
     const productMOQ = product.product_moq || 1;
@@ -323,14 +346,8 @@ function updateModalContent() {
     const productId = currentProductIndex + 1;
     document.getElementById("modalProductId").textContent = productId;
 
-    // Handle discount
-    const discountBadge = document.getElementById("modalProductDiscount");
-    if (product.product_discount && product.product_discount > 0) {
-      discountBadge.textContent = `${product.product_discount}% OFF`;
-      discountBadge.style.display = "inline-block";
-    } else {
-      discountBadge.style.display = "none";
-    }
+    document.getElementById("modalProductDescription").textContent =
+      product.product_description || "No description available.";
 
     document.getElementById("modalProductDescription").textContent =
       product.product_description || "No description available.";
