@@ -391,23 +391,25 @@ function navigateProduct(direction) {
 }
 
 function updateModalNavigation() {
-  const prevBtn = document.querySelector(".product-modal-nav.prev");
-  const nextBtn = document.querySelector(".product-modal-nav.next");
+  const prevBtn = document.querySelector(".modal-nav-prev");
+  const nextBtn = document.querySelector(".modal-nav-next");
 
-  if (currentProductIndex <= 0) {
-    prevBtn.style.opacity = "0.5";
-    prevBtn.style.pointerEvents = "none";
-  } else {
-    prevBtn.style.opacity = "1";
-    prevBtn.style.pointerEvents = "auto";
-  }
+  if (prevBtn && nextBtn) {
+    if (currentProductIndex <= 0) {
+      prevBtn.style.opacity = "0.5";
+      prevBtn.style.pointerEvents = "none";
+    } else {
+      prevBtn.style.opacity = "1";
+      prevBtn.style.pointerEvents = "auto";
+    }
 
-  if (currentProductIndex >= currentProducts.length - 1) {
-    nextBtn.style.opacity = "0.5";
-    nextBtn.style.pointerEvents = "none";
-  } else {
-    nextBtn.style.opacity = "1";
-    nextBtn.style.pointerEvents = "auto";
+    if (currentProductIndex >= currentProducts.length - 1) {
+      nextBtn.style.opacity = "0.5";
+      nextBtn.style.pointerEvents = "none";
+    } else {
+      nextBtn.style.opacity = "1";
+      nextBtn.style.pointerEvents = "auto";
+    }
   }
 }
 
@@ -420,28 +422,32 @@ function setupModalTouchEvents() {
     return;
   }
 
-  const modalContent = document.querySelector(".product-modal-content");
-  const modalBody = document.querySelector(".product-modal-body");
+  const modalContent = document.querySelector(".modal-content-wrapper");
+  const modalBody = document.querySelector(".modal-info-section");
 
   // Add touch events to both modal content and body for better coverage
-  modalContent.addEventListener("touchstart", handleTouchStart, {
-    passive: true,
-  });
-  modalContent.addEventListener("touchend", handleTouchEnd, { passive: true });
-  modalContent.addEventListener("touchmove", handleTouchMove, {
-    passive: false,
-  });
+  if (modalContent) {
+    modalContent.addEventListener("touchstart", handleTouchStart, {
+      passive: true,
+    });
+    modalContent.addEventListener("touchend", handleTouchEnd, { passive: true });
+    modalContent.addEventListener("touchmove", handleTouchMove, {
+      passive: false,
+    });
+  }
 
-  modalBody.addEventListener("touchstart", handleTouchStart, { passive: true });
-  modalBody.addEventListener("touchend", handleTouchEnd, { passive: true });
-  modalBody.addEventListener("touchmove", handleTouchMove, { passive: false });
+  if (modalBody) {
+    modalBody.addEventListener("touchstart", handleTouchStart, { passive: true });
+    modalBody.addEventListener("touchend", handleTouchEnd, { passive: true });
+    modalBody.addEventListener("touchmove", handleTouchMove, { passive: false });
+  }
 
   touchEventsAttached = true;
 }
 
 function removeModalTouchEvents() {
-  const modalContent = document.querySelector(".product-modal-content");
-  const modalBody = document.querySelector(".product-modal-body");
+  const modalContent = document.querySelector(".modal-content-wrapper");
+  const modalBody = document.querySelector(".modal-info-section");
 
   if (modalContent) {
     modalContent.removeEventListener("touchstart", handleTouchStart);
