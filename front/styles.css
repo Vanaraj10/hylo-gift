@@ -258,17 +258,16 @@ small {
 
 /* Header Styles */
 .header {
-  background: rgb(246, 246, 246);
+  background: rgb(255, 255, 255);
   position: relative;
   overflow: hidden;
   color: #1a1a1a;
   padding: 1rem 0;
-  box-shadow: 0 8px 32px rgba(212, 172, 103, 0.3),
+  box-shadow: 0 8px 32px rgba(68, 61, 47, 0.3),
     0 4px 16px rgba(184, 148, 79, 0.2);
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 3px solid #d4ac67;
 }
 
 .header::before {
@@ -374,7 +373,7 @@ small {
 
 /* Search Section */
 .search-section {
-  background: var(--background);
+  background: #f2fffe;
   padding: 2rem 0;
   box-shadow: var(--shadow);
   border-bottom: 1px solid var(--border-color);
@@ -451,7 +450,7 @@ small {
 
 .search-input {
   width: 100%;
-  padding: 1rem 1rem 1rem 3rem;
+  padding: 1rem 1rem 1rem 1rem;
   border: 2px solid var(--border-color);
   border-radius: 8px;
   font-family: var(--font-family-primary);
@@ -459,8 +458,8 @@ small {
   font-weight: var(--font-normal);
   line-height: var(--leading-normal);
   transition: all 0.3s ease;
-  background: var(--background);
-  color: var(--text-primary);
+  background: rgba(128,182,26,0.7);
+  color: white;
 }
 
 .search-input:focus {
@@ -470,9 +469,9 @@ small {
 }
 
 .search-input::placeholder {
-  color: var(--text-light);
-  font-style: normal;
+  color: white;
   font-weight: var(--font-normal);
+  font-size: 0.5rem;
 }
 
 .filter-group {
@@ -495,11 +494,11 @@ small {
   padding: 12px 16px;
   border: 2px solid var(--border-color);
   border-radius: 8px;
-  background: var(--background);
+  background: rgba(128,182,26,0.7);
   font-family: var(--font-family-primary);
   font-size: 0.5rem;
   font-weight: var(--font-normal);
-  color: var(--text-primary);
+  color: white;
   transition: all 0.3s ease;
   cursor: pointer;
 }
@@ -513,7 +512,7 @@ small {
 /* Smaller font for category dropdown */
 #categoryFilter,
 .filter-select {
-  font-size: 0.85rem !important;
+  font-size: 0.6rem !important;
   padding: 0.5rem 0.75rem !important;
   min-height: 32px;
 }
@@ -530,12 +529,13 @@ small {
 .main-content {
   padding: 2rem 0;
   padding-top: 0.2rem;
+  background-color: #f2fffe;
 }
 
 /* Horizontal Delivery and MOQ Section */
 .delivery-moq-section {
   margin-bottom: 1.5rem;
-  background: var(--background);
+  background: #f2fffe;
   border-radius: 16px;
   padding: 2rem;
   box-shadow: var(--shadow);
@@ -547,7 +547,7 @@ small {
 }
 
 .delivery-section-horizontal h3 {
-  color: var(--text-primary);
+  color: rgba(61,156,168,255);
   font-size: 1.4rem;
   display: flex;
   align-items: center;
@@ -582,27 +582,27 @@ small {
 }
 
 .delivery-item-horizontal:nth-child(1) {
-  background: #d3fffc;
+  background: #e2fffd;
 }
 
 .delivery-item-horizontal:nth-child(2) {
-  background: #d2ffd2;
+  background: #e1ffe1;
 }
 
 .delivery-item-horizontal:nth-child(3) {
-  background: #ffe1d0;
+  background: #fff3eb;
 }
 
 .delivery-item-horizontal:nth-child(4) {
-  background: #ecdaff;
+  background: #f6edff;
 }
 
 .delivery-item-horizontal:nth-child(5) {
-  background: #ebffd1;
+  background: #f8ffee;
 }
 
 .delivery-item-horizontal:nth-child(6) {
-  background: #fff1ca;
+  background: #fffaeb;
 }
 
 .delivery-item-horizontal:hover {
@@ -634,14 +634,14 @@ small {
 
 .delivery-item-horizontal .delivery-content h4 {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 0.3rem;
 }
 
 .delivery-item-horizontal .delivery-content p {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--text-secondary);
 }
 
@@ -726,7 +726,7 @@ small {
 
 /* Product Section */
 .product-section {
-  background: var(--background);
+  background: #f2fffe;
   border-radius: 12px;
   padding: 0.7rem;
   box-shadow: var(--shadow);
@@ -742,10 +742,10 @@ small {
   gap: 1rem;
 }
 
-.section-header h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--text-primary);
+.section-header h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgba(61,156,168,255)
 }
 
 .results-count {
@@ -918,7 +918,7 @@ small {
 /* Why Us Section */
 .why-us-section {
   padding: 2.5rem 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background:#f2fffe;
   color: var(--text-primary);
   position: relative;
 }
@@ -939,12 +939,12 @@ small {
 
 .why-us-section h2 {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 2rem;
   position: relative;
   z-index: 1;
-  color: var(--text-primary);
+  color: rgba(61,156,168,255);
 }
 
 .features-grid {
@@ -966,19 +966,19 @@ small {
 
 /* Individual feature card colors - mild pastels */
 .feature-card:nth-child(1) {
-  background: #c8fffb;
+  background: #e2fffd;
 }
 
 .feature-card:nth-child(2) {
-  background: #bdffbd;
+  background: #dbffdb;
 }
 
 .feature-card:nth-child(3) {
-  background: #ffdeca;
+  background: #fff4ee;
 }
 
 .feature-card:nth-child(4) {
-  background: #e3c6ff;
+  background: #f5ecff;
 }
 
 .feature-card:hover {
@@ -1027,9 +1027,9 @@ small {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.feature-card h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
+.feature-card h4 {
+  font-size: 1rem;
+  font-weight: 800;
   margin-bottom: 0.75rem;
   color: var(--text-primary);
 }
@@ -1038,21 +1038,21 @@ small {
   font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.6;
-  font-weight: 500;
+  font-weight: 800;
 }
 
 /* Terms Section */
 .terms-section {
   padding: 2.5rem 0;
-  background: linear-gradient(135deg, #fefefe 0%, #f7fafc 100%);
+  background: #f2fffe
 }
 
 .terms-section h2 {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  color: var(--text-primary);
+  color: rgba(61,156,168,255);
 }
 
 .terms-grid {
@@ -1072,19 +1072,19 @@ small {
 
 /* Individual terms card colors - mild pastels */
 .terms-card:nth-child(1) {
-  background: #e7ffc8;
+  background: #f4ffe6;
 }
 
 .terms-card:nth-child(2) {
-  background: #fff0c7;
+  background: #fbf6e8;
 }
 
 .terms-card:nth-child(3) {
-  background: #c6e8ff;
+  background: #e9f6ff;
 }
 
 .terms-card:nth-child(4) {
-  background: #f8c4ff;
+  background: #fdeeff;
 }
 
 .terms-card:hover {
@@ -1148,9 +1148,9 @@ small {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.terms-card h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
+.terms-card h4 {
+  font-size: 1rem;
+  font-weight: 800;
   margin-bottom: 0.75rem;
   color: var(--text-primary);
 }
@@ -1159,12 +1159,12 @@ small {
   font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.6;
-  font-weight: 500;
+  font-weight: 800;
 }
 
 /* Footer */
 .footer {
-  background: var(--background-dark);
+  background:#285a61;
   color: white;
   padding: 3rem 0 1rem;
 }
@@ -1341,6 +1341,7 @@ small {
   align-items: center;
   margin: 2rem 0;
   gap: 1rem;
+  background-color: #f2fffe
 }
 
 .pagination {
@@ -1675,7 +1676,7 @@ small {
   }
   .why-us-section h2,
   .terms-section h2 {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     margin-bottom: 1.5rem;
   }
 
@@ -1778,7 +1779,7 @@ small {
     height: 180px;
   }  .why-us-section h2,
   .terms-section h2 {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
   }
 
   .why-us-section,
@@ -2863,7 +2864,7 @@ option {
 .brands-carousel-section {
   margin: 4rem auto;
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+  background: #f2fffe;
   border-radius: 24px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.8);
@@ -2892,10 +2893,10 @@ option {
   animation: shimmer 6s ease-in-out infinite;
 }
 
-.brands-carousel-section h3 {
-  color: var(--text-primary);
-  font-size: 2rem;
-  font-weight: 800;
+.brands-carousel-section h2 {
+  color: rgba(61,156,168,255);
+  font-size: 1.4rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -2907,7 +2908,7 @@ option {
   letter-spacing: -0.02em;
 }
 
-.brands-carousel-section h3 i {
+.brands-carousel-section h2 i {
   color: var(--accent-color);
   font-size: 1.8rem;
   animation: pulse 2s ease-in-out infinite;
@@ -3081,13 +3082,13 @@ option {
     max-width: 95%;
   }
 
-  .brands-carousel-section h3 {
-    font-size: 1.6rem;
+  .brands-carousel-section h2 {
+    font-size: 1.2rem;
     margin-bottom: 1.5rem;
     gap: 0.5rem;
   }
 
-  .brands-carousel-section h3 i {
+  .brands-carousel-section h2 i {
     font-size: 1.4rem;
   }
 
@@ -3121,12 +3122,12 @@ option {
     max-width: 98%;
   }
 
-  .brands-carousel-section h3 {
-    font-size: 1.4rem;
+  .brands-carousel-section h2 {
+    font-size: 1.2rem;
     margin-bottom: 1.2rem;
     gap: 0.4rem;
   }
-  .brands-carousel-section h3 i {
+  .brands-carousel-section h2 i {
     font-size: 1.2rem;
   }
 }
