@@ -2481,8 +2481,7 @@ select:focus {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
 }
 
 .modal-title {
@@ -2684,6 +2683,25 @@ select:focus {
   border-radius: 12px;
   padding: 1rem;
   border: 1px solid #e5e7eb;
+}
+
+.description-wrapper{
+  background-color: rgb(239, 239, 239);
+  padding: 0.2rem;
+  padding-left: 0.5rem;
+  border-radius: 8px;
+}
+
+.description-wrapper span {
+  font-size: small;
+  font-family: 'Courier New', Courier, monospace;
+    color: #4a505b;
+}
+
+.description-wrapper p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #242424;
 }
 
 .description-header {
