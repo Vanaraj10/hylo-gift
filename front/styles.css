@@ -913,11 +913,6 @@ small {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(215, 53, 39, 0.02) 0%,
-    rgba(43, 108, 176, 0.02) 100%
-  );
 }
 .why-us-section .container {
   padding: 0 10px;
@@ -2396,12 +2391,11 @@ select:focus {
 }
 
 .id-number {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 0.25rem 0.6rem;
+  color: rgb(0, 0, 0);
   border-radius: 8px;
   font-weight: 700;
   font-family: 'Courier New', monospace;
+  place-self: right;
 }
 
 /* Price & MOQ Container */
