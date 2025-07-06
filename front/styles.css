@@ -88,7 +88,7 @@ body {
   font-weight: var(--font-normal);
   line-height: var(--leading-normal);
   color: var(--text-primary);
-  background-color: var(--background-light);
+  background-color: #f2fffe;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -515,9 +515,10 @@ small {
 
 /* Main Content */
 .main-content {
-  padding: 2rem 0;
+  padding: 0.3rem 0;
   padding-top: 0.2rem;
   background-color: #f2fffe;
+  padding-bottom: 0;
 }
 
 /* Horizontal Delivery and MOQ Section */
@@ -529,6 +530,7 @@ small {
 
 .delivery-section-horizontal {
   margin-bottom: 3rem;
+  margin-top: 2rem;
 }
 
 .delivery-section-horizontal h3 {
@@ -539,6 +541,7 @@ small {
   gap: 0.5rem;
   margin-bottom: 1.5rem;
   text-align: center;
+  margin-top: 1.5rem;
   justify-content: center;
 }
 
@@ -1998,6 +2001,7 @@ select:focus {
 
   .main-content {
     padding: 0;
+    padding-bottom: 0;
   }
 
   .product-card {
@@ -2262,6 +2266,34 @@ select:focus {
   background: #ffffff;
   transform: scale(1.1);
   color: #ef4444;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Share Button */
+.modal-share-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 4rem;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 50%;
+  color: #374151;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal-share-btn:hover {
+  background: #ffffff;
+  transform: scale(1.1);
+  color: #3b82f6;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -2657,10 +2689,15 @@ select:focus {
     border-radius: 12px;
     margin: 0.5rem;
   }
-  
-  .modal-close-btn {
+    .modal-close-btn {
     top: 1rem;
     right: 1rem;
+    width: 36px;
+    height: 36px;
+  }
+    .modal-share-btn {
+    top: 1rem;
+    right: 3.5rem;
     width: 36px;
     height: 36px;
   }
