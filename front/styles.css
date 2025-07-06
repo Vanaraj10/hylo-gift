@@ -2654,119 +2654,130 @@ option {
     animation: pulse 2s ease-in-out infinite;
 }
 
-.brands-carousel-container {
+.brands-marquee-container {
+    width: 100%;
+    overflow: hidden;
     position: relative;
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    margin: 0 auto 2rem auto;
+    padding: 1.5rem 0;
+    max-width: 100%;
+}
+
+.brands-marquee {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    height: 280px;
-    margin-bottom: 2rem;
-    overflow: hidden;
-    width: 100%;
+    gap: 3rem;
+    width: max-content;
+    animation: marquee-scroll 20s linear infinite;
 }
 
-/* Brand display container - responsive grid */
-.brand-display {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 logos on large screens */
-    gap: 2rem;
-    width: 100%;
-    max-width: 600px;
-    min-width: 280px;
-    height: 240px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.1),
-        0 5px 15px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    z-index: 2;
-    padding: 2rem;
-    margin: 0 auto;
+.brands-marquee:hover {
+    animation-play-state: paused;
 }
 
-.brand-display:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 
-        0 25px 50px rgba(0, 0, 0, 0.15),
-        0 10px 25px rgba(0, 0, 0, 0.08);
+@keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
-/* Individual brand item */
+/* Individual brand item for marquee */
 .brand-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.5rem;
     background: white;
     border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    opacity: 0;
-    transform: translateY(20px);
+    padding: 1rem 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+    min-width: 120px;
+    min-height: 80px;
+    flex-shrink: 0;
 }
 
-.brand-item.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.brand-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Brand logo wrapper */
+/* Brand logo wrapper for marquee */
 .brand-logo-wrapper {
-    width: 140px;
-    height: 90px;
+    width: 100px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 .brand-logo-wrapper img {
-    max-height: 80px;
-    max-width: 130px;
+    max-height: 55px;
+    max-width: 90px;
     object-fit: contain;
-    border-radius: 12px;
-    filter: 
-        drop-shadow(0 4px 15px rgba(0, 0, 0, 0.1))
-        saturate(1.1)
-        contrast(1.05);
-    transition: all 0.3s ease;
+    border-radius: 10px;
 }
 
-.brand-item:hover .brand-logo-wrapper img {
-    filter: 
-        drop-shadow(0 6px 20px rgba(0, 0, 0, 0.15))
-        saturate(1.2)
-        contrast(1.1);
-    transform: scale(1.05);
-}
-
-/* Brand name label */
+/* Brand name label for marquee */
 .brand-name-label {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--text-secondary);
     text-align: center;
-    line-height: 1.2;
-    letter-spacing: 0.02em;
     text-transform: uppercase;
-    transition: color 0.3s ease;
 }
 
-.brand-item:hover .brand-name-label {
-    color: var(--accent-color);
+/* Responsive marquee adjustments */
+@media (max-width: 768px) {
+    .brands-marquee-container {
+        max-width: 98vw;
+        padding: 1rem 0;
+    }
+    .brands-marquee {
+        gap: 1.5rem;
+        animation-duration: 15s;
+    }
+    .brand-item {
+        min-width: 90px;
+        min-height: 60px;
+        padding: 0.7rem 1rem;
+    }
+    .brand-logo-wrapper {
+        width: 70px;
+        height: 40px;
+    }
+    .brand-logo-wrapper img {
+        max-height: 35px;
+        max-width: 60px;
+    }
+    .brand-name-label {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .brands-marquee-container {
+        max-width: 100vw;
+        padding: 0.5rem 0;
+    }
+    .brands-marquee {
+        gap: 1rem;
+        animation-duration: 12s;
+    }
+    .brand-item {
+        min-width: 70px;
+        min-height: 50px;
+        padding: 0.5rem 0.7rem;
+    }
+    .brand-logo-wrapper {
+        width: 50px;
+        height: 30px;
+    }
+    .brand-logo-wrapper img {
+        max-height: 25px;
+        max-width: 45px;
+    }
+    .brand-name-label {
+        font-size: 0.6rem;
+    }
 }
 
 /* Navigation buttons */

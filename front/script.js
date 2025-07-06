@@ -67,9 +67,8 @@ async function loadCategories() {
   }
 }
 
-// Brand carousel variables
+// Brand marquee variables
 let brandsList = [];
-let currentBrandIndex = 0;
 
 async function loadBrandsCarousel() {
     try {
@@ -84,7 +83,7 @@ async function loadBrandsCarousel() {
         brandsList = brands.filter(brand => brand.logo);
         
         if (brandsList.length > 0) {
-            renderBrandCarousel();
+            renderBrandMarquee();
             
             // Show the carousel section
             const carouselSection = document.querySelector('.brands-carousel-section');
@@ -108,22 +107,16 @@ async function loadBrandsCarousel() {
     }
 }
 
-function renderBrandCarousel() {
-    const brandDisplay = document.getElementById('brandDisplay');
-    if (!brandDisplay || brandsList.length === 0) return;
+function renderBrandMarquee() {
+    const marquee = document.getElementById('brandsMarquee');
+    if (!marquee || brandsList.length === 0) return;
     
-    // Determine how many logos to show based on screen size
-    const isMobile = window.innerWidth <= 768;
-    const logosPerSlide = isMobile ? 1 : 2;
+    marquee.innerHTML = '';
     
-    // Clear existing content
-    brandDisplay.innerHTML = '';
+    // Duplicate the list for seamless looping
+    const fullList = brandsList.concat(brandsList);
     
-    // Create brand items for current slide
-    for (let i = 0; i < logosPerSlide && (currentBrandIndex + i) < brandsList.length; i++) {
-        const brandIndex = currentBrandIndex + i;
-        const brand = brandsList[brandIndex];
-        
+    for (const brand of fullList) {
         const brandItem = document.createElement('div');
         brandItem.className = 'brand-item';
         brandItem.innerHTML = `
@@ -132,87 +125,9 @@ function renderBrandCarousel() {
             </div>
             <span class="brand-name-label">${brand.name}</span>
         `;
-        
-        brandDisplay.appendChild(brandItem);
-        
-        // Add animation delay for staggered effect
-        setTimeout(() => {
-            brandItem.classList.add('active');
-        }, i * 100);
-    }
-    
-    updateNavigationButtons();
-}
-
-function navigateBrand(direction) {
-    if (brandsList.length === 0) return;
-    
-    // Determine how many logos to show based on screen size
-    const isMobile = window.innerWidth <= 768;
-    const logosPerSlide = isMobile ? 1 : 2;
-    
-    // Calculate new index
-    const previousIndex = currentBrandIndex;
-    currentBrandIndex += direction * logosPerSlide;
-    
-    // Handle wrapping
-    if (currentBrandIndex >= brandsList.length) {
-        currentBrandIndex = 0;
-    } else if (currentBrandIndex < 0) {
-        currentBrandIndex = Math.max(0, brandsList.length - logosPerSlide);
-    }
-    
-    // Add transition effect
-    const brandDisplay = document.getElementById('brandDisplay');
-    if (brandDisplay) {
-        const currentItems = brandDisplay.querySelectorAll('.brand-item');
-        
-        // Fade out current items
-        currentItems.forEach((item, index) => {
-            setTimeout(() => {
-                item.classList.remove('active');
-            }, index * 50);
-        });
-        
-        // Render new items after transition
-        setTimeout(() => {
-            renderBrandCarousel();
-        }, 300);
+        marquee.appendChild(brandItem);
     }
 }
-
-function updateNavigationButtons() {
-    const prevBtn = document.querySelector('.brand-prev');
-    const nextBtn = document.querySelector('.brand-next');
-    
-    if (prevBtn && nextBtn) {
-        const isMobile = window.innerWidth <= 768;
-        const logosPerSlide = isMobile ? 1 : 2;
-        
-        // Always enable buttons since we loop around
-        prevBtn.disabled = false;
-        nextBtn.disabled = false;
-        
-        // If we have fewer brands than logos per slide, disable both buttons
-        if (brandsList.length <= logosPerSlide) {
-            prevBtn.disabled = true;
-            nextBtn.disabled = true;
-        }
-    }
-}
-
-// Add window resize listener to handle responsive changes
-window.addEventListener('resize', () => {
-    // Debounce resize events
-    clearTimeout(window.resizeTimer);
-    window.resizeTimer = setTimeout(() => {
-        if (brandsList.length > 0) {
-            // Reset to start and re-render
-            currentBrandIndex = 0;
-            renderBrandCarousel();
-        }
-    }, 250);
-});
 
 async function fetchProducts(page = 1, search = "", category = "") {
   try {
