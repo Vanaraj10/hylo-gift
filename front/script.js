@@ -263,8 +263,7 @@ function renderProducts(products) {
       const highlightedBrand = searchTerm
         ? highlightText(brandName, searchTerm)
         : brandName;
-      
-      return `
+        return `
             <div class="product-card" data-category="${
               product.category_id
             }" onclick="openProductModal(${index})">
@@ -272,21 +271,14 @@ function renderProducts(products) {
                     <img src="${product.product_image}" alt="${
         product.product_name
       }" style="width:100%;height:100%;object-fit:cover;" />
-                </div>
-                <div class="product-info">
+                </div>                <div class="product-info">
                     <h3 class="product-name">${highlightedName}</h3>
-                    <div class="product-meta">
-                  
-                        <span class="product-brand">${highlightedBrand}</span>
-                    </div>                    <div class="product-price-moq">
-                        <div class="product-price">₹${
-                          product.product_price
-                        }</div>
-                        <div class="product-moq">
-                            <span>MOQ: ${(
-                              product.product_moq || 1
-                            ).toLocaleString()}</span>
-                        </div>
+                    <div class="product-moq">${highlightedBrand} • MOQ: ${(
+                      product.product_moq || 1
+                    ).toLocaleString()}</div>
+                    <div class="product-price-line">
+                        <span class="product-price">₹${product.product_price}</span>
+                        ${product.product_discount ? `<span class="product-offer">${product.product_discount}% OFF</span>` : ''}
                     </div>
                 </div>
             </div>
