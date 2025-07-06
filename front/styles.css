@@ -2681,12 +2681,10 @@ select:focus {
 .description-container {
   background: #f9fafb;
   border-radius: 12px;
-  padding: 1rem;
   border: 1px solid #e5e7eb;
 }
 
 .description-wrapper{
-  background-color: rgb(239, 239, 239);
   padding: 0.2rem;
   padding-left: 0.5rem;
   border-radius: 8px;
@@ -2694,13 +2692,17 @@ select:focus {
 
 .description-wrapper span {
   font-size: small;
+  background-color: rgb(226, 226, 226);
+  padding: 0.3rem;
+  border-radius: 8px;
   font-family: 'Courier New', Courier, monospace;
-    color: #4a505b;
+    color: #000000;
 }
 
 .description-wrapper p {
-  margin: 0;
+  margin-left: 0.2rem;
   font-size: 0.8rem;
+  margin-top: 0.2rem;
   color: #242424;
 }
 
