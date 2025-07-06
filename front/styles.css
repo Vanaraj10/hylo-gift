@@ -258,17 +258,7 @@ small {
 
 /* Header Styles */
 .header {
-  background: linear-gradient(
-    135deg,
-    #1a1a1a 0%,
-    #2c2520 15%,
-    #4a3d28 30%,
-    #6b5532 45%,
-    #8b6f3f 60%,
-    #b8944f 75%,
-    #d4ac67 90%,
-    #e6c78a 100%
-  );
+  background: rgb(246, 246, 246);
   position: relative;
   overflow: hidden;
   color: #1a1a1a;
@@ -288,27 +278,9 @@ small {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(230, 199, 138, 0.4) 50%,
-    transparent 100%
-  );
-  animation: shimmerGold 3s ease-in-out infinite;
   z-index: 1;
 }
 
-@keyframes shimmerGold {
-  0% {
-    left: -100%;
-  }
-  50% {
-    left: 100%;
-  }
-  100% {
-    left: 100%;
-  }
-}
 
 .header-content {
   display: flex;
@@ -316,7 +288,7 @@ small {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .logo-section {
@@ -376,14 +348,14 @@ small {
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .contact-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: rgb(255, 255, 255);
+  color: rgb(36, 36, 36);
   font-family: var(--font-family-primary);
   font-size: var(--text-sm);
   font-weight: var(--font-normal);
@@ -604,85 +576,52 @@ small {
   background: #efefef;
   border-radius: 12px;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
+  border: none;
   min-height: 220px;
   justify-content: space-between;
 }
 
-/* Individual delivery card colors - soft pastels without gradients */
 .delivery-item-horizontal:nth-child(1) {
-  background: var(--light-cyan);
-  border-color: #4fd1c7;
+  background: #d3fffc;
 }
 
 .delivery-item-horizontal:nth-child(2) {
-  background: var(--pale-mint-green);
-  border-color: #68d391;
+  background: #d2ffd2;
 }
 
 .delivery-item-horizontal:nth-child(3) {
-  background: var(--light-peach);
-  border-color: #f6ad55;
+  background: #ffe1d0;
 }
 
 .delivery-item-horizontal:nth-child(4) {
-  background: var(--pale-lavender);
-  border-color: #b794f6;
+  background: #ecdaff;
 }
 
 .delivery-item-horizontal:nth-child(5) {
-  background: var(--pale-green);
-  border-color: #84cc16;
+  background: #ebffd1;
 }
 
 .delivery-item-horizontal:nth-child(6) {
-  background: var(--light-apricot);
-  border-color: #f59e0b;
+  background: #fff1ca;
 }
 
 .delivery-item-horizontal:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  border-color: var(--accent-color);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .delivery-item-horizontal .delivery-icon {
   width: 60px;
   height: 60px;
-  background: var(--gradient-primary);
+  background: #f8f9fa;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #6b7280;
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  box-shadow: var(--shadow);
-}
-
-/* Individual delivery icon colors to match card themes */
-.delivery-item-horizontal:nth-child(1) .delivery-icon {
-  background: linear-gradient(135deg, #4fd1c7 0%, #319795 100%);
-}
-
-.delivery-item-horizontal:nth-child(2) .delivery-icon {
-  background: linear-gradient(135deg, #68d391 0%, #38a169 100%);
-}
-
-.delivery-item-horizontal:nth-child(3) .delivery-icon {
-  background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
-}
-
-.delivery-item-horizontal:nth-child(4) .delivery-icon {
-  background: linear-gradient(135deg, #b794f6 0%, #805ad5 100%);
-}
-
-.delivery-item-horizontal:nth-child(5) .delivery-icon {
-  background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
-}
-
-.delivery-item-horizontal:nth-child(6) .delivery-icon {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .delivery-item-horizontal .delivery-content {
@@ -716,30 +655,9 @@ small {
   margin-bottom: 1rem;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: var(--shadow);
-  background: var(--background);
-  border: 2px solid var(--border-light);
-}
-
-/* Individual delivery time image backgrounds to match card themes */
-.delivery-item-horizontal:nth-child(1) .delivery-time-image {
-  background: linear-gradient(135deg, #4fd1c7 0%, #319795 100%);
-  border-color: #4fd1c7;
-}
-
-.delivery-item-horizontal:nth-child(2) .delivery-time-image {
-  background: linear-gradient(135deg, #68d391 0%, #38a169 100%);
-  border-color: #68d391;
-}
-
-.delivery-item-horizontal:nth-child(3) .delivery-time-image {
-  background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
-  border-color: #f6ad55;
-}
-
-.delivery-item-horizontal:nth-child(4) .delivery-time-image {
-  background: linear-gradient(135deg, #b794f6 0%, #805ad5 100%);
-  border-color: #b794f6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background: #f8f9fa;
+  border: none;
 }
 
 .time-icon {
@@ -1040,37 +958,32 @@ small {
   border-radius: 16px;
   text-align: center;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
+  border: none;
   position: relative;
   z-index: 1;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Individual feature card colors */
+/* Individual feature card colors - mild pastels */
 .feature-card:nth-child(1) {
-  background: linear-gradient(135deg, var(--light-cyan) 0%, var(--light-cyan-dark) 100%);
-  border-color: #4fd1c7;
+  background: #c8fffb;
 }
 
 .feature-card:nth-child(2) {
-  background: linear-gradient(135deg, var(--pale-mint-green) 0%, var(--pale-mint-green-dark) 100%);
-  border-color: #68d391;
+  background: #bdffbd;
 }
 
 .feature-card:nth-child(3) {
-  background: linear-gradient(135deg, var(--light-peach) 0%, var(--light-peach-dark) 100%);
-  border-color: #f6ad55;
+  background: #ffdeca;
 }
 
 .feature-card:nth-child(4) {
-  background: linear-gradient(135deg, var(--pale-lavender) 0%, var(--pale-lavender-dark) 100%);
-  border-color: #b794f6;
+  background: #e3c6ff;
 }
 
 .feature-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  border-color: var(--accent-color);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .feature-icon {
@@ -1082,34 +995,36 @@ small {
   justify-content: center;
   margin: 0 auto 1rem;
   font-size: 1.8rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  background: #f8f9fa;
+  color: #6b7280;
 }
 
-/* Individual feature icon colors */
+/* Individual feature icon colors - subtle themed colors */
 .feature-card:nth-child(1) .feature-icon {
-  background: linear-gradient(135deg, #4fd1c7 0%, #319795 100%);
-  color: white;
+  background: #e6fffa;
+  color: #0d9488;
 }
 
 .feature-card:nth-child(2) .feature-icon {
-  background: linear-gradient(135deg, #68d391 0%, #38a169 100%);
-  color: white;
+  background: #f0fff4;
+  color: #059669;
 }
 
 .feature-card:nth-child(3) .feature-icon {
-  background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
-  color: white;
+  background: #fff5ee;
+  color: #ea580c;
 }
 
 .feature-card:nth-child(4) .feature-icon {
-  background: linear-gradient(135deg, #b794f6 0%, #805ad5 100%);
-  color: white;
+  background: #faf5ff;
+  color: #9333ea;
 }
 
 .feature-card:hover .feature-icon {
-  transform: scale(1.1) rotateY(15deg);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .feature-card h3 {
@@ -1151,35 +1066,30 @@ small {
   border-radius: 16px;
   text-align: center;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
+  border: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Individual terms card colors */
+/* Individual terms card colors - mild pastels */
 .terms-card:nth-child(1) {
-  background: linear-gradient(135deg, var(--pale-green) 0%, var(--pale-green-dark) 100%);
-  border-color: #84cc16;
+  background: #e7ffc8;
 }
 
 .terms-card:nth-child(2) {
-  background: linear-gradient(135deg, var(--light-apricot) 0%, var(--light-apricot-dark) 100%);
-  border-color: #f59e0b;
+  background: #fff0c7;
 }
 
 .terms-card:nth-child(3) {
-  background: linear-gradient(135deg, var(--sky-blue) 0%, var(--sky-blue-dark) 100%);
-  border-color: #0ea5e9;
+  background: #c6e8ff;
 }
 
 .terms-card:nth-child(4) {
-  background: linear-gradient(135deg, var(--light-pink) 0%, var(--light-pink-dark) 100%);
-  border-color: #ec4899;
+  background: #f8c4ff;
 }
 
 .terms-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  border-color: var(--accent-color);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .terms-icon {
@@ -1196,21 +1106,41 @@ small {
   transition: all 0.3s ease;
 }
 
-/* Individual terms icon colors */
+/* Terms icon styling with subtle themed colors */
+.terms-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+  color: #6b7280;
+}
+
+/* Individual terms icon colors - subtle themed colors */
 .terms-card:nth-child(1) .terms-icon {
-  background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
+  background: #f7fee7;
+  color: #65a30d;
 }
 
 .terms-card:nth-child(2) .terms-icon {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: #fffbf0;
+  color: #d97706;
 }
 
 .terms-card:nth-child(3) .terms-icon {
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  background: #f0f9ff;
+  color: #0284c7;
 }
 
 .terms-card:nth-child(4) .terms-icon {
-  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  background: #fdf2f8;
+  color: #db2777;
 }
 
 .terms-card:hover .terms-icon {
