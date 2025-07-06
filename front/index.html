@@ -302,62 +302,67 @@
           <div class="modal-image-section">
             <div class="modal-image-container">
               <img id="modalProductImage" src="" alt="" class="modal-product-image" />
-              <div class="image-overlay">
-                <div class="image-zoom-hint">
-                  <i class="fas fa-search-plus"></i>
-                  <span>Click to zoom</span>
-                </div>
-              </div>
             </div>
           </div>
 
           <!-- Info Section -->
           <div class="modal-info-section">
-            <div class="modal-info-header">
-              <h1 id="modalProductName" class="modal-product-title"></h1>
-              <div class="modal-product-id">
-                <span class="id-label">ID</span>
-                <span id="modalProductId" class="id-value"></span>
+            <!-- Header -->
+            <div class="modal-header">
+              <h2 id="modalProductName" class="modal-title"></h2>
+              <div class="modal-meta-row">
+                <div class="meta-badges">
+                  <span id="modalProductCategory" class="meta-badge category-badge"></span>
+                  <span id="modalProductBrand" class="meta-badge brand-badge"></span>
+                </div>
+                <div class="modal-id-badge">
+                  <span>ID:</span>
+                  <span id="modalProductId" class="id-number"></span>
+                </div>
               </div>
             </div>
 
-            <div class="modal-product-meta">
-              <div class="meta-tags">
-                <span id="modalProductCategory" class="meta-tag category-tag"></span>
-                <span id="modalProductBrand" class="meta-tag brand-tag"></span>
+            <!-- Price & MOQ Container -->
+            <div class="price-moq-container">
+              <div class="price-box">
+                <div class="price-label">Price</div>
+                <div class="price-value">
+                  <span id="modalProductPrice" class="price-amount"></span>
+                  <span id="modalProductDiscount" class="discount-badge"></span>
+                </div>
               </div>
-              <button onclick="shareProduct()" class="modal-share-btn" title="Share Product">
-                <i class="fas fa-share-alt"></i>
-              </button>
-            </div>
-
-            <div class="modal-pricing-section">
-              <div class="price-container">
-                <span id="modalProductPrice" class="modal-price"></span>
-                <span id="modalProductDiscount" class="modal-discount-badge"></span>
-              </div>
-              <div class="moq-container">
-                <span class="moq-label">MOQ</span>
-                <span id="modalProductMOQ" class="moq-value"></span>
-                <span class="moq-unit">Units</span>
+              <div class="moq-box">
+                <div class="moq-label">MOQ</div>
+                <div class="moq-value">
+                  <span id="modalProductMOQ" class="moq-amount"></span>
+                  <span class="moq-unit">Units</span>
+                </div>
               </div>
             </div>
 
-            <div class="modal-description-section">
-              <h3 class="section-title">Product Details</h3>
+            <!-- Description -->
+            <div class="description-container">
+              <div class="description-header">
+                <i class="fas fa-info-circle"></i>
+                <span>Product Details</span>
+              </div>
               <div class="description-content">
-                <p id="modalProductDescription" class="modal-description"></p>
+                <p id="modalProductDescription" class="description-text"></p>
               </div>
             </div>
 
-            <div class="modal-action-section">
-              <button class="modal-action-btn primary-btn">
+            <!-- Action Buttons -->
+            <div class="action-buttons-container">
+              <button class="action-btn primary-action">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Request Quote</span>
               </button>
-              <button class="modal-action-btn secondary-btn">
+              <button class="action-btn secondary-action">
                 <i class="fas fa-phone"></i>
                 <span>Call Now</span>
+              </button>
+              <button onclick="shareProduct()" class="action-btn share-action" title="Share Product">
+                <i class="fas fa-share-alt"></i>
               </button>
             </div>
           </div>

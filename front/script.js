@@ -131,7 +131,6 @@ function renderBrandMarquee() {
 
 async function fetchProducts(page = 1, search = "", category = "") {
   try {
-    // Always get all products first to apply custom sorting
     let query = supabaseClient
       .from("products")
       .select(
