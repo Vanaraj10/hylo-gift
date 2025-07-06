@@ -609,10 +609,40 @@ small {
   justify-content: space-between;
 }
 
+/* Individual delivery card colors - soft pastels without gradients */
+.delivery-item-horizontal:nth-child(1) {
+  background: var(--light-cyan);
+  border-color: #4fd1c7;
+}
+
+.delivery-item-horizontal:nth-child(2) {
+  background: var(--pale-mint-green);
+  border-color: #68d391;
+}
+
+.delivery-item-horizontal:nth-child(3) {
+  background: var(--light-peach);
+  border-color: #f6ad55;
+}
+
+.delivery-item-horizontal:nth-child(4) {
+  background: var(--pale-lavender);
+  border-color: #b794f6;
+}
+
+.delivery-item-horizontal:nth-child(5) {
+  background: var(--pale-green);
+  border-color: #84cc16;
+}
+
+.delivery-item-horizontal:nth-child(6) {
+  background: var(--light-apricot);
+  border-color: #f59e0b;
+}
+
 .delivery-item-horizontal:hover {
-  background: var(--background);
-  transform: translateY(-5px);
-  box-shadow: var(--shadow);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
   border-color: var(--accent-color);
 }
 
@@ -628,6 +658,31 @@ small {
   font-size: 1.2rem;
   margin-bottom: 1rem;
   box-shadow: var(--shadow);
+}
+
+/* Individual delivery icon colors to match card themes */
+.delivery-item-horizontal:nth-child(1) .delivery-icon {
+  background: linear-gradient(135deg, #4fd1c7 0%, #319795 100%);
+}
+
+.delivery-item-horizontal:nth-child(2) .delivery-icon {
+  background: linear-gradient(135deg, #68d391 0%, #38a169 100%);
+}
+
+.delivery-item-horizontal:nth-child(3) .delivery-icon {
+  background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+}
+
+.delivery-item-horizontal:nth-child(4) .delivery-icon {
+  background: linear-gradient(135deg, #b794f6 0%, #805ad5 100%);
+}
+
+.delivery-item-horizontal:nth-child(5) .delivery-icon {
+  background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
+}
+
+.delivery-item-horizontal:nth-child(6) .delivery-icon {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
 }
 
 .delivery-item-horizontal .delivery-content {
@@ -664,6 +719,27 @@ small {
   box-shadow: var(--shadow);
   background: var(--background);
   border: 2px solid var(--border-light);
+}
+
+/* Individual delivery time image backgrounds to match card themes */
+.delivery-item-horizontal:nth-child(1) .delivery-time-image {
+  background: linear-gradient(135deg, #4fd1c7 0%, #319795 100%);
+  border-color: #4fd1c7;
+}
+
+.delivery-item-horizontal:nth-child(2) .delivery-time-image {
+  background: linear-gradient(135deg, #68d391 0%, #38a169 100%);
+  border-color: #68d391;
+}
+
+.delivery-item-horizontal:nth-child(3) .delivery-time-image {
+  background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+  border-color: #f6ad55;
+}
+
+.delivery-item-horizontal:nth-child(4) .delivery-time-image {
+  background: linear-gradient(135deg, #b794f6 0%, #805ad5 100%);
+  border-color: #b794f6;
 }
 
 .time-icon {
