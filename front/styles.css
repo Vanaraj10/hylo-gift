@@ -2513,6 +2513,7 @@ select:focus {
 .modal-brand-category-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
   flex-direction: row;
   flex-wrap: wrap;
@@ -2685,8 +2686,6 @@ select:focus {
 }
 
 .description-wrapper{
-  padding: 0.2rem;
-  padding-left: 0.5rem;
   border-radius: 8px;
 }
 
@@ -2694,6 +2693,7 @@ select:focus {
   font-size: small;
   background-color: rgb(226, 226, 226);
   padding: 0.3rem;
+  display: block;
   border-radius: 8px;
   font-family: 'Courier New', Courier, monospace;
     color: #000000;
