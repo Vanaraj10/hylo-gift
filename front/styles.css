@@ -251,9 +251,9 @@ small {
 }
 
 .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 10px;
+  width: 100%;
+  margin: 0;
+  padding: 0 0px;
 }
 
 /* Header Styles */
@@ -263,7 +263,7 @@ small {
   overflow: hidden;
   color: #1a1a1a;
   padding: 1rem 0;
-  box-shadow: 0 8px 32px rgba(68, 61, 47, 0.3),
+  box-shadow: 0 1px 5px rgba(68, 61, 47, 0.3),
     0 4px 16px rgba(184, 148, 79, 0.2);
   position: sticky;
   top: 0;
@@ -371,13 +371,11 @@ small {
 .contact-item span {
   font-weight: var(--font-medium);
 }
-
+ /* background: #f2fffe; */
 /* Search Section */
 .search-section {
-  background: #f2fffe;
-  padding: 2rem 0;
-  box-shadow: var(--shadow);
-  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(180deg,#f2fffe,#f5fffe);
+  padding: 2rem 20rem;
 }
 
 .search-wrapper {
@@ -435,23 +433,12 @@ small {
 .search-input-wrapper {
   position: relative;
   flex: 1;
-  max-width: 400px;
   min-width: 300px;
-}
-
-.search-icon {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-light);
-  font-size: 1.1rem;
-  z-index: 1;
 }
 
 .search-input {
   width: 100%;
-  padding: 1rem 1rem 1rem 1rem;
+  padding: 1rem;
   border: 2px solid var(--border-color);
   border-radius: 8px;
   font-family: var(--font-family-primary);
@@ -459,8 +446,8 @@ small {
   font-weight: var(--font-normal);
   line-height: var(--leading-normal);
   transition: all 0.3s ease;
-  background: rgba(128,182,26,0.7);
-  color: white;
+  background: rgba(255, 255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .search-input:focus {
@@ -470,7 +457,7 @@ small {
 }
 
 .search-input::placeholder {
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: var(--font-normal);
   font-size: 0.5rem;
 }
@@ -495,11 +482,11 @@ small {
   padding: 14px 16px;
   border: 2px solid var(--border-color);
   border-radius: 8px;
-  background: rgba(128,182,26,0.7);
+  background: rgba(255, 255, 255, 0.7);
   font-family: var(--font-family-primary);
   font-size: 0.5rem;
   font-weight: var(--font-normal);
-  color: white;
+  color: rgb(0, 0, 0);
   transition: all 0.3s ease;
   cursor: pointer;
 }
@@ -537,10 +524,7 @@ small {
 .delivery-moq-section {
   margin-bottom: 1.5rem;
   background: #f2fffe;
-  border-radius: 16px;
   padding: 2rem;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border-light);
 }
 
 .delivery-section-horizontal {
@@ -727,11 +711,9 @@ small {
 
 /* Product Section */
 .product-section {
-  background: #f2fffe;
-  border-radius: 12px;
-  padding: 0.7rem;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border-light);
+  background: white;
+  padding: 0.7rem 0.8rem;
+  padding: 2rem;
 }
 
 .section-header {
@@ -818,10 +800,10 @@ small {
 
 .product-name {
   margin-bottom: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   color: #333;
-  line-height: 1.3;
+  line-height: 1;
 }
 
 .product-name mark,
@@ -937,6 +919,9 @@ small {
     rgba(43, 108, 176, 0.02) 100%
   );
 }
+.why-us-section .container {
+  padding: 0 10px;
+}
 
 .why-us-section h2 {
   text-align: center;
@@ -1036,7 +1021,7 @@ small {
 }
 
 .feature-card p {
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
   line-height: 1.6;
   font-weight: 800;
@@ -1045,7 +1030,10 @@ small {
 /* Terms Section */
 .terms-section {
   padding: 2.5rem 0;
-  background: #f2fffe
+  background: #ffffff
+}
+.terms-section .container {
+  padding: 0 10px;
 }
 
 .terms-section h2 {
@@ -1157,7 +1145,7 @@ small {
 }
 
 .terms-card p {
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
   line-height: 1.6;
   font-weight: 800;
@@ -1528,7 +1516,7 @@ small {
 
 @media (max-width: 768px) {
   .container {
-    padding: 0 10px;
+    padding: 0 0px;
   }
 
   .delivery-moq-section {
@@ -1614,7 +1602,7 @@ small {
     font-size: 0.8rem;
   }
   .search-section {
-    padding: 1.5rem 0;
+    padding: 2rem 1.8rem;
   }
 
   .search-wrapper {
@@ -1638,10 +1626,8 @@ small {
     padding: 0.6rem 1rem;
     font-size: 0.8rem;
     justify-content: center;
-  }
-  .search-input-wrapper {
+  }  .search-input-wrapper {
     min-width: auto;
-    max-width: none;
     flex: 2;
     min-width: 0; /* Allow flexbox to shrink below content size */
   }
@@ -1813,10 +1799,8 @@ small {
   .search-bar {
     gap: 1.5rem;
   }
-
   .search-input-wrapper {
     min-width: 250px;
-    max-width: 320px;
     flex: 2;
   }
 
@@ -2270,7 +2254,6 @@ select:focus {
 .product-modal-body {
   background: white;
   border-radius: 1rem;
-  max-width: 800px;
   width: 100%;
   max-height: 90vh;
   overflow: hidden;
@@ -2863,19 +2846,15 @@ option {
 
 /* Brand Carousel Section - Single Container Structure */
 .brands-carousel-section {
-  margin: 4rem auto;
-  padding: 4rem 2rem;
-  background: #f2fffe;
-  border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  margin: 0rem 0;
+  padding: 40px 0;
+  background: white;
   position: relative;
   overflow: hidden;
   opacity: 0;
   animation: fadeInUp 1s ease forwards;
   animation-delay: 0.5s;
   width: 100%;
-  max-width: 1400px;
 }
 
 .brands-carousel-section::before {
@@ -2885,6 +2864,7 @@ option {
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
   background: linear-gradient(
     45deg,
     transparent 30%,
@@ -3021,7 +3001,7 @@ option {
 /* Responsive marquee adjustments */
 @media (max-width: 768px) {
   .brands-marquee-container {
-    max-width: 98vw;
+    width: 98vw;
     padding: 1rem 0;
   }
   .brands-marquee {
@@ -3048,7 +3028,7 @@ option {
 
 @media (max-width: 480px) {
   .brands-marquee-container {
-    max-width: 100vw;
+    width: 100vw;
     padding: 0.5rem 0;
   }
   .brands-marquee {
@@ -3080,7 +3060,7 @@ option {
     margin: 2rem auto;
     padding: 2rem 1rem;
     border-radius: 16px;
-    max-width: 95%;
+    width: 95%;
   }
 
   .brands-carousel-section h2 {
@@ -3120,7 +3100,7 @@ option {
     margin: 1.5rem auto;
     padding: 1.5rem 0.75rem;
     border-radius: 12px;
-    max-width: 98%;
+    width: 98%;
   }
 
   .brands-carousel-section h2 {
@@ -3312,3 +3292,13 @@ option {
 .share-option:nth-child(5) i {
   color: #4f46e5;
 } /* Copy */
+section{
+  width: 100%;
+  min-width: 100%;
+}
+.footer {
+  padding: 20px 20px
+}
+.header {
+  padding: 20px 20px;
+}
