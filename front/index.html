@@ -322,42 +322,45 @@
           </div>
 
           <!-- Info Section -->
-          <div class="modal-info-section">            <!-- Header -->
+          <div class="modal-info-section">
+            <!-- Header -->
             <div class="modal-header">
               <!-- Line 1: Product Name -->
               <h2 id="modalProductName" class="modal-title"></h2>
-              
-              <!-- Line 2: ID -->
-              <div class="modal-id-row">
-                <span>ID:</span>
-                <span id="modalProductId" class="id-number"></span>
-              </div>
-              
-              <!-- Line 3: Brand and Category -->
+
+              <!-- Line 2: Brand and Category -->
               <div class="modal-brand-category-row">
                 <span id="modalProductBrand" class="brand-text"></span>
                 <span id="modalProductCategory" class="category-text"></span>
               </div>
-              
-              <!-- Line 4: MOQ -->
-              <div class="modal-moq-row">
-                <span>MOQ:</span>
-                <span id="modalProductMOQ" class="moq-amount"></span>
+
+              <!-- Line 3: ID and MOQ -->
+              <div class="modal-id-moq-row">
+                <div class="id-section">
+                  <span>ID:</span>
+                  <span id="modalProductId" class="id-number"></span>
+                </div>
+                <div class="moq-section">
+                  <span>MOQ:</span>
+                  <span id="modalProductMOQ" class="moq-amount"></span>
+                </div>
               </div>
-                <!-- Price Section -->
+
+              <!-- Line 4: Price Section -->
               <div class="modal-price-row">
-                <span id="modalProductPriceOriginal" class="price-amount-original"></span>
+                <span
+                  id="modalProductPriceOriginal"
+                  class="price-amount-original"
+                ></span>
                 <span id="modalProductPrice" class="price-amount"></span>
                 <span id="modalProductDiscount" class="discount-badge"></span>
-              </div>            </div>
-
-            <!-- Description -->
-            <div class="description-container">
+              </div>
               <div class="description-header">
-                <span>Description</span>
+                <span>Product Description</span>
+                
               </div>
               <div class="description-content">
-                <p id="modalProductDescription" class="description-text"></p>
+               <p id="modalProductDescription" class="description-text"></p>
               </div>
             </div>
           </div>

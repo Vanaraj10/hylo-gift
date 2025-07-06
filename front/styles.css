@@ -2458,14 +2458,12 @@ select:focus {
   height: auto;
   object-fit: contain;
   border-radius: 12px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   background: white;
 }
 
 .modal-product-image:hover {
   transform: scale(1.05);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 /* Info Section */
@@ -2512,7 +2510,7 @@ select:focus {
   font-family: 'Courier New', monospace;
 }
 
-/* Line 3: Brand and Category Row */
+/* Line 2: Brand and Category Row */
 .modal-brand-category-row {
   display: flex;
   align-items: center;
@@ -2542,17 +2540,30 @@ select:focus {
   border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
-/* Line 4: MOQ Row */
-.modal-moq-row {
+/* Line 3: ID and MOQ Row */
+.modal-id-moq-row {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
+  width: 100%;
   font-size: 0.9rem;
   color: #6b7280;
   font-weight: 500;
 }
 
-.modal-moq-row .moq-amount {
+.id-section, .moq-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.id-section .id-number {
+  color: #1f2937;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+}
+
+.moq-section .moq-amount {
   color: #667eea;
   font-weight: 700;
   font-size: 1rem;
@@ -2681,23 +2692,17 @@ select:focus {
   gap: 0.5rem;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #374151;
-  margin-bottom: 0.75rem;
-}
-
-.description-header i {
-  color: #667eea;
+  color: #4a505b;
+  margin-top: 0.1rem;
+  margin-bottom: 0.2rem;
 }
 
 .description-content {
   background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
 }
 
 .description-text {
-  color: #6b7280;
+  color: #000000;
   line-height: 1.5;
   font-size: 0.9rem;
   margin: 0;
@@ -2779,13 +2784,20 @@ select:focus {
   
   .modal-info-section {
     padding: 1.5rem;
-  }
-    .modal-title {
+  }  .modal-title {
     font-size: 1.3rem;
   }
   
-  .modal-id-row, .modal-moq-row {
+  .modal-id-moq-row {
     font-size: 0.85rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-id-moq-row .id-section,
+  .modal-id-moq-row .moq-section {
+    flex: none;
   }
   
   .modal-brand-category-row {
