@@ -464,7 +464,7 @@ small {
 
 /* Horizontal Delivery and MOQ Section */
 .delivery-moq-section {
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     background: var(--background);
     border-radius: 16px;
     padding: 2rem;
@@ -1320,7 +1320,7 @@ small {
     
     .delivery-moq-section {
         padding: 1.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
       .delivery-timeline-horizontal {
         grid-template-columns: repeat(2, 1fr);
@@ -1505,7 +1505,7 @@ small {
     }
     
     .delivery-moq-section {
-        padding: 1rem;
+        padding: 0.8rem;
     }
       .delivery-timeline-horizontal,
     .moq-tiers-horizontal {
