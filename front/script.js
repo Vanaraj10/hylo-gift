@@ -275,10 +275,14 @@ function renderProducts(products) {
                     <h3 class="product-name">${highlightedName}</h3>
                     <div class="product-moq">${highlightedBrand} • MOQ: ${(
                       product.product_moq || 1
-                    ).toLocaleString()}</div>
-                    <div class="product-price-line">
-                        <span class="product-price">₹${product.product_price}</span>
-                        ${product.product_discount ? `<span class="product-offer">${product.product_discount}% OFF</span>` : ''}
+                    ).toLocaleString()}</div>                    <div class="product-price-line">
+                        ${product.product_discount ? `
+                            <span class="product-price-original">₹${product.product_price}</span>
+                            <span class="product-price-discounted">₹${Math.round(product.product_price * (1 - product.product_discount / 100))}</span>
+                            <span class="product-offer">${product.product_discount}% OFF</span>
+                        ` : `
+                            <span class="product-price">₹${product.product_price}</span>
+                        `}
                     </div>
                 </div>
             </div>

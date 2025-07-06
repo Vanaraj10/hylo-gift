@@ -857,6 +857,21 @@ small {
   margin: 0;
 }
 
+.product-price-original {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-decoration: line-through;
+  margin: 0;
+}
+
+.product-price-discounted {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin: 0;
+}
+
 .product-offer {
   font-size: 0.7rem;
   font-weight: 600;
@@ -1485,8 +1500,15 @@ small {
   .product-moq {
     font-size: 0.7rem;
   }
+    .product-price {
+    font-size: 0.9rem;
+  }
   
-  .product-price {
+  .product-price-original {
+    font-size: 0.75rem;
+  }
+  
+  .product-price-discounted {
     font-size: 0.9rem;
   }
   
@@ -1523,8 +1545,15 @@ small {
   .product-moq {
     font-size: 0.65rem;
   }
+    .product-price {
+    font-size: 0.85rem;
+  }
   
-  .product-price {
+  .product-price-original {
+    font-size: 0.7rem;
+  }
+  
+  .product-price-discounted {
     font-size: 0.85rem;
   }
   
@@ -1546,8 +1575,15 @@ small {
   .product-moq {
     font-size: 0.6rem;
   }
+    .product-price {
+    font-size: 0.8rem;
+  }
   
-  .product-price {
+  .product-price-original {
+    font-size: 0.65rem;
+  }
+  
+  .product-price-discounted {
     font-size: 0.8rem;
   }
   
